@@ -22,13 +22,13 @@ class App extends React.Component {
         <div className="App">
           <Switch>
             <Route path="/login" render={() => 
-              <Login handleLogin={this.handleLogin.bind(this)}/>}
+              <Login handleLogin={this.handleLogin.bind(this)} />}
             />  
             <Route path="/signup" render={() => 
               <Signup />}
             /> 
             <Route path="/mypage" render={() => 
-              <Mypage />}
+              <Mypage handleLogin={this.handleLogin.bind(this)} />}
             />
             <Route
               path="/"
