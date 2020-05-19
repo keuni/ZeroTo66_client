@@ -10,7 +10,7 @@ class Login extends React.Component  {
     this.state = {
       username: '',
       password: '',
-      showModal: true
+      showModal: false
     };
     this.handleInputValue = this.handleInputValue.bind(this);
     this.handleModal = this.handleModal.bind(this);
@@ -34,24 +34,26 @@ class Login extends React.Component  {
           <form
             onSubmit={e => {
               e.preventDefault();
-              console.log(e)
-              return fetch('http://localhost:4000/signin', {
-                method: 'POST',
-                withCredentials: true,
-                credentials: 'include',
-                body: JSON.stringify(this.state),
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-              }).then(result => {
-                if(result.status === 200) {
-                  this.props.handleLogin();
-                  this.props.history.push('/mypage');
-                  return true;
-                } 
-                this.handleModal();
-                return false;
-              })
+              console.log(this.props)
+              this.props.handleLogin();
+              this.props.history.push('/mypage');
+              // return fetch('http://localhost:4000/signin', {
+              //   method: 'POST',
+              //   withCredentials: true,
+              //   credentials: 'include',
+              //   body: JSON.stringify(this.state),
+              //   headers: {
+              //     'Content-Type': 'application/json',
+              //   },
+              // }).then(result => {
+              //   if(result.status === 200) {
+              //     this.props.handleLogin();
+              //     this.props.history.push('/mypage');
+              //     return true;
+              //   } 
+              //   this.handleModal();
+              //   return false;
+              // })
             }}
           >
             <div>
