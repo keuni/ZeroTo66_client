@@ -9,13 +9,20 @@ class App extends React.Component {
   state = {
     isLogin: false  
   }
+
+  handleLogin() {
+    this.setState({
+      isLogin: !this.state.isLogin
+    })
+  }
+
   render() {
     return (
       <BrowserRouter>
         <div className="App">
           <Switch>
             <Route path="/login" render={() => 
-              <Login />}
+              <Login handleLogin={this.handleLogin.bind(this)}/>}
             />  
             <Route path="/signup" render={() => 
               <Signup />}
