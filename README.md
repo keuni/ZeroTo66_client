@@ -7,3 +7,6 @@ branch name : feature_"name of feature"
 
 커밋 메시지 가이드라인 : 'git commit' 활용, 맨 윗줄에는 영어로 body는 한글로 변경사항 설명하기.  
 참고 접두사 : ADD, FIX, DELETE  
+
+5/19 - 경은 : 리액트 설치 및 라우터 기본 세팅 완료
+             npm install -> client -> npm install(2번 필요)
