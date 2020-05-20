@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
-import Modal from '../SignupModal/Modal';
+import Modal from './SignupModal/Modal';
 import './Signup.css';
 
 class Signup extends React.Component {
@@ -41,11 +41,10 @@ class Signup extends React.Component {
               this.state.showModal ? 'Signupbox backSignup' : 'Signupbox'
             }
           >
-            <h1>ZeroTo66</h1>
+            <h1>Signup</h1>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                console.log('유저이름: ', this.state.username);
                 if (this.state.username === '' || this.state.password === '') {
                   this.handleModal('blank');
                 } else {
@@ -58,7 +57,6 @@ class Signup extends React.Component {
                     headers: { 'Content-Type': 'application/json' },
                   })
                     .then((res) => {
-                      console.log('RES ', res);
                       if (res.status === 201) {
                         this.props.history.push('/login');
                         return true;
@@ -72,7 +70,7 @@ class Signup extends React.Component {
               }}
             >
               <div>
-                Id
+                ID
                 <input
                   style={{
                     width: '400px',
@@ -80,13 +78,13 @@ class Signup extends React.Component {
                     margin: '5px',
                     borderRadius: '5px',
                   }}
-                  type="text"
-                  placeholder="Id를 입력해주세요"
+                  type='text'
+                  placeholder='ID를 입력해주세요'
                   onChange={this.handleInputValue('username')}
                 ></input>
               </div>
               <div>
-                Pw
+                PW
                 <input
                   style={{
                     width: '400px',
@@ -95,12 +93,12 @@ class Signup extends React.Component {
                     borderRadius: '5px',
                   }}
                   onChange={this.handleInputValue('password')}
-                  type="password"
-                  placeholder="비밀번호를 입력해주세요"
+                  type='password'
+                  placeholder='password를 입력해주세요'
                 ></input>
               </div>
               <div>
-                <Link to="/login">아이디 있으신가요?</Link>
+                <Link to='/login'>아이디가 있으신가요?</Link>
               </div>
               <button
                 style={{
@@ -108,9 +106,9 @@ class Signup extends React.Component {
                   height: '30px',
                   margin: '5px',
                   borderRadius: '5px',
-                  backgroundColor: 'skyblue',
+                  backgroundColor: '#CBA6C3',
                 }}
-                type="submit"
+                type='submit'
               >
                 Signup
               </button>

@@ -10,7 +10,7 @@ class Login extends React.Component {
     this.state = {
       username: '',
       password: '',
-      showModal: 404,
+      showModal: false,
     };
     this.handleInputValue = this.handleInputValue.bind(this);
     this.handleModal = this.handleModal.bind(this);
@@ -73,7 +73,7 @@ class Login extends React.Component {
                   borderRadius: '5px',
                 }}
                 type='text'
-                placeholder='username'
+                placeholder='ID를 입력해주세요'
                 onChange={this.handleInputValue('username')}
               ></input>
             </div>
@@ -86,7 +86,7 @@ class Login extends React.Component {
                   borderRadius: '5px',
                 }}
                 type='password'
-                placeholder='password'
+                placeholder='password를 입력해주세요'
                 onChange={this.handleInputValue('password')}
               ></input>
             </div>

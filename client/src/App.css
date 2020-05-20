@@ -12,3 +12,11 @@ input:focus {
 button:focus {
   outline: none;
 }
+
+.zeroTo66 {
+  margin-top: 15vh;
+  font-size: 40px;
+  font-weight: 600;
+  /* background-color: #cba6c3; */
+  color: #cba6c3;
+}
