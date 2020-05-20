@@ -9,24 +9,41 @@ class App extends React.Component {
   state = {
     isLogin: false,
   };
+
+  handleLogin() {
+    this.setState({
+      isLogin: !this.state.isLogin,
+    });
+  }
+
   render() {
     return (
       <BrowserRouter>
-        <div className="App">
+        <div className='App'>
           <Switch>
-            <Route path="/login" render={() => <Login />} />
             <Route
               path="/signup"
               render={() => <Signup isLogin={this.state.isLogin} />}
-            />
-            <Route path="/mypage" render={() => <Mypage />} />
+
             <Route
-              path="/"
+              path='/login'
+              render={() => <Login handleLogin={this.handleLogin.bind(this)} />}
+            />
+           
+            <Route
+              path='/mypage'
+              render={() => (
+                <Mypage handleLogin={this.handleLogin.bind(this)} />
+              )}
+            />
+          
+            <Route
+              path='/'
               render={() => {
                 if (this.state.isLogin) {
-                  return <Redirect to="/mypage" />;
+                  return <Redirect to='/mypage' />;
                 }
-                return <Redirect to="/login" />;
+                return <Redirect to='/login' />;
               }}
             />
           </Switch>
