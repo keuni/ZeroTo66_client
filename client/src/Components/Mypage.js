@@ -7,13 +7,8 @@ function Mypage(props) {
 
   const logout = () => {
     props.handleLogin();
-    fetch('http://localhost:4000/signout', {
-      method: 'GET',
-    }).then(result => {
-      console.log('logout',result)
-      // eslint-disable-next-line no-useless-concat
-      document.cookie = "token" + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-    })
+    // eslint-disable-next-line no-useless-concat
+    document.cookie = "token" + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
   }
   return (
     <div className="Mypage">
