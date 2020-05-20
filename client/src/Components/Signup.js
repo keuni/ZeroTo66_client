@@ -9,7 +9,7 @@ class Signup extends React.Component {
     this.state = {
       username: '',
       password: '',
-      showModal: true,
+      showModal: false,
     };
     this.handleInputValue = this.handleInputValue.bind(this);
     this.handleModal = this.handleModal.bind(this);
@@ -17,10 +17,16 @@ class Signup extends React.Component {
   handleInputValue = (key) => (e) => {
     this.setState({ [key]: e.target.value });
   };
-  handleModal() {
-    this.setState({
-      showModal: !this.state.showModal,
-    });
+  handleModal(arg) {
+    if (arg === 'blank') {
+      this.setState({
+        showModal: 'blank',
+      });
+    } else {
+      this.setState({
+        showModal: !this.state.showModal,
+      });
+    }
   }
   render() {
     return (
@@ -39,24 +45,30 @@ class Signup extends React.Component {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                fetch('http://localhost:3000/login', {
-                  method: 'POST',
-                  credentials: 'include',
-                  body: JSON.stringify(this.state),
-                })
-                  .then((res) => {
-                    this.props.history.push('/Login');
+                console.log('유저이름: ', this.state.username);
+                if (this.state.username === '' || this.state.password === '') {
+                  this.handleModal('blank');
+                } else {
+                  fetch('http://localhost:4000/user/signup', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                      username: this.state.username,
+                      password: this.state.password,
+                    }),
+                    headers: { 'Content-Type': 'application/json' },
                   })
-                  .then((res) => {
-                    if (res.status === 200) {
-                      this.props.history.push('/login');
-                      return true;
-                    } else {
-                      this.handleModal();
-                      return false;
-                    }
-                  })
-                  .catch((err) => console.log(err));
+                    .then((res) => {
+                      console.log('RES ', res);
+                      if (res.status === 201) {
+                        this.props.history.push('/login');
+                        return true;
+                      } else {
+                        this.handleModal();
+                        return false;
+                      }
+                    })
+                    .catch((err) => console.log(err));
+                }
               }}
             >
               <div>
@@ -68,9 +80,9 @@ class Signup extends React.Component {
                     margin: '5px',
                     borderRadius: '5px',
                   }}
-                  type="userid"
-                  placeholder="username을 작성 해주세요"
-                  onChange={this.handleInputValue('email')}
+                  type="text"
+                  placeholder="Id를 입력해주세요"
+                  onChange={this.handleInputValue('username')}
                 ></input>
               </div>
               <div>
@@ -84,11 +96,11 @@ class Signup extends React.Component {
                   }}
                   onChange={this.handleInputValue('password')}
                   type="password"
-                  placeholder="비밀번호를 작성 해주세요"
+                  placeholder="비밀번호를 입력해주세요"
                 ></input>
               </div>
               <div>
-                <Link to="/login">아이디 있나요?</Link>
+                <Link to="/login">아이디 있으신가요?</Link>
               </div>
               <button
                 style={{
