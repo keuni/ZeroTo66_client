@@ -36,6 +36,7 @@ class Signup extends React.Component {
             showModal={this.state.showModal}
             handleModal={this.handleModal}
           />
+          <div className='zeroTo66'>ZeroTo66</div>
           <div
             className={
               this.state.showModal ? 'Signupbox backSignup' : 'Signupbox'

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Mypage.css';
+import HabitList from './HabitList';
+import Calendar from './Calendar';
 
 function Mypage(props) {
   const logout = () => {
@@ -26,7 +28,9 @@ function Mypage(props) {
           LOGOUT
         </button>
       </Link>
-      <div className='HabitList'></div>
+      <div className='MypagezeroTo66'>ZeroTo66</div>
+      <HabitList />
+      <Calendar />
     </div>
   );
 }

@@ -13,3 +13,11 @@
 .backLogin {
   top: -100vh;
 }
+
+.zeroTo66 {
+  font-family: 'Pacifico', cursive;
+  margin-top: 15vh;
+  font-size: 40px;
+  font-weight: 600;
+  color: #cba6c3;
+}
