@@ -1,4 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family&display=swap');
+
 .App {
+  font-family: 'Noto Sans KR', sans-serif;
   text-align: center;
 }
 
+input:focus {
+  outline: none;
+}
+
+button:focus {
+  outline: none;
+}
