@@ -48,14 +48,18 @@ class Signup extends React.Component {
                 if (this.state.username === '' || this.state.password === '') {
                   this.handleModal('blank');
                 } else {
-                  fetch('http://localhost:4000/user/signup', {
-                    method: 'POST',
-                    body: JSON.stringify({
-                      username: this.state.username,
-                      password: this.state.password,
-                    }),
-                    headers: { 'Content-Type': 'application/json' },
-                  })
+                  fetch(
+                    // 'http://localhost:4000/user/signup',
+                    'http://54.180.103.96:4000/user/signup',
+                    {
+                      method: 'POST',
+                      body: JSON.stringify({
+                        username: this.state.username,
+                        password: this.state.password,
+                      }),
+                      headers: { 'Content-Type': 'application/json' },
+                    }
+                  )
                     .then((res) => {
                       if (res.status === 201) {
                         this.props.history.push('/login');
@@ -70,12 +74,12 @@ class Signup extends React.Component {
               }}
             >
               <div>
-                ID
+                <span className='IDtext'>ID</span>
                 <input
                   style={{
                     width: '400px',
                     height: '30px',
-                    margin: '5px',
+                    margin: '8px',
                     borderRadius: '5px',
                   }}
                   type='text'
@@ -84,7 +88,7 @@ class Signup extends React.Component {
                 ></input>
               </div>
               <div>
-                PW
+                <span className='PWtext'>PW</span>
                 <input
                   style={{
                     width: '400px',
@@ -110,7 +114,7 @@ class Signup extends React.Component {
                 }}
                 type='submit'
               >
-                Signup
+                회원가입
               </button>
             </form>
           </div>

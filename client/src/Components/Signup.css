@@ -13,3 +13,12 @@
 .backSignup {
   top: -100vh;
 }
+
+.IDtext {
+  margin-right: 7px;
+  margin-left: 7px;
+}
+
+.PWtext {
+  margin-right: 5px;
+}

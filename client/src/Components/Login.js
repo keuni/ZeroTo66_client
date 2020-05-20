@@ -45,15 +45,19 @@ class Login extends React.Component {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              return fetch('http://localhost:4000/user/signin', {
-                method: 'POST',
-                withCredentials: true,
-                credentials: 'include',
-                body: JSON.stringify(this.state),
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-              }).then((result) => {
+              return fetch(
+                'http://localhost:4000/user/signin',
+                // 'http://54.180.103.96:4000/user/signin',
+                {
+                  method: 'POST',
+                  withCredentials: true,
+                  credentials: 'include',
+                  body: JSON.stringify(this.state),
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                }
+              ).then((result) => {
                 if (result.status === 200) {
                   this.props.handleLogin();
                   this.props.history.push('/mypage');
