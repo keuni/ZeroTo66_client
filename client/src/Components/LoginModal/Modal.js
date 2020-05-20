@@ -4,10 +4,10 @@ import './Modal.css'
 const Modal = (props) => {
   return (
     <div>
-      <div className={ props.showModal ? "showModal" : "hideModal"}>
+      <div className={ props.showModal !== false ? "showModal" : "hideModal"}>
         <div className="modal_overlay" >
           <div className="modal_content">
-            <span id="check">username을 확인해주세요</span>
+            <span id="check">{ props.showModal === 404 ? "username을" : "비밀번호를"} 확인해주세요</span>
             <span id="x" onClick={props.handleModal}>X</span>
           </div>
         </div>

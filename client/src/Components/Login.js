@@ -10,7 +10,7 @@ class Login extends React.Component  {
     this.state = {
       username: '',
       password: '',
-      showModal: false
+      showModal: 404
     };
     this.handleInputValue = this.handleInputValue.bind(this);
     this.handleModal = this.handleModal.bind(this);
@@ -19,10 +19,19 @@ class Login extends React.Component  {
     this.setState({ [key]: e.target.value });
   };
 
-  handleModal() {
-    this.setState({
-      showModal: !this.state.showModal
-    })
+  handleModal(status) {
+    console.log('handlemodal')
+    if(status === 404 || status === 403) {
+      console.log('status', status)
+      this.setState({
+        showModal: status
+      })
+    } else {
+      console.log('false')
+      this.setState({
+        showModal: false
+      })
+    }  
   };
 
   render() {
@@ -31,29 +40,30 @@ class Login extends React.Component  {
         <Modal showModal={this.state.showModal} handleModal={this.handleModal} />
         <div className={this.state.showModal ? "Loginbox backLogin" : "Loginbox"}>
           <h1>Login</h1>
-          <form
+          <form 
             onSubmit={e => {
               e.preventDefault();
-              console.log(this.props)
-              this.props.handleLogin();
-              this.props.history.push('/mypage');
-              // return fetch('http://localhost:4000/signin', {
-              //   method: 'POST',
-              //   withCredentials: true,
-              //   credentials: 'include',
-              //   body: JSON.stringify(this.state),
-              //   headers: {
-              //     'Content-Type': 'application/json',
-              //   },
-              // }).then(result => {
-              //   if(result.status === 200) {
-              //     this.props.handleLogin();
-              //     this.props.history.push('/mypage');
-              //     return true;
-              //   } 
-              //   this.handleModal();
-              //   return false;
-              // })
+              // console.log(this.props)
+              // this.props.handleLogin();
+              // this.props.history.push('/mypage');
+              return fetch('http://localhost:4000/user/signin', {
+                method: 'POST',
+                // withCredentials: true,
+                // credentials: 'include',
+                body: JSON.stringify(this.state),
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              }).then(result => {
+                console.log(result)
+                if(result.status === 200) {
+                  this.props.handleLogin();
+                  this.props.history.push('/mypage');
+                  return true;
+                } 
+                this.handleModal(result.status);
+                return false;
+              })
             }}
           >
             <div>

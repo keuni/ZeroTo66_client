@@ -1,5 +1,5 @@
 .myModal {
-  z-index: 1;
+  z-index: 2;
   position: absolute;
   top: 0;
   left: 0;
@@ -16,7 +16,7 @@
 
 .modal_content {
   border: 0.3px lightgray solid;
-  z-index: 1;
+  z-index: 2;
   width: 300px;
   height: 50px;
   display: inline-block;

@@ -16,3 +16,9 @@
 .backLogin {
   top: -80vh;  
 }
+
+/*On focus change the z-index*/
+input:focus {
+  position: relative;
+  z-index: 10;
+}
