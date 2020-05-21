@@ -3,21 +3,18 @@ import { Link } from 'react-router-dom';
 import './Mypage.css';
 import HabitList from './HabitList';
 import Calendar from './Calendar';
+import url from './config/config';
 
 function Mypage(props) {
   const logout = () => {
-    return fetch(
-      // 'http://localhost:4000/user/signout',
-      'http://54.180.103.96:4000/user/signout',
-      {
-        method: 'GET',
-        withCredentials: true,
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    ).then(() => {
+    return fetch(url.server + 'user/signout', {
+      method: 'GET',
+      withCredentials: true,
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(() => {
       props.handleLogin();
     });
   };

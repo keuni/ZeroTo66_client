@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import Modal from './LoginModal/Modal';
 import './Login.css';
+import url from './config/config';
 
 class Login extends React.Component {
   constructor(props) {
@@ -46,22 +47,18 @@ class Login extends React.Component {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              return fetch(
-                // 'http://localhost:4000/user/signin',
-                'http://54.180.103.96:4000/user/signin',
-                {
-                  method: 'POST',
-                  withCredentials: true,
-                  credentials: 'include',
-                  body: JSON.stringify({
-                    username: this.state.username,
-                    password: this.state.password,
-                  }),
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                }
-              ).then((result) => {
+              return fetch(url.server + 'user/signin', {
+                method: 'POST',
+                withCredentials: true,
+                credentials: 'include',
+                body: JSON.stringify({
+                  username: this.state.username,
+                  password: this.state.password,
+                }),
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              }).then((result) => {
                 if (result.status === 200) {
                   this.props.handleLogin();
                   this.props.history.push('/mypage');

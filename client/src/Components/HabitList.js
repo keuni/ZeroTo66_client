@@ -1,5 +1,6 @@
 import React from 'react';
 import HabitInfo from './HabitInfo';
+import url from './config/config';
 
 class HabitList extends React.Component {
   state = {
@@ -9,7 +10,37 @@ class HabitList extends React.Component {
         habitName: 'test',
       },
     ],
+    habitName: '',
+    addHabit: false,
   };
+
+  handleInputValue = (e) => {
+    this.setState({ habitName: e.target.value });
+  };
+
+  openAddHabit() {
+    this.setState({
+      addHabit: !this.state.addHabit,
+    });
+  }
+  addHabit() {
+    this.openAddHabit();
+    fetch(url.server + 'record', {
+      method: 'POST',
+      body: JSON.stringify({
+        habitName: this.state.habitName,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((result) => {
+        return result.json();
+      })
+      .then((data) => {
+        console.log(35, data);
+      });
+  }
   componentDidMount() {
     fetch(
       'http://localhost:4000/habit',
@@ -43,7 +74,26 @@ class HabitList extends React.Component {
     return (
       <div className="HabitList">
         <div>{list}</div>
-        <button className="AddHabit"> + </button>
+       <div>
+          {this.state.addHabit ? (
+            <div>
+              <input
+                className='addText'
+                type='text'
+                placeholder='습관을 추가하세요'
+                onChange={this.handleInputValue.bind(this)}
+              ></input>
+              <button className='add' onClick={this.addHabit.bind(this)}>
+                Add
+              </button>
+            </div>
+          ) : (
+            ''
+          )}
+          <button className='btnAdd' onClick={this.openAddHabit.bind(this)}>
+            +
+          </button>
+        </div>
       </div>
     );
   }

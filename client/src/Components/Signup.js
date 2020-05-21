@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import Modal from './SignupModal/Modal';
 import './Signup.css';
+import url from './config/config';
 
 class Signup extends React.Component {
   constructor(props) {
@@ -49,18 +50,14 @@ class Signup extends React.Component {
                 if (this.state.username === '' || this.state.password === '') {
                   this.handleModal('blank');
                 } else {
-                  fetch(
-                    // 'http://localhost:4000/user/signup',
-                    'http://54.180.103.96:4000/user/signup',
-                    {
-                      method: 'POST',
-                      body: JSON.stringify({
-                        username: this.state.username,
-                        password: this.state.password,
-                      }),
-                      headers: { 'Content-Type': 'application/json' },
-                    }
-                  )
+                  fetch(url.server + 'user/signup', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                      username: this.state.username,
+                      password: this.state.password,
+                    }),
+                    headers: { 'Content-Type': 'application/json' },
+                  })
                     .then((res) => {
                       if (res.status === 201) {
                         this.props.history.push('/login');
