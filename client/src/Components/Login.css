@@ -21,3 +21,11 @@
   font-weight: 600;
   color: #cba6c3;
 }
+
+input {
+  -webkit-appearance: none;
+  width: '400px';
+  height: '30px';
+  margin: '5px';
+  border-radius: '5px';
+}

@@ -7,8 +7,8 @@ import Calendar from './Calendar';
 function Mypage(props) {
   const logout = () => {
     return fetch(
-      'http://localhost:4000/user/signout',
-      // 'http://54.180.103.96:4000/user/signout',
+      // 'http://localhost:4000/user/signout',
+      'http://54.180.103.96:4000/user/signout',
       {
         method: 'GET',
         withCredentials: true,

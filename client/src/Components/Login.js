@@ -47,13 +47,16 @@ class Login extends React.Component {
             onSubmit={(e) => {
               e.preventDefault();
               return fetch(
-                'http://localhost:4000/user/signin',
-                // 'http://54.180.103.96:4000/user/signin',
+                // 'http://localhost:4000/user/signin',
+                'http://54.180.103.96:4000/user/signin',
                 {
                   method: 'POST',
                   withCredentials: true,
                   credentials: 'include',
-                  body: JSON.stringify(this.state),
+                  body: JSON.stringify({
+                    username: this.state.username,
+                    password: this.state.password,
+                  }),
                   headers: {
                     'Content-Type': 'application/json',
                   },
@@ -84,12 +87,12 @@ class Login extends React.Component {
             </div>
             <div>
               <input
-                style={{
-                  width: '400px',
-                  height: '30px',
-                  margin: '5px',
-                  borderRadius: '5px',
-                }}
+                // style={{
+                //   width: '400px',
+                //   height: '30px',
+                //   margin: '5px',
+                //   borderRadius: '5px',
+                // }}
                 type='password'
                 placeholder='password를 입력해주세요'
                 onChange={this.handleInputValue('password')}
