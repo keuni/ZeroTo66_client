@@ -23,16 +23,21 @@ class HabitList extends React.Component {
         },
       }
     )
-      .then((result) => {
-        return result.json();
+      .then((res) => {
+        console.log('JSON', res);
+        if (res.status === 200) {
+          return res.json();
+        }
       })
       .then((data) => {
-        this.setState({ habitlist: data.result });
+        console.log('GET ', data);
+        this.setState({ habitlist: data });
       });
   }
-
   render() {
-    const list = this.state.habitlist.map((habit) => {
+    const { habitlist } = this.state;
+    const list = habitlist.map((habit) => {
+      console.log('MPA ', habit);
       return <HabitInfo key={habit.id} info={habit.habitName} />;
     });
     return (
