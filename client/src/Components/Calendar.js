@@ -5,21 +5,22 @@ import DayPicker from 'react-day-picker';
 class Calendar extends React.Component {
   state = {
     modifiers: {
-      //birthday => done_all
+      //birthday => done_all(성공률 100%, green)
       birthday: [new Date(2020, 4, 14), new Date(2020, 4, 16)],
       //default
       sunday: { daysOfWeek: [0] },
       foo: new Date(), //today
     },
+    //done_partiallyl(성공률 1-99%, red)
     done_partially: [new Date(2020, 4, 12), new Date(2020, 4, 20)],
   };
+
   componentDidMount() {
-    //get Records
+    //get Records -> setState birthday & done_partially
   }
 
   render() {
-    console.log('foo', this.state.modifiers.foo);
-    console.log('month', new Date(2020, 4));
+    const today = this.state.modifiers.foo;
     return (
       <div className='Calendar'>
         <div className='colorinfo'>
@@ -28,17 +29,16 @@ class Calendar extends React.Component {
         </div>
         <DayPicker
           modifiers={this.state.modifiers}
-          initialMonth={new Date(2020, 4)}
+          initialMonth={new Date()}
           selectedDays={this.state.done_partially}
-          //default
           disabledDays={[
             {
               after: new Date(2000, 4, 0),
-              before: this.state.modifiers.foo,
+              before: today,
             },
           ]}
           todayButton='Go to Today'
-          onTodayButtonClick={(day, modifiers) => console.log(day, modifiers)}
+          // onTodayButtonClick={(day, modifiers) => console.log(day, modifiers)}
         />
       </div>
     );
