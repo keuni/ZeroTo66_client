@@ -77,12 +77,6 @@ class Signup extends React.Component {
               <div>
                 <span className='IDtext'>ID</span>
                 <input
-                  style={{
-                    width: '400px',
-                    height: '30px',
-                    margin: '8px',
-                    borderRadius: '5px',
-                  }}
                   type='text'
                   placeholder='ID를 입력해주세요'
                   onChange={this.handleInputValue('username')}
@@ -91,12 +85,6 @@ class Signup extends React.Component {
               <div>
                 <span className='PWtext'>PW</span>
                 <input
-                  style={{
-                    width: '400px',
-                    height: '30px',
-                    margin: '5px',
-                    borderRadius: '5px',
-                  }}
                   onChange={this.handleInputValue('password')}
                   type='password'
                   placeholder='password를 입력해주세요'
@@ -105,16 +93,7 @@ class Signup extends React.Component {
               <div>
                 <Link to='/login'>아이디가 있으신가요?</Link>
               </div>
-              <button
-                style={{
-                  width: '200px',
-                  height: '30px',
-                  margin: '5px',
-                  borderRadius: '5px',
-                  backgroundColor: '#CBA6C3',
-                }}
-                type='submit'
-              >
+              <button className='login_signup_button' type='submit'>
                 회원가입
               </button>
             </form>
