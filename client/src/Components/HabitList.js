@@ -27,7 +27,7 @@ class HabitList extends React.Component {
         return result.json();
       })
       .then((data) => {
-        //
+        this.setState({ habitlist: data.result });
       });
   }
 
