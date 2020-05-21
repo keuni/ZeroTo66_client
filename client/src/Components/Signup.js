@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
-import Modal from '../SignupModal/Modal';
+import Modal from './SignupModal/Modal';
 import './Signup.css';
 
 class Signup extends React.Component {
@@ -36,29 +36,32 @@ class Signup extends React.Component {
             showModal={this.state.showModal}
             handleModal={this.handleModal}
           />
+          <div className='zeroTo66'>ZeroTo66</div>
           <div
             className={
               this.state.showModal ? 'Signupbox backSignup' : 'Signupbox'
             }
           >
-            <h1>ZeroTo66</h1>
+            <h1>Signup</h1>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                console.log('유저이름: ', this.state.username);
                 if (this.state.username === '' || this.state.password === '') {
                   this.handleModal('blank');
                 } else {
-                  fetch('http://localhost:4000/user/signup', {
-                    method: 'POST',
-                    body: JSON.stringify({
-                      username: this.state.username,
-                      password: this.state.password,
-                    }),
-                    headers: { 'Content-Type': 'application/json' },
-                  })
+                  fetch(
+                    // 'http://localhost:4000/user/signup',
+                    'http://54.180.103.96:4000/user/signup',
+                    {
+                      method: 'POST',
+                      body: JSON.stringify({
+                        username: this.state.username,
+                        password: this.state.password,
+                      }),
+                      headers: { 'Content-Type': 'application/json' },
+                    }
+                  )
                     .then((res) => {
-                      console.log('RES ', res);
                       if (res.status === 201) {
                         this.props.history.push('/login');
                         return true;
@@ -72,47 +75,26 @@ class Signup extends React.Component {
               }}
             >
               <div>
-                Id
+                <span className='IDtext'>ID</span>
                 <input
-                  style={{
-                    width: '400px',
-                    height: '30px',
-                    margin: '5px',
-                    borderRadius: '5px',
-                  }}
-                  type="text"
-                  placeholder="Id를 입력해주세요"
+                  type='text'
+                  placeholder='ID를 입력해주세요'
                   onChange={this.handleInputValue('username')}
                 ></input>
               </div>
               <div>
-                Pw
+                <span className='PWtext'>PW</span>
                 <input
-                  style={{
-                    width: '400px',
-                    height: '30px',
-                    margin: '5px',
-                    borderRadius: '5px',
-                  }}
                   onChange={this.handleInputValue('password')}
-                  type="password"
-                  placeholder="비밀번호를 입력해주세요"
+                  type='password'
+                  placeholder='password를 입력해주세요'
                 ></input>
               </div>
               <div>
-                <Link to="/login">아이디 있으신가요?</Link>
+                <Link to='/login'>아이디가 있으신가요?</Link>
               </div>
-              <button
-                style={{
-                  width: '200px',
-                  height: '30px',
-                  margin: '5px',
-                  borderRadius: '5px',
-                  backgroundColor: 'skyblue',
-                }}
-                type="submit"
-              >
-                Signup
+              <button className='login_signup_button' type='submit'>
+                회원가입
               </button>
             </form>
           </div>

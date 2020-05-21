@@ -22,21 +22,21 @@ class App extends React.Component {
         <div className='App'>
           <Switch>
             <Route
-              path="/signup"
+              path='/signup'
               render={() => <Signup isLogin={this.state.isLogin} />}
-
+            />
             <Route
               path='/login'
               render={() => <Login handleLogin={this.handleLogin.bind(this)} />}
             />
-           
+
             <Route
               path='/mypage'
               render={() => (
                 <Mypage handleLogin={this.handleLogin.bind(this)} />
               )}
             />
-          
+
             <Route
               path='/'
               render={() => {

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@1,700&family=Dancing+Script:wght@700&family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Pacifico&display=swap');
 
 .App {
   font-family: 'Noto Sans KR', sans-serif;
@@ -11,4 +11,32 @@ input:focus {
 
 button:focus {
   outline: none;
+}
+
+.zeroTo66 {
+  font-family: 'Pacifico', cursive;
+  margin-top: 15vh;
+  font-size: 40px;
+  font-weight: 600;
+  color: #cba6c3;
+}
+
+button {
+  font: inherit;
+  font-size: 13px;
+}
+
+input {
+  width: 400px;
+  height: 30px;
+  margin: 5px;
+  border-radius: 5px;
+}
+
+.login_signup_button {
+  width: 200px;
+  height: 30px;
+  margin: 5px;
+  border-radius: 5px;
+  background-color: #cba6c3;
 }

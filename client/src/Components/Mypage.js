@@ -1,12 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Mypage.css';
+import HabitList from './HabitList';
+import Calendar from './Calendar';
 
 function Mypage(props) {
   const logout = () => {
-    props.handleLogin();
-    // eslint-disable-next-line no-useless-concat
-    document.cookie = 'token' + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    return fetch(
+      // 'http://localhost:4000/user/signout',
+      'http://54.180.103.96:4000/user/signout',
+      {
+        method: 'GET',
+        withCredentials: true,
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    ).then(() => {
+      props.handleLogin();
+    });
   };
   return (
     <div className='Mypage'>
@@ -15,7 +28,9 @@ function Mypage(props) {
           LOGOUT
         </button>
       </Link>
-      <div className='HabitList'></div>
+      <div className='MypagezeroTo66'>ZeroTo66</div>
+      <HabitList />
+      <Calendar />
     </div>
   );
 }

@@ -10,7 +10,7 @@ class Login extends React.Component {
     this.state = {
       username: '',
       password: '',
-      showModal: 404,
+      showModal: false,
     };
     this.handleInputValue = this.handleInputValue.bind(this);
     this.handleModal = this.handleModal.bind(this);
@@ -38,6 +38,7 @@ class Login extends React.Component {
           showModal={this.state.showModal}
           handleModal={this.handleModal}
         />
+        <div className='zeroTo66'>ZeroTo66</div>
         <div
           className={this.state.showModal ? 'Loginbox backLogin' : 'Loginbox'}
         >
@@ -45,15 +46,22 @@ class Login extends React.Component {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              return fetch('http://localhost:4000/user/signin', {
-                method: 'POST',
-                withCredentials: true,
-                credentials: 'include',
-                body: JSON.stringify(this.state),
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-              }).then((result) => {
+              return fetch(
+                // 'http://localhost:4000/user/signin',
+                'http://54.180.103.96:4000/user/signin',
+                {
+                  method: 'POST',
+                  withCredentials: true,
+                  credentials: 'include',
+                  body: JSON.stringify({
+                    username: this.state.username,
+                    password: this.state.password,
+                  }),
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                }
+              ).then((result) => {
                 if (result.status === 200) {
                   this.props.handleLogin();
                   this.props.history.push('/mypage');
@@ -66,43 +74,22 @@ class Login extends React.Component {
           >
             <div>
               <input
-                style={{
-                  width: '400px',
-                  height: '30px',
-                  margin: '5px',
-                  borderRadius: '5px',
-                }}
                 type='text'
-                placeholder='username'
+                placeholder='ID를 입력해주세요'
                 onChange={this.handleInputValue('username')}
               ></input>
             </div>
             <div>
               <input
-                style={{
-                  width: '400px',
-                  height: '30px',
-                  margin: '5px',
-                  borderRadius: '5px',
-                }}
                 type='password'
-                placeholder='password'
+                placeholder='password를 입력해주세요'
                 onChange={this.handleInputValue('password')}
               ></input>
             </div>
             <div>
               <Link to='/signup'>회원가입하기</Link>
             </div>
-            <button
-              style={{
-                width: '200px',
-                height: '30px',
-                margin: '5px',
-                borderRadius: '5px',
-                backgroundColor: '#CBA6C3',
-              }}
-              type='submit'
-            >
+            <button className='login_signup_button' type='submit'>
               로그인
             </button>
           </form>
