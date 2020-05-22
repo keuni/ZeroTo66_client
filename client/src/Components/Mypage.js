@@ -26,8 +26,12 @@ function Mypage(props) {
         </button>
       </Link>
       <div className='MypagezeroTo66'>ZeroTo66</div>
-      <HabitList />
-      <Calendar />
+      <div className='mypagebody'>
+        <div className='mypageContent'>
+          <HabitList />
+          <Calendar />
+        </div>
+      </div>
     </div>
   );
 }
