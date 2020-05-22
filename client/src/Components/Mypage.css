@@ -19,10 +19,21 @@
 }
 
 .HabitList {
+  position: relative;
+  font-size: 20px;
   /* border: 1px solid black; */
   width: 500px;
+  margin-top: 40px;
   margin-left: 50px;
   float: left;
+  align-items: center;
+}
+
+.existingHabit {
+  font-size: 23px;
+  text-align: left;
+  margin-left: 30px;
+  width: 455px;
 }
 
 button {
@@ -31,9 +42,11 @@ button {
 
 .btnAdd {
   width: 455px;
+  background-color: transparent;
 }
+
 .addText {
-  width: 390px;
+  width: 330px;
   padding: 0 10px;
   border-radius: 0;
   border: none;
@@ -43,6 +56,7 @@ button {
 .add {
   border: none;
   font-size: 20px;
+  cursor: pointer;
 }
 ::placeholder {
   font-size: 15px;
