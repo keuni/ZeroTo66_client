@@ -1,5 +1,6 @@
 import React from 'react';
 import HabitInfo from './HabitInfo';
+import AddHabit from './AddHabit';
 import url from './config/config';
 
 class HabitList extends React.Component {
@@ -7,18 +8,15 @@ class HabitList extends React.Component {
     super(props);
 
     this.state = {
-      habitlist: [
-        {
-          id: 0,
-          habitName: '',
-        },
-      ],
+      habitlist: [],
+      completed: 0,
       newHabit: '',
-      addHabit: false,
+      adding: false,
       existModal: false,
     };
     this.openAddHabit = this.openAddHabit.bind(this);
     this.existModal = this.existModal.bind(this);
+    this.postRecord = this.postRecord.bind(this);
   }
 
   handleInputValue = (e) => {
@@ -27,7 +25,7 @@ class HabitList extends React.Component {
 
   openAddHabit() {
     this.setState({
-      addHabit: !this.state.addHabit,
+      adding: !this.state.adding,
     });
   }
   existModal() {
@@ -35,6 +33,7 @@ class HabitList extends React.Component {
       existModal: !this.state.existModal,
     });
   }
+
   addHabit() {
     this.openAddHabit();
     fetch(url.server + 'habit', {
@@ -58,13 +57,15 @@ class HabitList extends React.Component {
         if (data === undefined) {
           return;
         }
+        let obj = { completed: false, habit: data };
         this.setState({
-          habitlist: [...this.state.habitlist, data],
+          habitlist: [...this.state.habitlist, obj],
         });
       });
   }
+
   componentDidMount() {
-    fetch(url.server + 'habit', {
+    fetch(url.server + 'record/today', {
       method: 'GET',
       withCredentials: true,
       credentials: 'include',
@@ -82,15 +83,20 @@ class HabitList extends React.Component {
           return;
         }
         this.setState({ habitlist: data });
+        let count = 0;
+        data.map((x) => {
+          if (x.completed === true) {
+            count += 1;
+          }
+        });
+        this.setState({
+          completed: count,
+        });
       });
   }
   recordComplete(index) {
     let changed = this.state.habitlist[index];
-    if (changed.hasOwnProperty('completed')) {
-      changed['completed'] = !changed['completed'];
-    } else {
-      changed['completed'] = true;
-    }
+    changed['completed'] = !changed['completed'];
     let presentHabitList = this.state.habitlist;
     let newHabitList = presentHabitList
       .slice(0, index)
@@ -98,46 +104,71 @@ class HabitList extends React.Component {
       .concat(presentHabitList.slice(index + 1));
 
     this.setState({ habitlist: newHabitList });
+    let result = this.state.habitlist[index].completed;
+    if (result === true) {
+      this.setState({
+        completed: this.state.completed + 1,
+      });
+    } else {
+      this.setState({
+        completed: this.state.completed - 1,
+      });
+    }
+    console.log(116, changed);
+    this.postRecord(changed.habitId, result);
+  }
+
+  postRecord(id, result) {
+    fetch(url.server + 'record', {
+      method: 'POST',
+      withCredentials: true,
+      credentials: 'include',
+      body: JSON.stringify({
+        habitId: id,
+        completed: result,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        }
+      })
+      .then((data) => {
+        console.log(data);
+      });
   }
 
   render() {
-    const { habitlist } = this.state;
+    const { habitlist, completed } = this.state;
+    const all = habitlist.length;
+    console.log(146, habitlist[0]);
     return (
-      <div className="HabitList">
-        오늘의 습관
+      <div className='HabitList'>
+        <div className='todayList'>
+          오늘의 습관 {completed}/{all}
+        </div>
         <div>
-          {habitlist.map((habit, index) => (
-            <HabitInfo
-              key={habit.id}
-              id={index}
-              info={habit.habitName}
-              recordComplete={this.recordComplete.bind(this)}
-            />
-          ))}
+          {habitlist.length > 0
+            ? habitlist.map((data, index) => (
+                <HabitInfo
+                  key={data.habit.id}
+                  id={index}
+                  info={data.habit.habitName}
+                  check={data.completed}
+                  recordComplete={this.recordComplete.bind(this)}
+                />
+              ))
+            : ''}
         </div>
-        <div className="addHabit">
-          {this.state.addHabit ? (
-            <div>
-              <input
-                className="addText"
-                type="text"
-                placeholder="습관을 추가하세요"
-                onChange={this.handleInputValue.bind(this)}
-              ></input>
-              <button className="add" onClick={this.addHabit.bind(this)}>
-                Add
-              </button>
-              <button className="add" onClick={this.openAddHabit.bind(this)}>
-                cancel
-              </button>
-            </div>
-          ) : (
-            ''
-          )}
-          <button className="btnAdd" onClick={this.openAddHabit.bind(this)}>
-            +
-          </button>
-        </div>
+        <AddHabit
+          adding={this.state.adding}
+          handleInputValue={this.handleInputValue.bind(this)}
+          addHabit={this.addHabit.bind(this)}
+          openAddHabit={this.openAddHabit}
+        />
       </div>
     );
   }
