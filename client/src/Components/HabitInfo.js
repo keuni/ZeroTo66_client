@@ -2,7 +2,6 @@ import React from 'react';
 
 class HabitInfo extends React.Component {
   onToggle = () => {
-    console.log('test');
     this.props.recordComplete(this.props.id);
   };
   render() {
