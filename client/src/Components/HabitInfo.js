@@ -7,9 +7,14 @@ class HabitInfo extends React.Component {
   render() {
     return (
       <div>
-        <div className="existingHabit">
-          {this.props.info}
-          <input type="checkbox" onClick={this.onToggle.bind(this)}></input>
+        <div className='existingHabit'>
+          - {this.props.info}
+          <input
+            type='checkbox'
+            className='checkbox'
+            onClick={this.onToggle.bind(this)}
+            defaultChecked={this.props.check}
+          ></input>
         </div>
       </div>
     );
