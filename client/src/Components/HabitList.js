@@ -10,7 +10,7 @@ class HabitList extends React.Component {
       habitlist: [
         {
           id: 0,
-          habitName: 'test',
+          habitName: '',
         },
       ],
       newHabit: '',
@@ -84,35 +84,57 @@ class HabitList extends React.Component {
         this.setState({ habitlist: data });
       });
   }
+  recordComplete(index) {
+    let changed = this.state.habitlist[index];
+    if (changed.hasOwnProperty('completed')) {
+      changed['completed'] = !changed['completed'];
+    } else {
+      changed['completed'] = true;
+    }
+    let presentHabitList = this.state.habitlist;
+    let newHabitList = presentHabitList
+      .slice(0, index)
+      .concat(changed)
+      .concat(presentHabitList.slice(index + 1));
+
+    this.setState({ habitlist: newHabitList });
+  }
+
   render() {
     const { habitlist } = this.state;
-    const list = habitlist.map((habit) => {
-      return <HabitInfo key={habit.id} info={habit.habitName} />;
-    });
     return (
-      <div className='HabitList'>
+      <div className="HabitList">
         오늘의 습관
-        <div>{list}</div>
-        <div className='addHabit'>
+        <div>
+          {habitlist.map((habit, index) => (
+            <HabitInfo
+              key={habit.id}
+              id={index}
+              info={habit.habitName}
+              recordComplete={this.recordComplete.bind(this)}
+            />
+          ))}
+        </div>
+        <div className="addHabit">
           {this.state.addHabit ? (
             <div>
               <input
-                className='addText'
-                type='text'
-                placeholder='습관을 추가하세요'
+                className="addText"
+                type="text"
+                placeholder="습관을 추가하세요"
                 onChange={this.handleInputValue.bind(this)}
               ></input>
-              <button className='add' onClick={this.addHabit.bind(this)}>
+              <button className="add" onClick={this.addHabit.bind(this)}>
                 Add
               </button>
-              <button className='add' onClick={this.openAddHabit.bind(this)}>
+              <button className="add" onClick={this.openAddHabit.bind(this)}>
                 cancel
               </button>
             </div>
           ) : (
             ''
           )}
-          <button className='btnAdd' onClick={this.openAddHabit.bind(this)}>
+          <button className="btnAdd" onClick={this.openAddHabit.bind(this)}>
             +
           </button>
         </div>
