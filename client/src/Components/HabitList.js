@@ -114,7 +114,6 @@ class HabitList extends React.Component {
         completed: this.state.completed - 1,
       });
     }
-    console.log(116, changed);
     this.postRecord(changed.habitId, result);
   }
 
@@ -146,8 +145,8 @@ class HabitList extends React.Component {
     const all = habitlist.length;
     console.log(146, habitlist[0]);
     return (
-      <div className='HabitList'>
-        <div className='todayList'>
+      <div className="HabitList">
+        <div className="todayList">
           오늘의 습관 {completed}/{all}
         </div>
         <div>
