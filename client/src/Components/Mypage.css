@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap');
+
 .Logout {
   position: fixed;
   left: 0px;
@@ -11,46 +13,81 @@
 .MypagezeroTo66 {
   font-family: 'Pacifico', cursive;
   margin-top: 1.5vh;
-  margin-bottom: 1.5vh;
+  margin-bottom: 6vh;
   background-color: rgb(203, 203, 203);
   font-size: 50px;
   font-weight: 600;
   color: white;
 }
 
+.mypagebody {
+  /*수평 중앙정렬*/
+  display: flex;
+  justify-content: center;
+}
+
+.mypageContent {
+  display: flex;
+  width: 1000px;
+  margin-top: 2vh;
+  /* border: 1px rgb(0, 119, 255) solid; */
+}
 .HabitList {
+  /* border: 1px rgb(255, 170, 0) solid; */
+  font-family: 'Gamja Flower', cursive;
   position: relative;
   font-size: 20px;
-  /* border: 1px solid black; */
-  width: 500px;
+  width: 450px;
   margin-top: 40px;
   margin-left: 50px;
+  margin-right: 50px;
   float: left;
   align-items: center;
 }
 
+.title {
+  font-weight: bold;
+  font-size: 40px;
+  margin-bottom: 30px;
+}
+
 .existingHabit {
-  font-size: 23px;
+  /* border: 1px rgb(255, 170, 0) solid; */
+  font-size: 25px;
   text-align: left;
   margin-left: 30px;
-  width: 455px;
+  width: 400px;
+  margin-bottom: 30px;
 }
 
 button {
   font: inherit;
 }
+.btnAdd:active {
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
 
 .btnAdd {
-  width: 455px;
+  width: 400px;
+  color: grey;
   background-color: transparent;
+  border: 0.5px solid rgba(21, 21, 21, 0.504);
+  border-radius: 10px;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+.btnAdd:hover {
+  border: 0.5px solid rgba(193, 193, 193, 0.504);
+  color: rgba(193, 193, 193, 0.504);
 }
 
 .addText {
-  width: 330px;
+  width: 270px;
   padding: 0 10px;
   border-radius: 0;
   border: none;
-  border-bottom: 2px solid rgb(221, 217, 217);
+  border-bottom: 0.7px solid rgba(124, 123, 123, 0.593);
   margin-right: 0;
 }
 .add {
@@ -60,4 +97,193 @@ button {
 }
 ::placeholder {
   font-size: 15px;
+}
+
+.adding {
+  margin-top: -7px;
+}
+
+@media screen and (min-width: 1500px) {
+  .mypageContent {
+    width: 1300px;
+  }
+  .HabitList {
+    width: 600px;
+  }
+  .existingHabit {
+    width: 520px;
+    font-size: 30px;
+    margin-bottom: 50px;
+  }
+  .btnAdd {
+    width: 540px;
+    font-size: 30px;
+  }
+  .addText {
+    width: 390px;
+  }
+  .title {
+    font-size: 60px;
+    margin-bottom: 60px;
+  }
+  ::placeholder {
+    font-size: 20px;
+  }
+  .add,
+  button {
+    font-size: 30px;
+  }
+  /*calendar*/
+  .DayPicker-Body {
+    width: 600px !important;
+    font-size: 30px !important;
+  }
+  .DayPicker-Weekdays {
+    width: 600px !important;
+    font-size: 50px !important;
+  }
+  .DayPicker-Weekday {
+    font-size: 20px !important;
+  }
+  .DayPicker-Week {
+    height: 70px !important;
+    font: 70px !important;
+  }
+  .DayPicker-Caption {
+    font-size: 30px !important;
+    height: 60px !important;
+  }
+  .DayPicker-NavButton {
+    width: 42px !important;
+    height: 42px !important;
+  }
+  .DayPicker-NavButton--prev {
+    margin-right: 40px !important;
+  }
+  .DayPicker-Footer {
+    padding-top: 20px !important;
+  }
+  .DayPicker-TodayButton {
+    font-size: 25px !important;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .mypageContent {
+    width: 650px;
+  }
+  .HabitList {
+    width: 300px;
+    margin-left: 0;
+    margin-right: 10px;
+  }
+  .existingHabit {
+    margin-bottom: 25px;
+    width: 260px;
+    font-size: 20px;
+  }
+  .btnAdd {
+    width: 270px;
+    font-size: 15px;
+  }
+  .addText {
+    width: 195px;
+  }
+  .title {
+    font-size: 30px;
+    margin-bottom: 30px;
+  }
+  ::placeholder {
+    font-size: 10px;
+  }
+  .add,
+  button {
+    font-size: 15px;
+  }
+  .colorinfo {
+    font-size: 13px;
+  }
+  /*calendar*/
+  .DayPicker-Body {
+    width: 300px !important;
+    font-size: 15px !important;
+  }
+  .DayPicker-Weekdays {
+    width: 300px !important;
+    font-size: 25px !important;
+  }
+  .DayPicker-Weekday {
+    font-size: 10px !important;
+  }
+  .DayPicker-Week {
+    height: 35px !important;
+    font: 35px !important;
+  }
+  .DayPicker-Caption {
+    font-size: 15px !important;
+    height: 30px !important;
+  }
+  .DayPicker-NavButton {
+    margin-top: 3px !important;
+    width: 21px !important;
+    height: 21px !important;
+  }
+  .DayPicker-NavButton--prev {
+    margin-right: 20px !important;
+  }
+  .DayPicker-Footer {
+    padding-top: 10px !important;
+  }
+  .DayPicker-TodayButton {
+    font-size: 13px !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .mypageContent {
+    width: 350px;
+    display: inline-block;
+  }
+  .HabitList {
+    width: 350px;
+    margin-top: 0;
+    margin-bottom: 30px;
+  }
+  .existingHabit {
+    width: 260px;
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+  .btnAdd {
+    margin-top: 2px;
+    width: 295px;
+    font: inherit;
+    font-size: 20px;
+    padding: 0;
+  }
+  .addText {
+    width: 195px;
+  }
+  .addText {
+    width: 185px;
+  }
+  .title {
+    margin-bottom: 20px;
+  }
+  ::placeholder {
+    font-size: 13px;
+  }
+  .add,
+  button {
+    font-size: 18px;
+  }
+  .colorinfo {
+    font-size: 10px;
+  }
+  /*calendar*/
+  .DayPicker-wrapper {
+    margin-top: -10px !important;
+  }
+  .DayPicker-Weekday {
+    padding: 2px !important;
+  }
 }
