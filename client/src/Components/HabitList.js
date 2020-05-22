@@ -3,19 +3,26 @@ import HabitInfo from './HabitInfo';
 import url from './config/config';
 
 class HabitList extends React.Component {
-  state = {
-    habitlist: [
-      {
-        id: 0,
-        habitName: 'test',
-      },
-    ],
-    habitName: '',
-    addHabit: false,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      habitlist: [
+        {
+          id: 0,
+          habitName: 'test',
+        },
+      ],
+      newHabit: '',
+      addHabit: false,
+      existModal: false,
+    };
+    this.openAddHabit = this.openAddHabit.bind(this);
+    this.existModal = this.existModal.bind(this);
+  }
 
   handleInputValue = (e) => {
-    this.setState({ habitName: e.target.value });
+    this.setState({ newHabit: e.target.value });
   };
 
   openAddHabit() {
@@ -23,58 +30,70 @@ class HabitList extends React.Component {
       addHabit: !this.state.addHabit,
     });
   }
+  existModal() {
+    this.setState({
+      existModal: !this.state.existModal,
+    });
+  }
   addHabit() {
     this.openAddHabit();
-    fetch(url.server + 'record', {
+    fetch(url.server + 'habit', {
       method: 'POST',
+      withCredentials: true,
+      credentials: 'include',
       body: JSON.stringify({
-        habitName: this.state.habitName,
+        habitName: this.state.newHabit,
       }),
       headers: {
         'Content-Type': 'application/json',
       },
     })
       .then((result) => {
-        return result.json();
+        if (result.status === 201) {
+          return result.json();
+        }
+        this.existModal();
       })
       .then((data) => {
-        console.log(35, data);
+        if (data === undefined) {
+          return;
+        }
+        this.setState({
+          habitlist: [...this.state.habitlist, data],
+        });
       });
   }
   componentDidMount() {
-    fetch(
-      'http://localhost:4000/habit',
-      // 'http://54.180.103.96:4000/habit',
-      {
-        method: 'GET',
-        withCredentials: true,
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    )
+    fetch(url.server + 'habit', {
+      method: 'GET',
+      withCredentials: true,
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
       .then((res) => {
-        console.log('JSON', res);
         if (res.status === 200) {
           return res.json();
         }
       })
       .then((data) => {
-        console.log('GET ', data);
+        if (data === undefined) {
+          return;
+        }
         this.setState({ habitlist: data });
       });
   }
   render() {
     const { habitlist } = this.state;
     const list = habitlist.map((habit) => {
-      console.log('MPA ', habit);
       return <HabitInfo key={habit.id} info={habit.habitName} />;
     });
     return (
-      <div className="HabitList">
+      <div className='HabitList'>
+        오늘의 습관
         <div>{list}</div>
-       <div>
+        <div className='addHabit'>
           {this.state.addHabit ? (
             <div>
               <input
@@ -85,6 +104,9 @@ class HabitList extends React.Component {
               ></input>
               <button className='add' onClick={this.addHabit.bind(this)}>
                 Add
+              </button>
+              <button className='add' onClick={this.openAddHabit.bind(this)}>
+                cancel
               </button>
             </div>
           ) : (
