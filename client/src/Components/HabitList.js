@@ -84,7 +84,7 @@ class HabitList extends React.Component {
         }
         this.setState({ habitlist: data });
         let count = 0;
-        data.map((x) => {
+        data.forEach((x) => {
           if (x.completed === true) {
             count += 1;
           }
