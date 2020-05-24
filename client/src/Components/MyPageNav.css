@@ -1,0 +1,57 @@
+.navbar {
+  margin-bottom: 40px;
+  padding: 3px 20px;
+}
+.bg-dark {
+  background-color: rgb(129, 129, 129) !important;
+}
+
+.MypagezeroTo66 {
+  font-family: 'Pacifico', cursive;
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.navbar-dark .navbar-toggler {
+  border: none;
+}
+
+button.navbar-toggler:focus {
+  outline: none;
+}
+
+.navbar-dark .navbar-toggler {
+  border: none;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: white;
+}
+
+.mr-auto,
+.mx-auto {
+  margin-left: auto !important;
+}
+
+.Logout {
+  width: 90px;
+  border: white 0.2px solid;
+  padding: 5px 10px;
+  color: white;
+}
+
+.Logout:hover {
+  color: rgb(190, 190, 190);
+  border: rgb(190, 190, 190) 0.2px solid;
+  text-decoration: none;
+}
+@media screen and (max-width: 600px) {
+  .MypagezeroTo66 {
+    font-size: 30px;
+    font-weight: 400;
+  }
+  .Logout,
+  .Logout:hover {
+    border: none;
+  }
+}
