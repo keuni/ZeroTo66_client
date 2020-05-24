@@ -43,7 +43,7 @@ class Signup extends React.Component {
               this.state.showModal ? 'Loginbox backSignup' : 'Loginbox'
             }
           >
-            <h1>Signup</h1>
+            <div>Signup</div>
             <form
               onSubmit={(e) => {
                 e.preventDefault();

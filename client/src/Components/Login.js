@@ -43,7 +43,7 @@ class Login extends React.Component {
         <div
           className={this.state.showModal ? 'Loginbox backLogin' : 'Loginbox'}
         >
-          <h1>Login</h1>
+          <div>Login</div>
           <form
             onSubmit={(e) => {
               e.preventDefault();
