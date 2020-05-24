@@ -43,7 +43,7 @@ class Signup extends React.Component {
               this.state.showModal ? 'Loginbox backSignup' : 'Loginbox'
             }
           >
-            <div>Signup</div>
+            <div className='maintext'>Signup</div>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -71,17 +71,19 @@ class Signup extends React.Component {
                 }
               }}
             >
-              <div>
+              <div className='inputBox'>
                 <span className='IDtext'>ID</span>
                 <input
+                  className='input'
                   type='text'
                   placeholder='ID를 입력해주세요'
                   onChange={this.handleInputValue('username')}
                 ></input>
               </div>
-              <div>
+              <div className='inputBox'>
                 <span className='PWtext'>PW</span>
                 <input
+                  className='input'
                   onChange={this.handleInputValue('password')}
                   type='password'
                   placeholder='password를 입력해주세요'
