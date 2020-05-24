@@ -83,7 +83,7 @@ class Login extends React.Component {
                 onChange={this.handleInputValue('password')}
               ></input>
             </div>
-            <div>
+            <div className='goToOtherSide'>
               <Link to='/signup'>회원가입하기</Link>
             </div>
             <button className='login_signup_button' type='submit'>

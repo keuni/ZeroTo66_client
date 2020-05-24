@@ -25,19 +25,3 @@ button {
   font: inherit;
   font-size: 13px;
 }
-
-input {
-  width: 400px;
-  height: 30px;
-  margin: 5px;
-  border-radius: 5px;
-  font-size: 20px;
-}
-
-.login_signup_button {
-  width: 200px;
-  height: 30px;
-  margin: 5px;
-  border-radius: 5px;
-  background-color: #cba6c3;
-}

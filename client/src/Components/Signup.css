@@ -1,32 +1,27 @@
-.Signup {
+/* .Signup {
   position: absolute;
   width: 100%;
   vertical-align: middle;
-}
-
-.Signupbox {
-  position: relative;
-  z-index: 0;
-  height: 300px;
-}
+} */
 
 .backSignup {
   top: -100vh;
 }
 
 .IDtext {
-  margin-right: 7px;
+  margin-right: 10px;
   margin-left: 7px;
+  font-size: 23px;
 }
 
 .PWtext {
   margin-right: 5px;
+  font-size: 23px;
 }
 
-.zeroTo66 {
-  font-family: 'Pacifico', cursive;
-  margin-top: 15vh;
-  font-size: 40px;
-  font-weight: 600;
-  color: #cba6c3;
+@media screen and (min-width: 1500px) {
+  .IDtext,
+  .PWtext {
+    font-size: 33px;
+  }
 }

@@ -40,7 +40,7 @@ class Signup extends React.Component {
           <div className='zeroTo66'>ZeroTo66</div>
           <div
             className={
-              this.state.showModal ? 'Signupbox backSignup' : 'Signupbox'
+              this.state.showModal ? 'Loginbox backSignup' : 'Loginbox'
             }
           >
             <h1>Signup</h1>
@@ -87,7 +87,7 @@ class Signup extends React.Component {
                   placeholder='password를 입력해주세요'
                 ></input>
               </div>
-              <div>
+              <div className='goToOtherSide'>
                 <Link to='/login'>아이디가 있으신가요?</Link>
               </div>
               <button className='login_signup_button' type='submit'>
