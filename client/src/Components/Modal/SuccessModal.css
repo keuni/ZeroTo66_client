@@ -1,0 +1,8 @@
+.SuccessModal_content {
+  width: 430px;
+  height: 100px;
+  margin-top: 20vh;
+  background-color: rgb(78, 146, 0);
+  color: white;
+  font-size: 25px;
+}
