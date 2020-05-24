@@ -8,19 +8,19 @@ function AddHabit(props) {
           <input
             className='addText'
             type='text'
-            placeholder='습관을 추가하세요'
+            placeholder='새로운 습관을 만들어보세요'
             onChange={props.handleInputValue}
           ></input>
           <button className='add' onClick={props.addHabit}>
-            Add
+            추가
           </button>
-          <button className='add' onClick={props.openAddHabit}>
-            cancel
+          <button className='add cancel' onClick={props.openAddHabit}>
+            취소
           </button>
         </div>
       ) : (
         <button className='btnAdd' onClick={props.openAddHabit}>
-          +
+          추가하기
         </button>
       )}
     </div>
