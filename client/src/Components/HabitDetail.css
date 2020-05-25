@@ -12,11 +12,26 @@
 
 @media screen and (max-width: 1000px) {
   .OnehabitName {
+    margin-left: 10px;
     font-size: 17px;
     width: 200px;
   }
   .detailInfo {
-    margin-left: 70px;
+    margin-left: 60px;
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .OnehabitName {
+    text-align: center;
+    width: 500px;
+    margin-left: 24px;
+    font-size: 17px;
+    width: 200px;
+  }
+  .detailInfo {
+    margin-left: 50px;
     font-size: 15px;
   }
 }

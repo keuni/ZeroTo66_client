@@ -13,35 +13,36 @@ class HabitCalendar extends React.Component {
     },
   };
 
-  componentDidMount() {
-    fetch(url.server + 'habit/' + this.props.detailHabitId, {
-      method: 'GET',
-      withCredentials: true,
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => {
-        res.json();
-      })
-      .then((data) => {
-        let year = new Date().getFullYear();
-        let month = new Date().getMonth();
-        let done_all = [];
-        data = [true, false, false, true, true];
-        data.forEach((x, index) => {
-          if (x === true) {
-            done_all.push(new Date(year, month, index + 1));
-          }
-        });
-        this.setState((prevState) => {
-          let modifiers = Object.assign({}, prevState.modifiers);
-          modifiers.birthday = done_all;
-          return { modifiers };
-        });
-      });
-  }
+  // componentDidMount() {
+  //   fetch(url.server + 'record/' + this.props.detailHabitId, {
+  //     method: 'GET',
+  //     withCredentials: true,
+  //     credentials: 'include',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   })
+  //     .then((res) => {
+  //       return res.json();
+  //     })
+  //     .then((data) => {
+  //       if (data) {
+  //         let year = new Date().getFullYear();
+  //         let month = new Date().getMonth();
+  //         let done_all = [];
+  //         data.forEach((x, index) => {
+  //           if (x === true) {
+  //             done_all.push(new Date(year, month, index + 1));
+  //           }
+  //         });
+  //         this.setState((prevState) => {
+  //           let modifiers = Object.assign({}, prevState.modifiers);
+  //           modifiers.birthday = done_all;
+  //           return { modifiers };
+  //         });
+  //       }
+  //     });
+  // }
 
   render() {
     const today = this.state.modifiers.foo;

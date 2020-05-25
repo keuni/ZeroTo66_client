@@ -51,7 +51,6 @@ input::placeholder {
 .goToOtherSide {
   margin-top: 15px;
   margin-bottom: 0px;
-  font-size: 20px;
   font-size: 18px;
 }
 
@@ -68,10 +67,6 @@ input::placeholder {
 @media screen and (min-width: 1500px) {
   .zeroTo66 {
     font-size: 75px;
-  }
-
-  .Loginbox {
-    font-size: 30px;
   }
   .maintext {
     font-size: 55px;
@@ -97,5 +92,64 @@ input::placeholder {
     width: 250px;
     height: 50px;
     font-size: 30px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .zeroTo66 {
+    font-size: 35px;
+  }
+  .maintext {
+    font-size: 30px;
+  }
+  input {
+    width: 280px;
+    height: 32px;
+  }
+  .input {
+    font-size: 17px;
+  }
+  input::placeholder {
+    font-size: 14px;
+  }
+  .goToOtherSide {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  .login_signup_button {
+    width: 140px;
+    height: 28px;
+    font-size: 17px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .zeroTo66 {
+    font-size: 30px;
+  }
+  .maintext {
+    font-size: 25px;
+    margin-bottom: 20px;
+  }
+  input {
+    width: 250px;
+    height: 28px;
+  }
+  .input {
+    font-size: 18px;
+  }
+  input::placeholder {
+    font-size: 13px;
+  }
+  .goToOtherSide {
+    font-size: 15px;
+    margin-bottom: 5px;
+  }
+
+  .login_signup_button {
+    width: 120px;
+    height: 25px;
+    font-size: 15px;
   }
 }

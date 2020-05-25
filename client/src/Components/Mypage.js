@@ -14,9 +14,9 @@ class Mypage extends React.Component {
       habitDetail: false,
       detailHabitName: null,
       detailHabitId: null,
-      total: 3,
-      streak: 6,
-      longestStreak: 14,
+      total: 0,
+      streak: 0,
+      longestStreak: 0,
     };
     this.showHabitDetail = this.showHabitDetail.bind(this);
     this.getStreakInfo = this.getStreakInfo.bind(this);
@@ -48,10 +48,12 @@ class Mypage extends React.Component {
         detailHabitName: habitName,
       });
     }
+    this.getStreakInfo(id);
   }
 
-  getStreakInfo() {
-    fetch(url.server + 'record/' + this.props.detailHabitId, {
+  getStreakInfo(id) {
+    console.log('getstreak', this.state.detailHabitId);
+    fetch(url.server + 'record/' + id, {
       method: 'GET',
       withCredentials: true,
       credentials: 'include',
@@ -59,7 +61,7 @@ class Mypage extends React.Component {
         'Content-Type': 'application/json',
       },
     })
-      .then((res) => res.json)
+      .then((res) => res.json())
       .then((data) => {
         this.setState({
           total: data.total,
@@ -83,10 +85,7 @@ class Mypage extends React.Component {
         <MyPageNav onClick={this.logout.bind(this)} />
         <div className='mypagebody'>
           <div className='mypageContent'>
-            <HabitList
-              showHabitDetail={this.showHabitDetail}
-              getStreakInfo={this.getStreakInfo}
-            />
+            <HabitList showHabitDetail={this.showHabitDetail} />
             {habitDetail === false ? (
               <Calendar />
             ) : (

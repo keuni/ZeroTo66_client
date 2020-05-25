@@ -6,7 +6,6 @@ class HabitInfo extends React.Component {
   }
 
   onClick() {
-    this.props.getStreakInfo();
     this.props.showHabitDetail(
       this.props.id,
       this.props.habitId,
@@ -15,7 +14,7 @@ class HabitInfo extends React.Component {
   }
 
   remove = () => {
-    this.props.deleteHabit(this.props.id);
+    this.props.deleteHabit(this.props.id, this.props.habitId);
   };
 
   render() {
@@ -31,16 +30,24 @@ class HabitInfo extends React.Component {
           >
             {this.props.info}
           </span>
-          <input
-            type='checkbox'
-            className='checkbox'
-            onClick={this.onToggle.bind(this)}
-            defaultChecked={this.props.check}
-          ></input>
+          {!this.props.deleting ? (
+            <input
+              type='checkbox'
+              className='checkbox'
+              onClick={this.onToggle.bind(this)}
+              defaultChecked={this.props.check}
+            ></input>
+          ) : (
+            ''
+          )}
+          {this.props.deleting ? (
+            <button className='delete' onClick={this.remove.bind(this)}>
+              삭제
+            </button>
+          ) : (
+            ''
+          )}
         </div>
-        <button className="delete" onClick={this.remove.bind(this)}>
-          삭제
-        </button>
       </div>
     );
   }
