@@ -14,6 +14,10 @@ class HabitInfo extends React.Component {
     );
   }
 
+  remove = () => {
+    this.props.deleteHabit(this.props.id);
+  };
+
   render() {
     return (
       <div>
@@ -34,6 +38,9 @@ class HabitInfo extends React.Component {
             defaultChecked={this.props.check}
           ></input>
         </div>
+        <button className="delete" onClick={this.remove.bind(this)}>
+          삭제
+        </button>
       </div>
     );
   }
