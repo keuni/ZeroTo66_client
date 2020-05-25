@@ -1,7 +1,11 @@
 .Calendar {
+  margin-top: 30px;
   font-family: 'Mukta', 'Noto Sans KR';
   outline: 0 !important;
-  border: none !important;
+}
+
+.MainCalendar {
+  margin-top: 20px;
 }
 
 .DayPicker-wrapper {
