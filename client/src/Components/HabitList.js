@@ -2,6 +2,7 @@ import React from 'react';
 import HabitInfo from './HabitInfo';
 import AddHabit from './AddHabit';
 import url from './config/config';
+import SuccessModal from './Modal/SuccessModal';
 
 class HabitList extends React.Component {
   constructor(props) {
@@ -12,11 +13,11 @@ class HabitList extends React.Component {
       completed: 0,
       newHabit: '',
       adding: false,
-      existModal: false,
+      successModal: 'hide',
     };
     this.openAddHabit = this.openAddHabit.bind(this);
-    this.existModal = this.existModal.bind(this);
     this.postRecord = this.postRecord.bind(this);
+    this.showSuccessModal = this.showSuccessModal.bind(this);
   }
 
   handleInputValue = (e) => {
@@ -26,11 +27,6 @@ class HabitList extends React.Component {
   openAddHabit() {
     this.setState({
       adding: !this.state.adding,
-    });
-  }
-  existModal() {
-    this.setState({
-      existModal: !this.state.existModal,
     });
   }
 
@@ -51,7 +47,6 @@ class HabitList extends React.Component {
         if (result.status === 201) {
           return result.json();
         }
-        this.existModal();
       })
       .then((data) => {
         if (data === undefined) {
@@ -109,12 +104,26 @@ class HabitList extends React.Component {
       this.setState({
         completed: this.state.completed + 1,
       });
+      this.showSuccessModal();
     } else {
       this.setState({
         completed: this.state.completed - 1,
       });
     }
     this.postRecord(changed.habitId, result);
+  }
+
+  showSuccessModal() {
+    const { habitlist, completed, successModal } = this.state;
+    if (
+      successModal === 'hide' &&
+      habitlist.length > 0 &&
+      habitlist.length === completed + 1
+    ) {
+      this.setState({
+        successModal: true,
+      });
+    }
   }
 
   postRecord(id, result) {
@@ -140,13 +149,23 @@ class HabitList extends React.Component {
       });
   }
 
+  offsuccessModal() {
+    this.setState({
+      successModal: 'hide',
+    });
+  }
+
   render() {
-    const { habitlist, completed } = this.state;
+    const { habitlist, completed, successModal } = this.state;
     const all = habitlist.length;
-    console.log(146, habitlist[0]);
     return (
-      <div className="HabitList">
-        <div className="todayList">
+      <div className='HabitList'>
+        {successModal === true ? (
+          <SuccessModal offsuccessModal={this.offsuccessModal.bind(this)} />
+        ) : (
+          ''
+        )}
+        <div className='todayList'>
           오늘의 습관 {completed}/{all}
         </div>
         <div>
