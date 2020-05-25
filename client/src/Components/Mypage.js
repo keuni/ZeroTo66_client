@@ -1,12 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './Mypage.css';
 import HabitList from './HabitList';
 import Calendar from './Calendar';
 import url from './config/config';
+import MyPageNav from './MyPageNav';
 
-function Mypage(props) {
-  const logout = () => {
+class Mypage extends React.Component {
+  logout = () => {
     return fetch(url.server + 'user/signout', {
       method: 'GET',
       withCredentials: true,
@@ -15,25 +15,22 @@ function Mypage(props) {
         'Content-Type': 'application/json',
       },
     }).then(() => {
-      props.handleLogin();
+      this.props.handleLogin();
     });
   };
-  return (
-    <div className='Mypage'>
-      <Link to='/login'>
-        <button className='Logout' onClick={logout}>
-          LOGOUT
-        </button>
-      </Link>
-      <div className='MypagezeroTo66'>ZeroTo66</div>
-      <div className='mypagebody'>
-        <div className='mypageContent'>
-          <HabitList />
-          <Calendar />
+  render() {
+    return (
+      <div className='Mypage'>
+        <MyPageNav onClick={this.logout.bind(this)} />
+        <div className='mypagebody'>
+          <div className='mypageContent'>
+            <HabitList />
+            <Calendar />
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default Mypage;

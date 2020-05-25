@@ -1,25 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap');
 
-.Logout {
-  position: fixed;
-  left: 0px;
-  margin-left: 10px;
-  margin-top: 25px;
-  border-radius: 5px;
-  font-size: 15px;
-  padding: 3px 10px;
-}
-
-.MypagezeroTo66 {
-  font-family: 'Pacifico', cursive;
-  margin-top: 1.5vh;
-  margin-bottom: 6vh;
-  background-color: rgb(203, 203, 203);
-  font-size: 50px;
-  font-weight: 600;
-  color: white;
-}
-
 .mypagebody {
   /*수평 중앙정렬*/
   display: flex;
@@ -59,7 +39,7 @@
   text-align: left;
   margin-left: 30px;
   width: 400px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 .checkbox {
   -webkit-appearance: none;
