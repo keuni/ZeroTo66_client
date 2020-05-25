@@ -1,3 +1,7 @@
+.habitDetail {
+  width: 430px;
+}
+
 .OnehabitName {
   font-size: 20px;
   height: 35px;
@@ -10,13 +14,39 @@
   text-align: left;
 }
 
+@media screen and (min-width: 1500px) {
+  .habitDetail {
+    width: 650px;
+  }
+}
 @media screen and (max-width: 1000px) {
+  .habitDetail {
+    width: 400px;
+  }
   .OnehabitName {
+    margin-left: 10px;
     font-size: 17px;
     width: 200px;
   }
   .detailInfo {
-    margin-left: 70px;
+    margin-left: 60px;
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .habitDetail {
+    width: 350px;
+  }
+  .OnehabitName {
+    text-align: center;
+    margin-left: 45px;
+    font-size: 17px;
+    width: 200px;
+  }
+  .detailInfo {
+    margin-left: 30px;
+    width: 300px;
     font-size: 15px;
   }
 }

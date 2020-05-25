@@ -14,7 +14,7 @@ class HabitCalendar extends React.Component {
   };
 
   componentDidMount() {
-    fetch(url.server + 'habit/' + this.props.detailHabitId, {
+    fetch(url.server + 'habit/detail?habitId=' + this.props.detailHabitId, {
       method: 'GET',
       withCredentials: true,
       credentials: 'include',
@@ -23,23 +23,24 @@ class HabitCalendar extends React.Component {
       },
     })
       .then((res) => {
-        res.json();
+        return res.json();
       })
       .then((data) => {
-        let year = new Date().getFullYear();
-        let month = new Date().getMonth();
-        let done_all = [];
-        data = [true, false, false, true, true];
-        data.forEach((x, index) => {
-          if (x === true) {
-            done_all.push(new Date(year, month, index + 1));
-          }
-        });
-        this.setState((prevState) => {
-          let modifiers = Object.assign({}, prevState.modifiers);
-          modifiers.birthday = done_all;
-          return { modifiers };
-        });
+        if (data) {
+          let year = new Date().getFullYear();
+          let month = new Date().getMonth();
+          let done_all = [];
+          data.forEach((x, index) => {
+            if (x === true) {
+              done_all.push(new Date(year, month, index + 1));
+            }
+          });
+          this.setState((prevState) => {
+            let modifiers = Object.assign({}, prevState.modifiers);
+            modifiers.birthday = done_all;
+            return { modifiers };
+          });
+        }
       });
   }
 

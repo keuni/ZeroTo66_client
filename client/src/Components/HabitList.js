@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import HabitInfo from './HabitInfo';
 import AddHabit from './AddHabit';
@@ -12,6 +13,7 @@ class HabitList extends React.Component {
       habitlist: [],
       completed: 0,
       successModal: 'hide',
+      deleting: false,
     };
     this.postRecord = this.postRecord.bind(this);
     this.showSuccessModal = this.showSuccessModal.bind(this);
@@ -49,7 +51,7 @@ class HabitList extends React.Component {
       });
   }
 
-  deleteHabit(id) {
+  deleteHabit(index, id) {
     fetch(url.server + 'habit', {
       method: 'PATCH',
       withCredentials: true,
@@ -63,7 +65,10 @@ class HabitList extends React.Component {
     }).then((result) => {
       if (result.status === 201) {
         let newState = JSON.parse(JSON.stringify(this.state.habitlist));
-        newState.splice(id, 1);
+        if (newState[index].completed) {
+          this.setState({ completed: this.state.completed - 1 });
+        }
+        newState.splice(index, 1);
         this.setState({ habitlist: newState });
       }
     });
@@ -164,20 +169,32 @@ class HabitList extends React.Component {
       successModal: 'hide',
     });
   }
+  openDelete() {
+    this.setState({
+      deleting: !this.state.deleting,
+    });
+  }
 
   render() {
     const { habitlist, completed, successModal } = this.state;
     const all = habitlist.length;
     return (
-      <div className="HabitList">
+      <div className='HabitList'>
         {successModal === true ? (
           <SuccessModal offsuccessModal={this.offsuccessModal.bind(this)} />
         ) : (
           ''
         )}
-        <div className="todayList">
-          오늘의 습관 {completed}/{all}
+        <div className='todayList'>
+          <span className='text1'>오늘의 습관 </span>
+          <span className='text2'>
+            {completed}/{all}
+          </span>
+          <button className='openDelete' onClick={this.openDelete.bind(this)}>
+            ⚙️
+          </button>
         </div>
+
         <div>
           {habitlist.length > 0
             ? habitlist.map((data, index) => (
@@ -189,9 +206,8 @@ class HabitList extends React.Component {
                   check={data.completed}
                   recordComplete={this.recordComplete.bind(this)}
                   showHabitDetail={this.props.showHabitDetail}
-                  getStreakInfo={this.props.getStreakInfo}
                   deleteHabit={this.deleteHabit.bind(this)}
-
+                  deleting={this.state.deleting}
                 />
               ))
             : ''}
