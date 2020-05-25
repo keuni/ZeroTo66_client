@@ -158,7 +158,6 @@ class HabitList extends React.Component {
   render() {
     const { habitlist, completed, successModal } = this.state;
     const all = habitlist.length;
-    console.log(146, habitlist[0]);
     return (
       <div className='HabitList'>
         {successModal === true ? (
