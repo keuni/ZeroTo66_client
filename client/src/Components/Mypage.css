@@ -6,6 +6,10 @@
   justify-content: center;
 }
 
+input:focus {
+  outline: none;
+}
+
 .mypageContent {
   display: flex;
   width: 1000px;
@@ -31,8 +35,7 @@
   font-size: 25px;
   text-align: left;
   margin-left: 50px;
-  width: 350px;
-
+  width: 320px;
   margin-bottom: 20px;
 }
 .checkbox {
@@ -66,6 +69,7 @@ button {
   border: none;
   border-radius: 10px;
   padding: 0;
+  margin-left: -30px;
 }
 .btnAdd:hover {
   color: rgba(193, 193, 193, 0.504);
@@ -73,12 +77,12 @@ button {
 
 .addText {
   margin-top: 12px;
-  width: 255px;
+  width: 290px;
   padding: 0 10px;
   border-radius: 0;
   border: none;
   border-bottom: 0.7px solid rgba(124, 123, 123, 0.593);
-  margin-left: 5px;
+  margin-left: -25px;
   font-size: 15px;
 }
 
@@ -88,6 +92,10 @@ button {
   font-size: 15px;
   cursor: pointer;
 }
+.cancel {
+  margin-top: 7px;
+  width: 200px;
+}
 ::placeholder {
   font-size: 15px;
 }
@@ -95,7 +103,9 @@ button {
 .adding {
   margin-top: -7px;
 }
-
+.colorinfo {
+  margin-bottom: -10px;
+}
 .completedHabit {
   text-decoration: line-through;
 }
@@ -105,34 +115,41 @@ button {
     width: 1300px;
   }
   .HabitList {
+    font-size: 40px;
     width: 600px;
   }
   .todayList {
-    margin-bottom: 40px;
+    margin-bottom: 50px;
   }
   .existingHabit {
-    margin-left: 65px;
-    width: 450px;
-    font-size: 35px;
+    width: 420px;
+    font-size: 30px;
+    margin-left: 60px;
     margin-bottom: 30px;
   }
   .btnAdd {
-    margin-left: 10px;
-    width: 515px;
-    height: 45px;
-    font-size: 25px;
+    width: 500px;
+    font-size: 30px;
   }
   .addText {
-    margin-left: 20px;
-    margin-top: 1px;
-    width: 330px;
-    font-size: 23px;
+    margin-left: -20px;
+    width: 370px;
+  }
+  .title {
+    font-size: 60px;
+    margin-bottom: 60px;
   }
   ::placeholder {
     font-size: 20px;
   }
-  .add {
-    font-size: 23px;
+  .add,
+  button {
+    font-size: 24px;
+  }
+  .colorinfo {
+    font-size: 18px;
+    width: 590px;
+    margin-left: 20px;
   }
   /*calendar*/
   .DayPicker-Body {
@@ -183,27 +200,25 @@ button {
   .existingHabit {
     margin-left: 15px;
     margin-bottom: 25px;
-    width: 250px;
-    font-size: 23px;
+    width: 260px;
+    font-size: 20px;
   }
   .checkbox {
-    margin-top: 4px;
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
   }
   .btnAdd {
     width: 240px;
+    margin-left: -5px;
     font-size: 15px;
-    margin-top: 3px;
   }
   .addText {
-    margin-left: -15px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    width: 195px;
+    margin-left: 0px;
+    width: 230px;
   }
-  .cancel {
-    width: 200px;
+  .title {
+    font-size: 30px;
+    margin-bottom: 30px;
   }
   ::placeholder {
     font-size: 10px;
@@ -214,6 +229,9 @@ button {
   }
   .colorinfo {
     font-size: 13px;
+  }
+  .Calendar {
+    margin-left: 40px;
   }
   /*calendar*/
   .DayPicker-Body {
@@ -252,6 +270,12 @@ button {
 }
 
 @media screen and (max-width: 600px) {
+  .Calendar {
+    display: inline-block;
+    margin-left: 0;
+    width: 350px;
+    margin-top: 10px !important;
+  }
   .mypageContent {
     width: 350px;
     display: inline-block;
@@ -259,46 +283,47 @@ button {
   .HabitList {
     width: 350px;
     margin-top: 0;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
   }
   .todayList {
     font-size: 25px;
   }
   .existingHabit {
-    margin-left: 70px;
-    width: 220px;
+    margin-left: 60px;
+    width: 230px;
     margin-bottom: 10px;
     font-size: 20px;
   }
   .checkbox {
-    width: 15px;
-    height: 15px;
+    margin-top: 3px;
+    width: 16px;
+    height: 16px;
   }
   .btnAdd {
-    width: 220px;
-    margin-top: 6px;
-    margin-left: 5px;
-    font-size: 13px;
-    height: 27px;
+    margin-left: -10px;
+    margin-top: 2px;
+    width: 200px;
+    font: inherit;
+    font-size: 18px;
+    padding: 0;
   }
   .addText {
-    margin-top: 10px;
-    height: 27px;
-    width: 195px;
-    font-size: 13px;
+    margin-left: 5px;
+    margin-top: 4px;
+    width: 200px;
+  }
+  .title {
+    margin-bottom: 20px;
   }
   .addText::placeholder {
-    font-size: 5px;
+    font-size: 11px;
   }
-  .addText {
-    margin-left: 15px;
-    width: 170px;
-    margin-bottom: 2px;
-  }
-  .add {
+  .add,
+  button {
     font-size: 13px;
   }
   .colorinfo {
+    margin-bottom: 0px;
     font-size: 10px;
   }
   /*calendar*/

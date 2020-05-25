@@ -22,7 +22,7 @@ class Calendar extends React.Component {
   render() {
     const today = this.state.modifiers.foo;
     return (
-      <div className='Calendar'>
+      <div className='Calendar MainCalendar'>
         <div className='colorinfo'>
           성공률 : <span className='green'> 100% </span> /
           <span className='red'> 1~99% </span> / 0%
@@ -33,12 +33,11 @@ class Calendar extends React.Component {
           selectedDays={this.state.done_partially}
           disabledDays={[
             {
-              after: new Date(2000, 4, 0),
+              after: new Date(2000, 0, 0),
               before: today,
             },
           ]}
           todayButton='Go to Today'
-          // onTodayButtonClick={(day, modifiers) => console.log(day, modifiers)}
         />
       </div>
     );

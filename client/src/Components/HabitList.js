@@ -164,9 +164,11 @@ class HabitList extends React.Component {
                 <HabitInfo
                   key={data.habitId}
                   id={index}
+                  habitId={data.habitId}
                   info={data.habitName}
                   check={data.completed}
                   recordComplete={this.recordComplete.bind(this)}
+                  showHabitDetail={this.props.showHabitDetail}
                 />
               ))
             : ''}
