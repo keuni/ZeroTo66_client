@@ -14,7 +14,7 @@ class HabitCalendar extends React.Component {
   };
 
   componentDidMount() {
-    fetch(url.server + 'record/' + this.props.detailHabitId, {
+    fetch(url.server + 'habit/detail?habitId=' + this.props.detailHabitId, {
       method: 'GET',
       withCredentials: true,
       credentials: 'include',
