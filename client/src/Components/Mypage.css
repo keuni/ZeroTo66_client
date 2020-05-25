@@ -115,6 +115,10 @@ button {
   margin-top: -7px;
 }
 
+.completedHabit {
+  text-decoration: line-through;
+}
+
 @media screen and (min-width: 1500px) {
   .mypageContent {
     width: 1300px;
