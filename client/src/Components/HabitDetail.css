@@ -22,10 +22,9 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
   .OnehabitName {
     text-align: center;
-    width: 500px;
     margin-left: 24px;
     font-size: 17px;
     width: 200px;

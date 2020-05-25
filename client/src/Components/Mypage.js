@@ -52,7 +52,6 @@ class Mypage extends React.Component {
   }
 
   getStreakInfo(id) {
-    console.log('getstreak', this.state.detailHabitId);
     fetch(url.server + 'record/' + id, {
       method: 'GET',
       withCredentials: true,

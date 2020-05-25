@@ -29,7 +29,6 @@ class Calendar extends React.Component {
         return res.json();
       })
       .then((data) => {
-        console.log('data,', data);
         if (data) {
           let year = new Date().getFullYear();
           let month = new Date().getMonth();
