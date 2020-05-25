@@ -43,7 +43,7 @@ class Login extends React.Component {
         <div
           className={this.state.showModal ? 'Loginbox backLogin' : 'Loginbox'}
         >
-          <h1>Login</h1>
+          <div className='maintext'>Login</div>
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -69,21 +69,23 @@ class Login extends React.Component {
               });
             }}
           >
-            <div>
+            <div className='inputBox'>
               <input
+                className='input'
                 type='text'
                 placeholder='ID를 입력해주세요'
                 onChange={this.handleInputValue('username')}
               ></input>
             </div>
-            <div>
+            <div className='inputBox'>
               <input
+                className='input'
                 type='password'
                 placeholder='password를 입력해주세요'
                 onChange={this.handleInputValue('password')}
               ></input>
             </div>
-            <div>
+            <div className='goToOtherSide'>
               <Link to='/signup'>회원가입하기</Link>
             </div>
             <button className='login_signup_button' type='submit'>
