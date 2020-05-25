@@ -38,9 +38,13 @@ class HabitList extends React.Component {
         if (data === undefined) {
           return;
         }
-        let obj = { completed: false, habit: data };
+        let newHabit = {
+          habitId: data.id,
+          habitName: data.habitName,
+          completed: false,
+        };
         this.setState({
-          habitlist: [...this.state.habitlist, obj],
+          habitlist: [...this.state.habitlist, newHabit],
         });
       });
   }
@@ -86,13 +90,9 @@ class HabitList extends React.Component {
   recordComplete(index) {
     let changed = this.state.habitlist[index];
     changed['completed'] = !changed['completed'];
-    let presentHabitList = this.state.habitlist;
-    let newHabitList = presentHabitList
-      .slice(0, index)
-      .concat(changed)
-      .concat(presentHabitList.slice(index + 1));
-
-    this.setState({ habitlist: newHabitList });
+    let newState = JSON.parse(JSON.stringify(this.state.habitlist));
+    newState.splice(index, 1, changed);
+    this.setState({ habitlist: newState });
     let result = this.state.habitlist[index].completed;
     if (result === true) {
       this.setState({
