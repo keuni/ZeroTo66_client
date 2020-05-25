@@ -11,33 +11,19 @@ class HabitList extends React.Component {
     this.state = {
       habitlist: [],
       completed: 0,
-      newHabit: '',
-      adding: false,
       successModal: 'hide',
     };
-    this.openAddHabit = this.openAddHabit.bind(this);
     this.postRecord = this.postRecord.bind(this);
     this.showSuccessModal = this.showSuccessModal.bind(this);
   }
 
-  handleInputValue = (e) => {
-    this.setState({ newHabit: e.target.value });
-  };
-
-  openAddHabit() {
-    this.setState({
-      adding: !this.state.adding,
-    });
-  }
-
-  addHabit() {
-    this.openAddHabit();
+  addHabit(newHabit) {
     fetch(url.server + 'habit', {
       method: 'POST',
       withCredentials: true,
       credentials: 'include',
       body: JSON.stringify({
-        habitName: this.state.newHabit,
+        habitName: newHabit,
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -52,9 +38,13 @@ class HabitList extends React.Component {
         if (data === undefined) {
           return;
         }
-        let obj = { completed: false, habit: data };
+        let newHabit = {
+          habitId: data.id,
+          habitName: data.habitName,
+          completed: false,
+        };
         this.setState({
-          habitlist: [...this.state.habitlist, obj],
+          habitlist: [...this.state.habitlist, newHabit],
         });
       });
   }
@@ -73,10 +63,17 @@ class HabitList extends React.Component {
           return res.json();
         }
       })
-      .then((data) => {
-        if (data === undefined) {
+      .then((rawData) => {
+        if (rawData === undefined) {
           return;
         }
+        let data = rawData.map((x) => {
+          return {
+            habitId: x.habitId,
+            habitName: x.habit.habitName,
+            completed: x.completed,
+          };
+        });
         this.setState({ habitlist: data });
         let count = 0;
         data.forEach((x) => {
@@ -89,16 +86,13 @@ class HabitList extends React.Component {
         });
       });
   }
+
   recordComplete(index) {
     let changed = this.state.habitlist[index];
     changed['completed'] = !changed['completed'];
-    let presentHabitList = this.state.habitlist;
-    let newHabitList = presentHabitList
-      .slice(0, index)
-      .concat(changed)
-      .concat(presentHabitList.slice(index + 1));
-
-    this.setState({ habitlist: newHabitList });
+    let newState = JSON.parse(JSON.stringify(this.state.habitlist));
+    newState.splice(index, 1, changed);
+    this.setState({ habitlist: newState });
     let result = this.state.habitlist[index].completed;
     if (result === true) {
       this.setState({
@@ -138,15 +132,11 @@ class HabitList extends React.Component {
       headers: {
         'Content-Type': 'application/json',
       },
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          return res.json();
-        }
-      })
-      .then((data) => {
-        console.log(data);
-      });
+    }).then((res) => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    });
   }
 
   offsuccessModal() {
@@ -172,21 +162,16 @@ class HabitList extends React.Component {
           {habitlist.length > 0
             ? habitlist.map((data, index) => (
                 <HabitInfo
-                  key={data.habit.id}
+                  key={data.habitId}
                   id={index}
-                  info={data.habit.habitName}
+                  info={data.habitName}
                   check={data.completed}
                   recordComplete={this.recordComplete.bind(this)}
                 />
               ))
             : ''}
         </div>
-        <AddHabit
-          adding={this.state.adding}
-          handleInputValue={this.handleInputValue.bind(this)}
-          addHabit={this.addHabit.bind(this)}
-          openAddHabit={this.openAddHabit}
-        />
+        <AddHabit addHabit={this.addHabit.bind(this)} />
       </div>
     );
   }
