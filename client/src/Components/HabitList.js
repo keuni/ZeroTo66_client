@@ -47,7 +47,6 @@ class HabitList extends React.Component {
         if (result.status === 201) {
           return result.json();
         }
-        this.existModal();
       })
       .then((data) => {
         if (data === undefined) {
@@ -91,7 +90,6 @@ class HabitList extends React.Component {
       });
   }
   recordComplete(index) {
-    console.log('recordComplete');
     let changed = this.state.habitlist[index];
     changed['completed'] = !changed['completed'];
     let presentHabitList = this.state.habitlist;
@@ -129,7 +127,6 @@ class HabitList extends React.Component {
   }
 
   postRecord(id, result) {
-    console.log('postRecord');
     fetch(url.server + 'record', {
       method: 'POST',
       withCredentials: true,
