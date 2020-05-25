@@ -169,6 +169,7 @@ class HabitList extends React.Component {
                   check={data.completed}
                   recordComplete={this.recordComplete.bind(this)}
                   showHabitDetail={this.props.showHabitDetail}
+                  getStreakInfo={this.props.getStreakInfo}
                 />
               ))
             : ''}

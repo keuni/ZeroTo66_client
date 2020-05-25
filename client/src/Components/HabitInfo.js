@@ -4,20 +4,23 @@ class HabitInfo extends React.Component {
   onToggle() {
     this.props.recordComplete(this.props.id);
   }
-  clickHabitDetail() {
+
+  onClick() {
+    this.props.getStreakInfo();
     this.props.showHabitDetail(
       this.props.id,
       this.props.habitId,
       this.props.info
     );
   }
+
   render() {
     return (
       <div>
         <div className='existingHabit'>
           -{' '}
           <span
-            onClick={this.clickHabitDetail.bind(this)}
+            onClick={this.onClick.bind(this)}
             className={
               this.props.check ? 'eachHabit completedHabit' : 'eachHabit'
             }
