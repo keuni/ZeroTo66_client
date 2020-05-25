@@ -49,6 +49,26 @@ class HabitList extends React.Component {
       });
   }
 
+  deleteHabit(id) {
+    fetch(url.server + 'habit', {
+      method: 'PATCH',
+      withCredentials: true,
+      credentials: 'include',
+      body: JSON.stringify({
+        habitId: id,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((result) => {
+      if (result.status === 201) {
+        let newState = JSON.parse(JSON.stringify(this.state.habitlist));
+        newState.splice(id, 1);
+        this.setState({ habitlist: newState });
+      }
+    });
+  }
+
   componentDidMount() {
     fetch(url.server + 'record/today', {
       method: 'GET',
@@ -149,13 +169,13 @@ class HabitList extends React.Component {
     const { habitlist, completed, successModal } = this.state;
     const all = habitlist.length;
     return (
-      <div className='HabitList'>
+      <div className="HabitList">
         {successModal === true ? (
           <SuccessModal offsuccessModal={this.offsuccessModal.bind(this)} />
         ) : (
           ''
         )}
-        <div className='todayList'>
+        <div className="todayList">
           오늘의 습관 {completed}/{all}
         </div>
         <div>
@@ -167,6 +187,7 @@ class HabitList extends React.Component {
                   info={data.habitName}
                   check={data.completed}
                   recordComplete={this.recordComplete.bind(this)}
+                  deleteHabit={this.deleteHabit.bind(this)}
                 />
               ))
             : ''}
