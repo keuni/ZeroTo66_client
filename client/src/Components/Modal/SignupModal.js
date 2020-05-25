@@ -1,15 +1,16 @@
 import React from 'react';
 import './Modal.css';
 
-const Modal = (props) => {
+const SignupModal = (props) => {
   return (
     <div>
-      <div className={props.showModal !== false ? 'showModal' : 'hideModal'}>
+      <div className={props.showModal ? 'showModal' : 'hideModal'}>
         <div className='modal_overlay'>
           <div className='modal_content'>
             <span id='check'>
-              {props.showModal === 404 ? 'username을' : '비밀번호를'}{' '}
-              확인해주세요
+              {props.showModal === 'blank'
+                ? '다시 한 번 확인해주세요'
+                : '이미 가입되어 있는 Id입니다'}
             </span>
             <span id='x' onClick={props.handleModal}>
               X
@@ -21,4 +22,4 @@ const Modal = (props) => {
   );
 };
 
-export default Modal;
+export default SignupModal;

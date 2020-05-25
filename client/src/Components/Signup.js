@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
-import Modal from './SignupModal/Modal';
+import SignupModal from './Modal/SignupModal';
 import './Signup.css';
 import url from './config/config';
 
@@ -33,16 +33,18 @@ class Signup extends React.Component {
     return (
       <div>
         <center>
-          <Modal
+          <SignupModal
             showModal={this.state.showModal}
             handleModal={this.handleModal}
           />
-          <div className='zeroTo66'>ZeroTo66</div>
           <div
             className={
-              this.state.showModal ? 'Loginbox backSignup' : 'Loginbox'
+              this.state.showModal
+                ? 'LoginSignupBox backLoginSignup'
+                : 'LoginSignupBox'
             }
           >
+            <div className='zeroTo66'>ZeroTo66</div>
             <div className='maintext'>Signup</div>
             <form
               onSubmit={(e) => {
