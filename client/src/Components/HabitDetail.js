@@ -11,7 +11,8 @@ class HabitDetail extends React.Component {
       streak,
       longestStreak,
       modifiers,
-      HabitchangeMonth,
+      getHabitCalendarInfo,
+      getdetailMonth,
     } = this.props;
 
     return (
@@ -20,7 +21,8 @@ class HabitDetail extends React.Component {
           <HabitCalendar
             detailHabitId={detailHabitId}
             modifiers={modifiers}
-            HabitchangeMonth={HabitchangeMonth}
+            getHabitCalendarInfo={getHabitCalendarInfo}
+            getdetailMonth={getdetailMonth}
           />
         </div>
         <div className='detailInfo'>

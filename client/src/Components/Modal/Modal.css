@@ -8,7 +8,6 @@
 
 .modal_overlay {
   z-index: 2;
-  /* background-color: rgba(0, 0, 0, 0.582); */
   width: 100%;
   height: 100vh;
   vertical-align: middle;
@@ -21,7 +20,7 @@
   height: 70px;
   display: inline-block;
   background-color: white;
-  margin-top: 37vh;
+  margin-top: 35vh;
   padding-top: 30px;
   border-radius: 10px;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
@@ -49,5 +48,19 @@
     font-size: 27px;
     width: 450px;
     height: 100px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .modal_content {
+    font-size: 15px;
+    width: 270px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .modal_content {
+    font-size: 14px;
+    width: 250px;
   }
 }

@@ -167,11 +167,6 @@
 
 /* Default modifiers */
 
-/* .DayPicker-Day--outside {
-  color: #8b9898;
-  cursor: default;
-} */
-
 .DayPicker-Day--disabled {
   color: #c6c6c6;
   cursor: default;

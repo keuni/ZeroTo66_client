@@ -1,5 +1,5 @@
 import React from 'react';
-import AddHabitModal from './Modal/AddHabitModal';
+// import AddHabitModal from './Modal/AddHabitModal';
 
 class AddHabit extends React.Component {
   constructor(props) {
@@ -29,24 +29,24 @@ class AddHabit extends React.Component {
 
   render() {
     return (
-      <div className="addHabit">
+      <div className='addHabit'>
         {this.state.adding ? (
-          <div className="adding">
+          <div className='adding'>
             <input
-              className="addText"
-              type="text"
-              placeholder="새로운 습관을 만들어보세요"
+              className='addText'
+              type='text'
+              placeholder='새로운 습관을 만들어보세요'
               onChange={this.handleInputValue.bind(this)}
             ></input>
-            <button className="add" onClick={this.postHabit.bind(this)}>
+            <button className='add' onClick={this.postHabit.bind(this)}>
               추가
             </button>
-            <button className="add cancel" onClick={this.openAddHabit}>
+            <button className='add cancel' onClick={this.openAddHabit}>
               취소
             </button>
           </div>
         ) : (
-          <button className="btnAdd" onClick={this.openAddHabit}>
+          <button className='btnAdd' onClick={this.openAddHabit}>
             추가하기
           </button>
         )}

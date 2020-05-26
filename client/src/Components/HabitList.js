@@ -211,6 +211,8 @@ class HabitList extends React.Component {
                   deleting={this.state.deleting}
                   getHabitCalendarInfo={this.props.getHabitCalendarInfo}
                   getMainCalendarInfo={this.props.getMainCalendarInfo}
+                  detailMonth={this.props.detailMonth}
+                  detailyear={this.props.detailyear}
                 />
               ))
             : ''}
