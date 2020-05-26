@@ -208,6 +208,7 @@ class HabitList extends React.Component {
                   showHabitDetail={this.props.showHabitDetail}
                   deleteHabit={this.deleteHabit.bind(this)}
                   deleting={this.state.deleting}
+                  getPercentage={this.props.getPercentage}
                 />
               ))
             : ''}

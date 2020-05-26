@@ -32,9 +32,13 @@ class App extends React.Component {
 
             <Route
               path='/mypage'
-              render={() => (
-                <Mypage handleLogin={this.handleLogin.bind(this)} />
-              )}
+              render={() => {
+                if (this.state.isLogin) {
+                  return <Mypage handleLogin={this.handleLogin.bind(this)} />;
+                } else {
+                  return <Redirect to='/login' />;
+                }
+              }}
             />
 
             <Route

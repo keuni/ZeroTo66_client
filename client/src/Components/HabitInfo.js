@@ -11,6 +11,7 @@ class HabitInfo extends React.Component {
       this.props.habitId,
       this.props.info
     );
+    this.props.getPercentage(this.props.habitId);
   }
 
   remove = () => {
