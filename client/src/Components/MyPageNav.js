@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Nav, Navbar /*NavDropdown */ } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './MyPageNav.css';
 
@@ -28,7 +28,11 @@ class MyPageNav extends React.Component {
           <Navbar.Collapse id='responsive-navbar-nav'>
             <Nav className='mr-auto'>
               <Nav.Link>
-                <Link className='Logout' to='/login'>
+                <Link
+                  onClick={this.props.logout}
+                  className='Logout'
+                  to='/login'
+                >
                   LOGOUT
                 </Link>
               </Nav.Link>

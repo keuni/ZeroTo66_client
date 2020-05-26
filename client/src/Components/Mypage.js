@@ -17,10 +17,19 @@ class Mypage extends React.Component {
       total: 0,
       streak: 0,
       longestStreak: 0,
+      Habitmodifiers: {
+        //birthday => done_all(성공률 100%, green)
+        birthday: [],
+        //default
+        sunday: { daysOfWeek: [0] },
+        foo: new Date(), //today
+      },
     };
     this.showHabitDetail = this.showHabitDetail.bind(this);
     this.getStreakInfo = this.getStreakInfo.bind(this);
+    this.getPercentage = this.getPercentage.bind(this);
   }
+
   logout() {
     return fetch(url.server + 'user/signout', {
       method: 'GET',
@@ -70,6 +79,35 @@ class Mypage extends React.Component {
       });
   }
 
+  getPercentage(id) {
+    fetch(url.server + 'habit/detail?habitId=' + id, {
+      method: 'GET',
+      withCredentials: true,
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        let year = new Date().getFullYear();
+        let month = new Date().getMonth();
+        let done_all = [];
+        data.forEach((x, index) => {
+          if (x === true) {
+            done_all.push(new Date(year, month, index + 1));
+          }
+        });
+        this.setState((prevState) => {
+          let Habitmodifiers = Object.assign({}, prevState.Habitmodifiers);
+          Habitmodifiers.birthday = done_all;
+          return { Habitmodifiers };
+        });
+      });
+  }
+
   render() {
     const {
       habitDetail,
@@ -78,13 +116,17 @@ class Mypage extends React.Component {
       total,
       streak,
       longestStreak,
+      Habitmodifiers,
     } = this.state;
     return (
       <div className='Mypage'>
-        <MyPageNav onClick={this.logout.bind(this)} />
+        <MyPageNav logout={this.logout.bind(this)} />
         <div className='mypagebody'>
           <div className='mypageContent'>
-            <HabitList showHabitDetail={this.showHabitDetail} />
+            <HabitList
+              showHabitDetail={this.showHabitDetail}
+              getPercentage={this.getPercentage}
+            />
             {habitDetail === false ? (
               <Calendar />
             ) : (
@@ -94,6 +136,7 @@ class Mypage extends React.Component {
                 total={total}
                 streak={streak}
                 longestStreak={longestStreak}
+                modifiers={Habitmodifiers}
               />
             )}
           </div>
