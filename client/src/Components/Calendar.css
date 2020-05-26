@@ -13,7 +13,7 @@
 }
 
 .DayPicker-Day--birthday {
-  background-color: rgb(193, 224, 162);
+  background-color: rgb(193, 224, 162) !important;
 }
 
 /* DayPicker styles */

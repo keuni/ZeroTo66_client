@@ -18,16 +18,26 @@ class Mypage extends React.Component {
       streak: 0,
       longestStreak: 0,
       Habitmodifiers: {
-        //birthday => done_all(성공률 100%, green)
         birthday: [],
-        //default
         sunday: { daysOfWeek: [0] },
         foo: new Date(), //today
+      },
+      mainCalendar: {
+        modifiers: {
+          birthday: [],
+          sunday: { daysOfWeek: [0] },
+          foo: new Date(), //today
+        },
+        done_partially: [],
       },
     };
     this.showHabitDetail = this.showHabitDetail.bind(this);
     this.getStreakInfo = this.getStreakInfo.bind(this);
-    this.getPercentage = this.getPercentage.bind(this);
+    this.getHabitCalendarInfo = this.getHabitCalendarInfo.bind(this);
+    this.getMainCalendarInfo = this.getMainCalendarInfo.bind(this);
+    this.colorTodayComplete = this.colorTodayComplete.bind(this);
+    this.changeMonth = this.changeMonth.bind(this);
+    this.HabitchangeMonth = this.HabitchangeMonth.bind(this);
   }
 
   logout() {
@@ -43,7 +53,7 @@ class Mypage extends React.Component {
     });
   }
 
-  showHabitDetail(index, id, habitName) {
+  showHabitDetail(index, id, habitName, check) {
     if (this.state.habitDetail === index) {
       this.setState({
         habitDetail: false,
@@ -58,6 +68,7 @@ class Mypage extends React.Component {
       });
     }
     this.getStreakInfo(id);
+    this.colorTodayComplete(check, id);
   }
 
   getStreakInfo(id) {
@@ -79,8 +90,11 @@ class Mypage extends React.Component {
       });
   }
 
-  getPercentage(id) {
-    fetch(url.server + 'habit/detail?habitId=' + id, {
+  getHabitCalendarInfo(id, yr, mth) {
+    let fetchUrl = url.server + 'habit/detail?habitId=' + id;
+    let year = new Date().getFullYear();
+    let month = new Date().getMonth();
+    fetch(fetchUrl, {
       method: 'GET',
       withCredentials: true,
       credentials: 'include',
@@ -92,8 +106,6 @@ class Mypage extends React.Component {
         return res.json();
       })
       .then((data) => {
-        let year = new Date().getFullYear();
-        let month = new Date().getMonth();
         let done_all = [];
         data.forEach((x, index) => {
           if (x === true) {
@@ -107,6 +119,104 @@ class Mypage extends React.Component {
         });
       });
   }
+  getMainCalendarInfo(yr, mth) {
+    let fetchUrl;
+    let year;
+    let month;
+    if (yr === undefined) {
+      fetchUrl = url.server + 'record/monthly';
+      year = new Date().getFullYear();
+      month = new Date().getMonth();
+    } else {
+      fetchUrl = url.server + 'record/monthly?year=' + yr + '&month=' + mth;
+      year = yr;
+      month = mth - 1;
+    }
+    fetch(fetchUrl, {
+      method: 'GET',
+      withCredentials: true,
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        if (data) {
+          let done_all = [];
+          let done_partially = [];
+          data.done_all.forEach((x) => {
+            let date = Number(x.slice(8));
+            done_all.push(new Date(year, month, date));
+          });
+          data.done_partially.forEach((x) => {
+            let date = Number(x.slice(8));
+            done_partially.push(new Date(year, month, date));
+          });
+          this.setState((prevState) => {
+            let mainCalendar = Object.assign({}, prevState.mainCalendar);
+            mainCalendar.modifiers.birthday = done_all;
+            mainCalendar.done_partially = done_partially;
+            return { mainCalendar };
+          });
+        }
+      });
+  }
+
+  changeMonth(year, month) {
+    this.getMainCalendarInfo(year, month);
+  }
+
+  HabitchangeMonth(yr, mth) {
+    let fetchUrl =
+      url.server +
+      'record/monthly?year=' +
+      yr +
+      '&month=' +
+      mth +
+      '&habitId=' +
+      this.state.detailHabitId;
+    let year = yr;
+    let month = mth - 1;
+    fetch(fetchUrl, {
+      method: 'GET',
+      withCredentials: true,
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        let done_all = [];
+        data.done_all.forEach((x) => {
+          done_all.push(new Date(year, month, x.slice(8)));
+        });
+        this.setState((prevState) => {
+          let Habitmodifiers = Object.assign({}, prevState.Habitmodifiers);
+          Habitmodifiers.birthday = done_all;
+          return { Habitmodifiers };
+        });
+      });
+  }
+
+  colorTodayComplete(complete, clickedId) {
+    if (clickedId === this.state.detailHabitId) {
+      if (complete) {
+        let Habitmodifiers = Object.assign({}, this.state.Habitmodifiers);
+        Habitmodifiers.birthday.push(new Date());
+        this.setState({ Habitmodifiers });
+      } else {
+        let Habitmodifiers = Object.assign({}, this.state.Habitmodifiers);
+        Habitmodifiers.birthday.pop();
+        this.setState({ Habitmodifiers });
+      }
+    }
+  }
 
   render() {
     const {
@@ -117,6 +227,7 @@ class Mypage extends React.Component {
       streak,
       longestStreak,
       Habitmodifiers,
+      mainCalendar,
     } = this.state;
     return (
       <div className='Mypage'>
@@ -125,10 +236,17 @@ class Mypage extends React.Component {
           <div className='mypageContent'>
             <HabitList
               showHabitDetail={this.showHabitDetail}
-              getPercentage={this.getPercentage}
+              getHabitCalendarInfo={this.getHabitCalendarInfo}
+              getMainCalendarInfo={this.getMainCalendarInfo}
+              colorTodayComplete={this.colorTodayComplete}
+              detailHabitId={detailHabitId}
             />
             {habitDetail === false ? (
-              <Calendar />
+              <Calendar
+                mainCalendar={mainCalendar}
+                getMainCalendarInfo={this.getMainCalendarInfo}
+                changeMonth={this.changeMonth}
+              />
             ) : (
               <HabitDetail
                 detailHabitName={detailHabitName}
@@ -137,6 +255,7 @@ class Mypage extends React.Component {
                 streak={streak}
                 longestStreak={longestStreak}
                 modifiers={Habitmodifiers}
+                HabitchangeMonth={this.HabitchangeMonth}
               />
             )}
           </div>

@@ -3,7 +3,7 @@ import './SuccessModal.css';
 
 const SuccessModal = (props) => {
   return (
-    <div>
+    <div className='myModal'>
       <div className='modal_overlay SuccessModal_overlay'>
         <div className='modal_content SuccessModal_content'>
           <span id='check SuccessModal_check'>

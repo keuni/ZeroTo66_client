@@ -130,6 +130,7 @@ class HabitList extends React.Component {
       });
     }
     this.postRecord(changed.habitId, result);
+    this.props.colorTodayComplete(result, this.state.habitlist[index].habitId);
   }
 
   showSuccessModal() {
@@ -208,7 +209,8 @@ class HabitList extends React.Component {
                   showHabitDetail={this.props.showHabitDetail}
                   deleteHabit={this.deleteHabit.bind(this)}
                   deleting={this.state.deleting}
-                  getPercentage={this.props.getPercentage}
+                  getHabitCalendarInfo={this.props.getHabitCalendarInfo}
+                  getMainCalendarInfo={this.props.getMainCalendarInfo}
                 />
               ))
             : ''}
