@@ -26,8 +26,6 @@ class AddHabit extends React.Component {
     this.props.addHabit(this.state.newHabit);
   }
 
-  btnColorChange() {}
-
   render() {
     return (
       <div className="addHabit">
