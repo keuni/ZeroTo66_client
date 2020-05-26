@@ -20,9 +20,9 @@ class HabitInfo extends React.Component {
     );
   }
 
-  remove = () => {
+  remove() {
     this.props.deleteHabit(this.props.id, this.props.habitId);
-  };
+  }
 
   render() {
     return (
