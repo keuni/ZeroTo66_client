@@ -1,5 +1,4 @@
 import React from 'react';
-// import AddHabitModal from './Modal/AddHabitModal';
 
 class AddHabit extends React.Component {
   constructor(props) {
