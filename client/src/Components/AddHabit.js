@@ -31,11 +31,6 @@ class AddHabit extends React.Component {
     return (
       <div className="addHabit">
         {this.state.adding ? (
-         // <AddHabitModal
-//             handleInputValue={this.handleInputValue.bind(this)}
-//             openAddHabit={this.openAddHabit}
-//             postHabit={this.postHabit.bind(this)}
-//           />
           <div className="adding">
             <input
               className="addText"
@@ -46,23 +41,6 @@ class AddHabit extends React.Component {
             <button className="add" onClick={this.postHabit.bind(this)}>
               추가
             </button>
-            <div> Freguency </div>
-            <div className="Freguency">
-              <label for="Monday"> 월 </label>
-              <input type="checkbox" id="Monday" value="Monday" />
-              <label for="Tuesday"> 화 </label>
-              <input type="checkbox" id="Tuesday" vlaue="Tuesday" />
-              <label for="Wednesday"> 수 </label>
-              <input type="checkbox" id="Wednesday" vlaue="Wednesday" />
-              <label for="Thursday"> 목 </label>
-              <input type="checkbox" id="Thursday" vlaue="Thursday" />
-              <label for="Friday"> 금 </label>
-              <input type="checkbox" id="Friday" vlaue="Friday" />
-              <label for="Saturday"> 토 </label>
-              <input type="checkbox" id="Saturday" vlaue="Saturday" />
-              <label for="Sunday"> 일 </label>
-              <input type="checkbox" id="Sunday" vlaue="Sunday" />
-            </div>
             <button className="add cancel" onClick={this.openAddHabit}>
               취소
             </button>
