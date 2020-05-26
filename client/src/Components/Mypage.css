@@ -5,11 +5,6 @@
   display: flex;
   justify-content: center;
 }
-
-.Freguency {
-  width: 30px;
-}
-
 input:focus {
   outline: none;
 }
