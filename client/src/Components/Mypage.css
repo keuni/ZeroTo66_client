@@ -26,6 +26,7 @@ input:focus {
   margin: 0 50px;
   float: left;
   align-items: center;
+  z-index: 0;
 }
 .todayList {
   font-size: 40px;

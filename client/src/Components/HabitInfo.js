@@ -1,17 +1,19 @@
 import React from 'react';
 
 class HabitInfo extends React.Component {
-  onToggle() {
+  checkboxClick() {
     this.props.recordComplete(this.props.id);
+    this.props.getMainCalendarInfo();
   }
 
-  onClick() {
+  eachHabitClick() {
     this.props.showHabitDetail(
       this.props.id,
       this.props.habitId,
-      this.props.info
+      this.props.info,
+      this.props.check
     );
-    this.props.getPercentage(this.props.habitId);
+    this.props.getHabitCalendarInfo(this.props.habitId);
   }
 
   remove = () => {
@@ -24,7 +26,7 @@ class HabitInfo extends React.Component {
         <div className='existingHabit'>
           -{' '}
           <span
-            onClick={this.onClick.bind(this)}
+            onClick={this.eachHabitClick.bind(this)}
             className={
               this.props.check ? 'eachHabit completedHabit' : 'eachHabit'
             }
@@ -35,7 +37,7 @@ class HabitInfo extends React.Component {
             <input
               type='checkbox'
               className='checkbox'
-              onClick={this.onToggle.bind(this)}
+              onClick={this.checkboxClick.bind(this)}
               defaultChecked={this.props.check}
             ></input>
           ) : (
