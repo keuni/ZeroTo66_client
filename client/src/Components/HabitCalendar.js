@@ -3,7 +3,12 @@ import DayPicker from 'react-day-picker';
 
 class HabitCalendar extends React.Component {
   onMonthclick(date) {
-    this.props.HabitchangeMonth(date.getFullYear(), date.getMonth() + 1);
+    this.props.getHabitCalendarInfo(
+      this.props.detailHabitId,
+      date.getFullYear(),
+      date.getMonth() + 1
+    );
+    this.props.getdetailMonth(date.getFullYear(), date.getMonth() + 1);
   }
 
   render() {

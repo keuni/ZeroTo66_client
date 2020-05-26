@@ -13,12 +13,16 @@ class HabitInfo extends React.Component {
       this.props.info,
       this.props.check
     );
-    this.props.getHabitCalendarInfo(this.props.habitId);
+    this.props.getHabitCalendarInfo(
+      this.props.habitId,
+      this.props.detailyear,
+      this.props.detailMonth
+    );
   }
 
-  remove = () => {
+  remove() {
     this.props.deleteHabit(this.props.id, this.props.habitId);
-  };
+  }
 
   render() {
     return (

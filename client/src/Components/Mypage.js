@@ -14,6 +14,8 @@ class Mypage extends React.Component {
       habitDetail: false,
       detailHabitName: null,
       detailHabitId: null,
+      detailyear: null,
+      detailMonth: null,
       total: 0,
       streak: 0,
       longestStreak: 0,
@@ -37,7 +39,7 @@ class Mypage extends React.Component {
     this.getMainCalendarInfo = this.getMainCalendarInfo.bind(this);
     this.colorTodayComplete = this.colorTodayComplete.bind(this);
     this.changeMonth = this.changeMonth.bind(this);
-    this.HabitchangeMonth = this.HabitchangeMonth.bind(this);
+    this.getdetailMonth = this.getdetailMonth.bind(this);
   }
 
   logout() {
@@ -91,9 +93,23 @@ class Mypage extends React.Component {
   }
 
   getHabitCalendarInfo(id, yr, mth) {
-    let fetchUrl = url.server + 'habit/detail?habitId=' + id;
-    let year = new Date().getFullYear();
-    let month = new Date().getMonth();
+    let fetchUrl, year, month;
+    if (yr) {
+      fetchUrl =
+        url.server +
+        'habit/detail?habitId=' +
+        id +
+        '&year=' +
+        yr +
+        '&month=' +
+        mth;
+      year = yr;
+      month = mth - 1;
+    } else {
+      fetchUrl = url.server + 'habit/detail?habitId=' + id;
+      year = new Date().getFullYear();
+      month = new Date().getMonth();
+    }
     fetch(fetchUrl, {
       method: 'GET',
       withCredentials: true,
@@ -169,41 +185,6 @@ class Mypage extends React.Component {
     this.getMainCalendarInfo(year, month);
   }
 
-  HabitchangeMonth(yr, mth) {
-    let fetchUrl =
-      url.server +
-      'record/monthly?year=' +
-      yr +
-      '&month=' +
-      mth +
-      '&habitId=' +
-      this.state.detailHabitId;
-    let year = yr;
-    let month = mth - 1;
-    fetch(fetchUrl, {
-      method: 'GET',
-      withCredentials: true,
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        let done_all = [];
-        data.done_all.forEach((x) => {
-          done_all.push(new Date(year, month, x.slice(8)));
-        });
-        this.setState((prevState) => {
-          let Habitmodifiers = Object.assign({}, prevState.Habitmodifiers);
-          Habitmodifiers.birthday = done_all;
-          return { Habitmodifiers };
-        });
-      });
-  }
-
   colorTodayComplete(complete, clickedId) {
     if (clickedId === this.state.detailHabitId) {
       if (complete) {
@@ -218,6 +199,13 @@ class Mypage extends React.Component {
     }
   }
 
+  getdetailMonth(year, month) {
+    this.setState({
+      detailyear: year,
+      detailMonth: month,
+    });
+  }
+
   render() {
     const {
       habitDetail,
@@ -228,6 +216,8 @@ class Mypage extends React.Component {
       longestStreak,
       Habitmodifiers,
       mainCalendar,
+      detailMonth,
+      detailyear,
     } = this.state;
     return (
       <div className='Mypage'>
@@ -239,7 +229,8 @@ class Mypage extends React.Component {
               getHabitCalendarInfo={this.getHabitCalendarInfo}
               getMainCalendarInfo={this.getMainCalendarInfo}
               colorTodayComplete={this.colorTodayComplete}
-              detailHabitId={detailHabitId}
+              detailMonth={detailMonth}
+              detailyear={detailyear}
             />
             {habitDetail === false ? (
               <Calendar
@@ -255,7 +246,8 @@ class Mypage extends React.Component {
                 streak={streak}
                 longestStreak={longestStreak}
                 modifiers={Habitmodifiers}
-                HabitchangeMonth={this.HabitchangeMonth}
+                getHabitCalendarInfo={this.getHabitCalendarInfo}
+                getdetailMonth={this.getdetailMonth}
               />
             )}
           </div>
