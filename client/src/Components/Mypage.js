@@ -14,8 +14,8 @@ class Mypage extends React.Component {
       habitDetail: false,
       detailHabitName: null,
       detailHabitId: null,
-      detailyear: null,
-      detailMonth: null,
+      detailyear: new Date().getFullYear(),
+      detailMonth: new Date().getMonth() + 1,
       total: 0,
       streak: 0,
       longestStreak: 0,
@@ -92,24 +92,16 @@ class Mypage extends React.Component {
       });
   }
 
-  getHabitCalendarInfo(id, yr, mth) {
-    let fetchUrl, year, month;
-    if (yr) {
-      fetchUrl =
-        url.server +
-        'habit/detail?habitId=' +
-        id +
-        '&year=' +
-        yr +
-        '&month=' +
-        mth;
-      year = yr;
-      month = mth - 1;
-    } else {
-      fetchUrl = url.server + 'habit/detail?habitId=' + id;
-      year = new Date().getFullYear();
-      month = new Date().getMonth();
-    }
+  getHabitCalendarInfo(id, year, mth) {
+    let fetchUrl =
+      url.server +
+      'habit/detail?habitId=' +
+      id +
+      '&year=' +
+      year +
+      '&month=' +
+      mth;
+    let month = mth - 1;
     fetch(fetchUrl, {
       method: 'GET',
       withCredentials: true,
