@@ -48,7 +48,6 @@ class Login extends React.Component {
         >
           <div className='zeroTo66'>ZeroTo66</div>
           <div className='maintext'>Login</div>
-
           <form
             onSubmit={(e) => {
               e.preventDefault();
