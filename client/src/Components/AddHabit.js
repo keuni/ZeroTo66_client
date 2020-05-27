@@ -40,7 +40,7 @@ class AddHabit extends React.Component {
             <button className='add' onClick={this.postHabit.bind(this)}>
               추가
             </button>
-            <div> Freguency </div>
+            <div> Frequency </div>
             <div className='Frequency'>
               <label for='Monday'> 월 </label>
               <input type='checkbox' id='Monday' value='Monday' />

@@ -15,9 +15,11 @@ class Signup extends React.Component {
     this.handleInputValue = this.handleInputValue.bind(this);
     this.handleModal = this.handleModal.bind(this);
   }
+
   handleInputValue = (key) => (e) => {
     this.setState({ [key]: e.target.value });
   };
+
   handleModal(arg) {
     if (arg === 'blank') {
       this.setState({
@@ -29,6 +31,7 @@ class Signup extends React.Component {
       });
     }
   }
+
   render() {
     return (
       <div>

@@ -2,6 +2,15 @@ import React from 'react';
 import DayPicker from 'react-day-picker';
 
 class HabitCalendar extends React.Component {
+  onMonthclick(date) {
+    this.props.getHabitCalendarInfo(
+      this.props.detailHabitId,
+      date.getFullYear(),
+      date.getMonth() + 1
+    );
+    this.props.getdetailMonth(date.getFullYear(), date.getMonth() + 1);
+  }
+
   render() {
     const today = this.props.modifiers.foo;
     return (
@@ -19,6 +28,7 @@ class HabitCalendar extends React.Component {
             },
           ]}
           todayButton='Go to Today'
+          onMonthChange={(month) => this.onMonthclick(month)}
         />
       </div>
     );

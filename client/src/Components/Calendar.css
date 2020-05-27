@@ -13,7 +13,7 @@
 }
 
 .DayPicker-Day--birthday {
-  background-color: rgb(193, 224, 162);
+  background-color: rgb(193, 224, 162) !important;
 }
 
 /* DayPicker styles */
@@ -166,11 +166,6 @@
 }
 
 /* Default modifiers */
-
-/* .DayPicker-Day--outside {
-  color: #8b9898;
-  cursor: default;
-} */
 
 .DayPicker-Day--disabled {
   color: #c6c6c6;
