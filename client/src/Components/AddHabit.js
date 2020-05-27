@@ -2,10 +2,10 @@ import React from 'react';
 import './AddHabit.css';
 
 const units = {
-  CHECK: 'check',
-  COUNT: 'count',
-  MINUTE: 'minute',
-  properties: {
+  CHECK: '1',
+  COUNT: '2',
+  MINUTE: '3',
+  prop: {
     1: { value: 'check' },
     2: { value: 'count' },
     3: { value: 'minute' },
@@ -29,6 +29,7 @@ class AddHabit extends React.Component {
       },
       adding: false,
       unit: units.CHECK,
+      goal: 1,
     };
     this.openAddHabit = this.openAddHabit.bind(this);
     this.postHabit = this.postHabit.bind(this);
@@ -42,9 +43,11 @@ class AddHabit extends React.Component {
   };
 
   handleUnit = (e) => {
-    console.log('d');
-    console.log(e.target.value);
     this.setState({ unit: e.target.value });
+  };
+
+  handleGoal = (e) => {
+    this.setState({ goal: e.target.value });
   };
 
   openAddHabit() {
@@ -73,7 +76,9 @@ class AddHabit extends React.Component {
           frequency += '0';
         }
       }
-      this.props.addHabit(this.state.newHabit, frequency);
+      let unit = Number(this.state.unit);
+      let goal = this.state.unit === units.CHECK ? 1 : this.state.goal;
+      this.props.addHabit(this.state.newHabit, frequency, unit, goal);
     } else {
       document.querySelector('.checkagain').classList.toggle('hidecheckagain');
     }
@@ -89,7 +94,6 @@ class AddHabit extends React.Component {
     return (
       <div className='addHabit'>
         {this.state.adding ? (
-
           <form
             className='adding'
             onSubmit={(e) => {
@@ -109,9 +113,12 @@ class AddHabit extends React.Component {
               </div>
             </div>
 
-         <div className='unitSelect'>
+            <div className='unitSelect'>
               <label>단위를 선택하세요 : </label>
-              <select onChange={this.handleUnit.bind(this)}>
+              <select
+                onChange={this.handleUnit.bind(this)}
+                value={this.state.unit}
+              >
                 <option value={units.CHECK}>Check</option>
                 <option value={units.COUNT}>Count</option>
                 <option value={units.MINUTE}>Minute</option>
@@ -125,6 +132,7 @@ class AddHabit extends React.Component {
                         className='addText'
                         type='text'
                         placeholder='5'
+                        onChange={this.handleGoal.bind(this)}
                       ></input>
                       <span> 번</span>
                     </div>
@@ -134,6 +142,7 @@ class AddHabit extends React.Component {
                         className='addText'
                         type='text'
                         placeholder='30'
+                        onChange={this.handleGoal.bind(this)}
                       ></input>
                       <span> 분</span>
                     </div>
