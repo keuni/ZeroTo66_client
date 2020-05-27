@@ -22,6 +22,7 @@ class AddHabit extends React.Component {
       frequency: ['1', '1', '1', '1', '1', '1', '1'],
       adding: false,
       unit: units.CHECK,
+      goal: 1,
     };
     this.openAddHabit = this.openAddHabit.bind(this);
     this.postHabit = this.postHabit.bind(this);
@@ -37,6 +38,10 @@ class AddHabit extends React.Component {
   handleUnit = (e) => {
     this.setState({ unit: e.target.value });
   };
+  handleGoal = (e) => {
+    this.setState({ goal: e.target.value });
+  };
+
   handleGoal = (e) => {
     this.setState({ goal: e.target.value });
   };
