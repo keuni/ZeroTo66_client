@@ -42,20 +42,20 @@ class AddHabit extends React.Component {
             </button>
             <div> Frequency </div>
             <div className='Frequency'>
+              <input type='checkbox' id='Monday' value='Monday' checked />
               <label for='Monday'> 월 </label>
-              <input type='checkbox' id='Monday' value='Monday' />
+              <input type='checkbox' id='Tuesday' vlaue='Tuesday' checked />
               <label for='Tuesday'> 화 </label>
-              <input type='checkbox' id='Tuesday' vlaue='Tuesday' />
+              <input type='checkbox' id='Wednesday' vlaue='Wednesday' checked />
               <label for='Wednesday'> 수 </label>
-              <input type='checkbox' id='Wednesday' vlaue='Wednesday' />
+              <input type='checkbox' id='Thursday' vlaue='Thursday' checked />
               <label for='Thursday'> 목 </label>
-              <input type='checkbox' id='Thursday' vlaue='Thursday' />
+              <input type='checkbox' id='Friday' vlaue='Friday' checked />
               <label for='Friday'> 금 </label>
-              <input type='checkbox' id='Friday' vlaue='Friday' />
+              <input type='checkbox' id='Saturday' vlaue='Saturday' checked />
               <label for='Saturday'> 토 </label>
-              <input type='checkbox' id='Saturday' vlaue='Saturday' />
+              <input type='checkbox' id='Sunday' vlaue='Sunday' checked />
               <label for='Sunday'> 일 </label>
-              <input type='checkbox' id='Sunday' vlaue='Sunday' />
             </div>
             <button className='add cancel' onClick={this.openAddHabit}>
               취소
