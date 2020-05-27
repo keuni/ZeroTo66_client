@@ -19,7 +19,7 @@ class HabitList extends React.Component {
     this.showSuccessModal = this.showSuccessModal.bind(this);
   }
 
-  addHabit(newHabit, frequency) {
+  addHabit(newHabit, frequency, unit, goal) {
     fetch(url.server + 'habit', {
       method: 'POST',
       withCredentials: true,
@@ -27,6 +27,8 @@ class HabitList extends React.Component {
       body: JSON.stringify({
         habitName: newHabit,
         frequency,
+        unit,
+        goal,
       }),
       headers: {
         'Content-Type': 'application/json',
