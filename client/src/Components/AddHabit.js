@@ -1,10 +1,11 @@
 import React from 'react';
 import './AddHabit.css';
+import AddHabitModal from './Modal/AddHabitModal';
 
 const units = {
-  CHECK: '1',
-  COUNT: '2',
-  MINUTE: '3',
+  CHECK: 'check',
+  COUNT: 'count',
+  MINUTE: 'minute',
   prop: {
     1: { value: 'check' },
     2: { value: 'count' },
@@ -18,15 +19,7 @@ class AddHabit extends React.Component {
 
     this.state = {
       newHabit: '',
-      settingDay: {
-        mo: true,
-        tu: true,
-        we: true,
-        th: true,
-        fr: true,
-        sa: true,
-        su: true,
-      },
+      frequency: ['1', '1', '1', '1', '1', '1', '1'],
       adding: false,
       unit: units.CHECK,
       goal: 1,
@@ -45,6 +38,9 @@ class AddHabit extends React.Component {
   handleUnit = (e) => {
     this.setState({ unit: e.target.value });
   };
+  handleGoal = (e) => {
+    this.setState({ goal: e.target.value });
+  };
 
   handleGoal = (e) => {
     this.setState({ goal: e.target.value });
@@ -53,170 +49,44 @@ class AddHabit extends React.Component {
   openAddHabit() {
     this.setState({
       adding: !this.state.adding,
-      settingDay: {
-        mo: true,
-        tu: true,
-        we: true,
-        th: true,
-        fr: true,
-        sa: true,
-        su: true,
-      },
+      frequency: ['1', '1', '1', '1', '1', '1', '1'],
+      newHabit: '',
     });
   }
 
   postHabit() {
     if (this.state.newHabit.length > 0) {
-      this.openAddHabit();
-      let frequency = '';
-      for (let day in this.state.settingDay) {
-        if (this.state.settingDay[day]) {
-          frequency += '1';
-        } else {
-          frequency += '0';
-        }
-      }
-      let unit = Number(this.state.unit);
+      let frequency = this.state.frequency.join('');
+      let unit = this.state.unit;
       let goal = this.state.unit === units.CHECK ? 1 : this.state.goal;
       this.props.addHabit(this.state.newHabit, frequency, unit, goal);
+      return true;
     } else {
       document.querySelector('.checkagain').classList.toggle('hidecheckagain');
+      return false;
     }
   }
 
-  changeSettingday(e) {
-    let settingDay = Object.assign({}, this.state.settingDay);
-    settingDay[e.target.value] = !settingDay[e.target.value];
-    this.setState({ settingDay });
+  changefrequency(e) {
+    let frequency = JSON.parse(JSON.stringify(this.state.frequency));
+    frequency[Number(e.target.value)] =
+      frequency[Number(e.target.value)] === '1' ? '0' : '1';
+    this.setState({ frequency });
   }
 
   render() {
     return (
       <div className='addHabit'>
         {this.state.adding ? (
-          <form
-            className='adding'
-            onSubmit={(e) => {
-              e.preventDefault();
-              this.postHabit();
-            }}
-          >
-            <div className='textbox'>
-              <input
-                className='addText'
-                type='text'
-                placeholder='새로운 습관을 만들어보세요'
-                onChange={this.handleInputValue.bind(this)}
-              ></input>
-              <div className='checkagain hidecheckagain'>
-                습관이 입력되지 않았습니다!
-              </div>
-            </div>
-
-            <div className='unitSelect'>
-              <label>단위를 선택하세요 : </label>
-              <select
-                onChange={this.handleUnit.bind(this)}
-                value={this.state.unit}
-              >
-                <option value={units.CHECK}>Check</option>
-                <option value={units.COUNT}>Count</option>
-                <option value={units.MINUTE}>Minute</option>
-              </select>
-
-              {this.state.unit !== units.CHECK ? (
-                <div>
-                  {this.state.unit === units.COUNT ? (
-                    <div>
-                      <input
-                        className='addText'
-                        type='text'
-                        placeholder='5'
-                        onChange={this.handleGoal.bind(this)}
-                      ></input>
-                      <span> 번</span>
-                    </div>
-                  ) : (
-                    <div>
-                      <input
-                        className='addText'
-                        type='text'
-                        placeholder='30'
-                        onChange={this.handleGoal.bind(this)}
-                      ></input>
-                      <span> 분</span>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <div></div>
-              )}
-            </div>
-
-            <div> Frequency </div>
-            <div className='Frequency'>
-              <input
-                type='checkbox'
-                id='mo'
-                value='mo'
-                defaultChecked={this.state.settingDay.mo}
-                onClick={this.changeSettingday.bind(this)}
-              />
-              <label htmlFor='mo'> 월 </label>
-              <input
-                type='checkbox'
-                id='tu'
-                value='tu'
-                defaultChecked={this.state.settingDay.tu}
-                onClick={this.changeSettingday.bind(this)}
-              />
-              <label htmlFor='tu'> 화 </label>
-              <input
-                type='checkbox'
-                id='we'
-                value='we'
-                defaultChecked={this.state.settingDay.we}
-                onClick={this.changeSettingday.bind(this)}
-              />
-              <label htmlFor='we'> 수 </label>
-              <input
-                type='checkbox'
-                id='th'
-                value='th'
-                defaultChecked={this.state.settingDay.th}
-                onClick={this.changeSettingday.bind(this)}
-              />
-              <label htmlFor='th'> 목 </label>
-              <input
-                type='checkbox'
-                id='fr'
-                value='fr'
-                defaultChecked={this.state.settingDay.fr}
-                onClick={this.changeSettingday.bind(this)}
-              />
-              <label htmlFor='fr'> 금 </label>
-              <input
-                type='checkbox'
-                id='sa'
-                value='sa'
-                defaultChecked={this.state.settingDay.sa}
-                onClick={this.changeSettingday.bind(this)}
-              />
-              <label htmlFor='sa'> 토 </label>
-              <input
-                type='checkbox'
-                id='su'
-                value='su'
-                defaultChecked={this.state.settingDay.su}
-                onClick={this.changeSettingday.bind(this)}
-              />
-              <label htmlFor='su'> 일 </label>
-            </div>
-            <input type='submit' className='add' value='추가' />
-            <button className='add' onClick={this.openAddHabit}>
-              취소
-            </button>
-          </form>
+          <AddHabitModal
+            handleInputValue={this.handleInputValue.bind(this)}
+            handleUnit={this.handleUnit.bind(this)}
+            handleGoal={this.handleGoal.bind(this)}
+            openAddHabit={this.openAddHabit}
+            postHabit={this.postHabit.bind(this)}
+            changefrequency={this.changefrequency.bind(this)}
+            state={this.state}
+          />
         ) : (
           <button className='btnAdd' onClick={this.openAddHabit}>
             추가하기

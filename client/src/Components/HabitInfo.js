@@ -34,10 +34,15 @@ class HabitInfo extends React.Component {
     this.props.deleteHabit(this.props.id, this.props.habitId);
   }
 
+
+  edit() {
+    this.props.editHabit(this.props.id);
+
   showHabitCount() {
     this.setState({
       showCount: !this.state.showCount,
     });
+
   }
 
   render() {
@@ -53,22 +58,22 @@ class HabitInfo extends React.Component {
           >
             {this.props.info}
           </span>
-          {!this.props.deleting ? (
+          {this.props.setting ? (
+            <div className='settingBtn'>
+              <button className='delete' onClick={this.remove.bind(this)}>
+                삭제
+              </button>
+              <button className='modify' onClick={this.edit.bind(this)}>
+                수정
+              </button>
+            </div>
+          ) : (
             <input
               type='checkbox'
               className='checkbox'
               onClick={this.checkboxClick.bind(this)}
               defaultChecked={this.props.check}
             ></input>
-          ) : (
-            ''
-          )}
-          {this.props.deleting ? (
-            <button className='delete' onClick={this.remove.bind(this)}>
-              삭제
-            </button>
-          ) : (
-            ''
           )}
         </div>
         {this.state.showCount ? <HabitClickCount /> : ''}

@@ -1,0 +1,160 @@
+.editModal {
+  font-family: 'Mukta', 'Noto Sans KR';
+}
+
+.editModal_content {
+  align-items: center;
+  width: 370px;
+  height: 410px;
+  margin-top: 34vh;
+  background-color: rgba(76, 76, 76, 0.957);
+  color: white;
+  font-size: 20px;
+  padding-top: 15px;
+  border-radius: 20px;
+  z-index: 99 !important;
+}
+.formbody {
+  margin: 20px 0px;
+}
+.editModalAdding {
+  width: 370px;
+  border: none;
+}
+.unitText {
+  width: 100px;
+}
+.editcancel {
+  color: rgb(0, 0, 0);
+  background-color: white;
+}
+.unitLabel {
+  top: 0px;
+}
+.dayLabel {
+  top: 15px;
+}
+.add {
+  border: none;
+}
+
+@media screen and (min-width: 1500px) {
+  .editModal_content {
+    font-size: 22px;
+    width: 430px;
+    height: 470px;
+  }
+  .editModal_title {
+    font-size: 30px;
+  }
+  .editModalAdding {
+    width: 430px;
+  }
+  .formbody {
+    width: 430px;
+  }
+  .addText {
+    margin-top: -8px;
+    margin-left: 2px;
+    width: 310px;
+    height: 38px;
+  }
+  input.addText {
+    margin-top: 10px;
+    font-size: 20px;
+  }
+  input.addText::placeholder {
+    font-size: 16px;
+  }
+  .unitSelect {
+    margin-top: 10px;
+  }
+  .unitSelect label {
+    margin-right: -10px;
+  }
+  .unitText {
+    width: 90px;
+    height: 35px;
+  }
+  .Frequency input[type='checkbox'] + label {
+    margin-left: -1px;
+    width: 20px;
+  }
+  .editFrequency {
+    margin-bottom: 40px;
+  }
+  .add {
+    font-size: 22px;
+  }
+  .twobtn {
+    margin-top: -10px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .editModal_content {
+    font-size: 13px;
+    width: 240px;
+    height: 300px;
+    margin-top: 28vh;
+    position: relative;
+  }
+  .formbody {
+    width: 240px;
+    margin: 20px 0px;
+  }
+  .addText {
+    margin-top: -8px;
+    margin-left: 2px;
+    width: 180px;
+  }
+  input.addText {
+    font-size: 13px;
+  }
+  input.addText::placeholder {
+    font-size: 11px;
+  }
+  .unitSelect {
+    margin-top: 0;
+  }
+  .unitSelect label {
+    margin-right: -10px;
+  }
+  .unitText {
+    width: 50px;
+    height: 24px;
+  }
+  .Frequency input[type='checkbox'] + label {
+    margin-left: -1px;
+    width: 9px;
+  }
+  .add {
+    height: 25px;
+    width: 50px;
+    margin-right: 10px;
+  }
+  .editcancel {
+    margin-right: 130px;
+  }
+  label::placeholder {
+    font-size: 11px;
+  }
+  .twobtn {
+    margin-top: 20px;
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .editModal_content {
+    margin-top: 19vh;
+  }
+  .DayPicker-Caption,
+  .DayPicker-Weekday,
+  [role='button'],
+  .DayPicker-Months,
+  .DayPicker-wrapper {
+    position: relative;
+    z-index: -1;
+  }
+}
