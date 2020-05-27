@@ -63,7 +63,6 @@ class Login extends React.Component {
                   'Content-Type': 'application/json',
                 },
               }).then((result) => {
-                console.log('result', result.status);
                 if (result.status === 200) {
                   this.props.handleLogin();
                   this.props.history.push('/mypage');
