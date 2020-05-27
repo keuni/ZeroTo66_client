@@ -16,6 +16,10 @@
   line-height: 10px;
 }
 
+input:focus {
+  outline: none;
+}
+
 .mypageContent {
   display: flex;
   width: 1000px;
