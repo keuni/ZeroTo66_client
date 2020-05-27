@@ -36,7 +36,7 @@ class HabitInfo extends React.Component {
 
   showHabitCount() {
     this.setState({
-      showCount: true,
+      showCount: !this.state.showCount,
     });
   }
 
