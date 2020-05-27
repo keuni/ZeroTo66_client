@@ -1,6 +1,8 @@
 import React from 'react';
 import './HabitDetail.css';
 import HabitCalendar from './HabitCalendar';
+import './css-circular-prog-bar.css';
+import url from './config/config';
 
 class HabitDetail extends React.Component {
   render() {
@@ -13,7 +15,17 @@ class HabitDetail extends React.Component {
       modifiers,
       getHabitCalendarInfo,
       getdetailMonth,
+      curHabitInfo,
+      curHabitTimer,
+      startTimer,
+      stopTimer,
     } = this.props;
+
+    let standard =
+      curHabitInfo.unit === 'minute'
+        ? curHabitInfo.goal * 60
+        : curHabitInfo.goal;
+    let percent = Math.floor((curHabitInfo.progress / standard) * 100);
 
     return (
       <div className='habitDetail'>
@@ -41,6 +53,72 @@ class HabitDetail extends React.Component {
             ''
           )}
           {total > 0 ? <div>오늘까지 총 {total}일 달성하셨습니다.</div> : ''}
+        </div>
+        <div>
+          {curHabitInfo.unit === 'check' ? (
+            ''
+          ) : curHabitInfo.unit === 'count' ? (
+            <div>
+              <div
+                class={
+                  percent > 50
+                    ? 'progress-circle over50 p' + percent
+                    : 'progress-circle p' + percent
+                }
+              >
+                <span>{percent}%</span>
+                <div class='left-half-clipper'>
+                  <div class='first50-bar'></div>
+                  <div class='value-bar'></div>
+                </div>
+              </div>
+              <button
+                onClick={() => this.setHabitProgress(curHabitInfo.progress + 1)}
+              >
+                1
+              </button>
+              <button
+                onClick={() => this.setHabitProgress(curHabitInfo.progress + 3)}
+              >
+                3
+              </button>
+              <button
+                onClick={() => this.setHabitProgress(curHabitInfo.progress + 5)}
+              >
+                5
+              </button>
+              <button
+                onClick={() =>
+                  this.setHabitProgress(curHabitInfo.progress + 10)
+                }
+              >
+                10
+              </button>
+            </div>
+          ) : (
+            <div>
+              <div
+                class={
+                  percent > 50
+                    ? 'progress-circle over50 p' + percent
+                    : 'progress-circle p' + percent
+                }
+              >
+                <span>
+                  {curHabitTimer.minutes}:{curHabitTimer.seconds}
+                </span>
+                <div class='left-half-clipper'>
+                  <div class='first50-bar'></div>
+                  <div class='value-bar'></div>
+                </div>
+              </div>
+              {!curHabitTimer.onTimer ? (
+                <button onClick={startTimer}>시작</button>
+              ) : (
+                <button onClick={stopTimer}>그만</button>
+              )}
+            </div>
+          )}
         </div>
       </div>
     );

@@ -2,9 +2,9 @@ import React from 'react';
 import './AddHabit.css';
 
 const units = {
-  CHECK: '1',
-  COUNT: '2',
-  MINUTE: '3',
+  CHECK: 'check',
+  COUNT: 'count',
+  MINUTE: 'minute',
   prop: {
     1: { value: 'check' },
     2: { value: 'count' },
@@ -76,7 +76,7 @@ class AddHabit extends React.Component {
           frequency += '0';
         }
       }
-      let unit = Number(this.state.unit);
+      let unit = this.state.unit;
       let goal = this.state.unit === units.CHECK ? 1 : this.state.goal;
       this.props.addHabit(this.state.newHabit, frequency, unit, goal);
     } else {

@@ -1,15 +1,6 @@
 import React from 'react';
-import HabitClickCount from './HabitClickCount';
 
 class HabitInfo extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      showCount: false,
-    };
-    this.showHabitCount = this.showHabitCount.bind(this);
-  }
   checkboxClick() {
     this.props.recordComplete(this.props.id);
     this.props.getMainCalendarInfo();
@@ -20,24 +11,20 @@ class HabitInfo extends React.Component {
       this.props.id,
       this.props.habitId,
       this.props.info,
-      this.props.check
+      this.props.check,
+      this.props.unit,
+      this.props.goal,
+      this.props.progress
     );
     this.props.getHabitCalendarInfo(
       this.props.habitId,
       this.props.detailyear,
       this.props.detailMonth
     );
-    this.showHabitCount();
   }
 
   remove() {
     this.props.deleteHabit(this.props.id, this.props.habitId);
-  }
-
-  showHabitCount() {
-    this.setState({
-      showCount: !this.state.showCount,
-    });
   }
 
   render() {
@@ -53,7 +40,7 @@ class HabitInfo extends React.Component {
           >
             {this.props.info}
           </span>
-          {!this.props.deleting ? (
+          {!this.props.deleting && this.props.unit === 'check' ? (
             <input
               type='checkbox'
               className='checkbox'
@@ -71,7 +58,6 @@ class HabitInfo extends React.Component {
             ''
           )}
         </div>
-        {this.state.showCount ? <HabitClickCount /> : ''}
       </div>
     );
   }
