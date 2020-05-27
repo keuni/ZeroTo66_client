@@ -32,6 +32,16 @@ class Mypage extends React.Component {
         },
         done_partially: [],
       },
+      curHabitInfo: {
+        unit: 'check',
+        goal: 0,
+        progress: 0,
+      },
+      curHabitTimer: {
+        onTimer: false,
+        minutes: 0,
+        seconds: 0,
+      },
     };
     this.showHabitDetail = this.showHabitDetail.bind(this);
     this.getStreakInfo = this.getStreakInfo.bind(this);
@@ -40,6 +50,12 @@ class Mypage extends React.Component {
     this.colorTodayComplete = this.colorTodayComplete.bind(this);
     this.changeMonth = this.changeMonth.bind(this);
     this.getdetailMonth = this.getdetailMonth.bind(this);
+    this.handleCurHabitProgress = this.handleCurHabitProgress.bind(this);
+    this.postRecord = this.postRecord.bind(this);
+    this.setCurHabitTimer = this.setCurHabitTimer.bind(this);
+    this.startTimer = this.startTimer.bind(this);
+    this.stopTimer = this.stopTimer.bind(this);
+    this.setHabitProgress = this.setHabitProgress.bind(this);
   }
 
   logout() {
@@ -55,19 +71,37 @@ class Mypage extends React.Component {
     });
   }
 
-  showHabitDetail(index, id, habitName, check) {
+  showHabitDetail(index, id, habitName, check, unit, goal, progress) {
     if (this.state.habitDetail === index) {
       this.setState({
         habitDetail: false,
         detailHabitId: null,
         detailHabitName: null,
+        curHabitInfo: {
+          unit: 'check',
+          goal: 0,
+          progress: 0,
+        },
+        curHabitTimer: {
+          onTimer: false,
+          minutes: 0,
+          seconds: 0,
+        },
       });
     } else {
       this.setState({
         habitDetail: index,
         detailHabitId: id,
         detailHabitName: habitName,
+        curHabitInfo: { unit: unit, goal: goal, progress: progress },
+        curHabitTimer: {
+          onTimer: false,
+          minutes:
+            unit === 'minute' ? Math.floor((goal * 60 - progress) / 60) : 0,
+          seconds: unit === 'minute' ? (goal * 60 - progress) % 60 : 0,
+        },
       });
+      clearInterval(this.timer);
     }
     this.getStreakInfo(id);
     this.colorTodayComplete(check, id);
@@ -82,13 +116,19 @@ class Mypage extends React.Component {
         'Content-Type': 'application/json',
       },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        }
+      })
       .then((data) => {
-        this.setState({
-          total: data.total,
-          streak: data.streak,
-          longestStreak: data.longestStreak,
-        });
+        if (data) {
+          this.setState({
+            total: data.total,
+            streak: data.streak,
+            longestStreak: data.longestStreak,
+          });
+        }
       });
   }
 
@@ -199,6 +239,94 @@ class Mypage extends React.Component {
     }
   }
 
+  postRecord(id, result) {
+    fetch(url.server + 'record', {
+      method: 'POST',
+      withCredentials: true,
+      credentials: 'include',
+      body: JSON.stringify({
+        habitId: id,
+        progress: result,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    });
+  }
+
+  handleCurHabitProgress(progress) {
+    this.setState({
+      curHabitInfo: { ...this.state.curHabitInfo, progress: progress },
+    });
+  }
+
+  setCurHabitTimer() {
+    this.timer = setInterval(() => {
+      const { curHabitInfo, detailHabitId, curHabitTimer } = this.state;
+      const { seconds, minutes } = curHabitTimer;
+      if (seconds > 0) {
+        this.setState({
+          curHabitTimer: {
+            ...curHabitTimer,
+            minutes: minutes,
+            seconds: seconds - 1,
+          },
+        });
+      }
+      if (seconds === 0) {
+        if (minutes === 0) {
+          this.setState({
+            curHabitTimer: {
+              ...curHabitTimer,
+              onTimer: false,
+            },
+          });
+          clearInterval(this.timer);
+        } else {
+          this.setState({
+            curHabitTimer: {
+              ...curHabitTimer,
+              minutes: minutes - 1,
+              seconds: 59,
+            },
+          });
+        }
+      }
+
+      let newProgress = curHabitInfo.goal * 60 - (minutes * 60 + seconds);
+      this.setHabitProgress(detailHabitId, newProgress);
+    }, 1000);
+  }
+
+  setHabitProgress(habitId, newProgress) {
+    this.postRecord(habitId, newProgress);
+    this.handleCurHabitProgress(newProgress);
+  }
+
+  startTimer() {
+    this.setState({
+      curHabitTimer: {
+        ...this.state.curHabitTimer,
+        onTimer: true,
+      },
+    });
+    this.setCurHabitTimer();
+  }
+
+  stopTimer() {
+    this.setState({
+      curHabitTimer: {
+        ...this.state.curHabitTimer,
+        onTimer: false,
+      },
+    });
+    clearInterval(this.timer);
+  }
+
   getdetailMonth(year, month) {
     this.setState({
       detailyear: year,
@@ -218,6 +346,8 @@ class Mypage extends React.Component {
       mainCalendar,
       detailMonth,
       detailyear,
+      curHabitInfo,
+      curHabitTimer,
     } = this.state;
     return (
       <div className='Mypage'>
@@ -231,6 +361,7 @@ class Mypage extends React.Component {
               colorTodayComplete={this.colorTodayComplete}
               detailMonth={detailMonth}
               detailyear={detailyear}
+              postRecord={this.postRecord}
             />
             {habitDetail === false ? (
               <Calendar
@@ -248,6 +379,14 @@ class Mypage extends React.Component {
                 modifiers={Habitmodifiers}
                 getHabitCalendarInfo={this.getHabitCalendarInfo}
                 getdetailMonth={this.getdetailMonth}
+                curHabitInfo={curHabitInfo}
+                handleCurHabitProgress={this.handleCurHabitProgress}
+                postRecord={this.postRecord}
+                setCurHabitTimer={this.setCurHabitTimer}
+                curHabitTimer={curHabitTimer}
+                startTimer={this.startTimer}
+                stopTimer={this.stopTimer}
+                setHabitProgress={this.setHabitProgress}
               />
             )}
           </div>

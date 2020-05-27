@@ -31,7 +31,6 @@ class HabitList extends React.Component {
       editDetail: null,
       index: null,
     };
-    this.postRecord = this.postRecord.bind(this);
     this.showSuccessModal = this.showSuccessModal.bind(this);
     this.postEditHabit = this.postEditHabit.bind(this);
     this.handleInputValue = this.handleInputValue.bind(this);
@@ -73,6 +72,7 @@ class HabitList extends React.Component {
             unit: data.unit.toString(),
             goal: data.goal,
             completed: false,
+            progress: 0,
           };
           this.setState({
             habitlist: [...this.state.habitlist, newHabit],
@@ -172,9 +172,10 @@ class HabitList extends React.Component {
             habitId: x.habitId,
             habitName: x.habit.habitName,
             frequency: x.habit.frequency.split(''),
-            unit: units[x.habit.unit.toUpperCase()],
-            goal: x.habit.goal,
             completed: x.completed,
+            unit: x.habit.unit,
+            goal: x.habit.goal,
+            progress: x.progress,
           };
         });
         this.setState({ habitlist: data });
@@ -207,7 +208,7 @@ class HabitList extends React.Component {
         completed: this.state.completed - 1,
       });
     }
-    this.postRecord(changed.habitId, result);
+    this.props.postRecord(changed.habitId, result);
     this.props.colorTodayComplete(result, this.state.habitlist[index].habitId);
   }
 
@@ -222,25 +223,6 @@ class HabitList extends React.Component {
         successModal: true,
       });
     }
-  }
-
-  postRecord(id, result) {
-    fetch(url.server + 'record', {
-      method: 'POST',
-      withCredentials: true,
-      credentials: 'include',
-      body: JSON.stringify({
-        habitId: id,
-        completed: result,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then((res) => {
-      if (res.status === 200) {
-        return res.json();
-      }
-    });
   }
 
   offsuccessModal() {
@@ -358,6 +340,9 @@ class HabitList extends React.Component {
                   habitId={data.habitId}
                   info={data.habitName}
                   check={data.completed}
+                  unit={data.unit}
+                  goal={data.goal}
+                  progress={data.progress}
                   recordComplete={this.recordComplete.bind(this)}
                   showHabitDetail={this.props.showHabitDetail}
                   deleteHabit={this.deleteHabit.bind(this)}
