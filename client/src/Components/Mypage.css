@@ -6,16 +6,6 @@
   justify-content: center;
 }
 
-.Frequency input[type='checkbox'] {
-  width: 10px;
-}
-
-.Frequency input[type='checkbox'] + label {
-  display: inline-block;
-  width: 20px;
-  line-height: 10px;
-}
-
 input:focus {
   outline: none;
 }
@@ -72,53 +62,7 @@ button {
   font: inherit;
   background: none;
 }
-.addHabit {
-  font-family: 'Noto Sans KR';
-}
 
-.btnAdd {
-  margin-top: 10px;
-  height: 30px;
-  width: 300px;
-  color: grey;
-  background-color: transparent;
-  border: none;
-  border-radius: 10px;
-  padding: 0;
-  margin-left: -30px;
-}
-.btnAdd:hover {
-  color: rgba(193, 193, 193, 0.504);
-}
-
-.addText {
-  margin-top: 12px;
-  width: 290px;
-  padding: 0 10px;
-  border-radius: 0;
-  border: none;
-  border-bottom: 0.7px solid rgba(124, 123, 123, 0.593);
-  margin-left: -25px;
-  font-size: 20px;
-}
-
-.add {
-  background-color: none;
-  border: none;
-  font-size: 15px;
-  cursor: pointer;
-}
-.cancel {
-  margin-top: 7px;
-  width: 200px;
-}
-::placeholder {
-  font-size: 15px;
-}
-
-.adding {
-  margin-top: -7px;
-}
 .colorinfo {
   margin-bottom: -10px;
 }
@@ -154,26 +98,6 @@ button {
     font-size: 30px;
     margin-left: 60px;
     margin-bottom: 30px;
-  }
-  .btnAdd {
-    width: 500px;
-    font-size: 30px;
-  }
-  .addText {
-    margin-left: -20px;
-    width: 370px;
-    font-size: 25px;
-  }
-  .title {
-    font-size: 60px;
-    margin-bottom: 60px;
-  }
-  ::placeholder {
-    font-size: 20px;
-  }
-  .add,
-  button {
-    font-size: 24px;
   }
   .colorinfo {
     font-size: 18px;
@@ -245,27 +169,6 @@ button {
     margin-top: 4px;
     width: 18px;
     height: 18px;
-  }
-  .btnAdd {
-    width: 240px;
-    margin-left: -5px;
-    font-size: 17px;
-  }
-  .addText {
-    margin-left: -10px;
-    width: 200px;
-    font-size: 17px;
-  }
-  .title {
-    font-size: 30px;
-    margin-bottom: 30px;
-  }
-  ::placeholder {
-    font-size: 10px;
-  }
-  .add,
-  button {
-    font-size: 15px;
   }
   .colorinfo {
     font-size: 13px;
@@ -347,30 +250,6 @@ button {
     margin-top: 5px;
     width: 16px;
     height: 16px;
-  }
-  .btnAdd {
-    margin-left: -10px;
-    margin-top: 2px;
-    width: 200px;
-    font: inherit;
-    font-size: 15px;
-    padding: 0;
-  }
-  .addText {
-    margin-left: -5px;
-    margin-top: 4px;
-    width: 170px;
-    font-size: 15px;
-  }
-  .title {
-    margin-bottom: 20px;
-  }
-  .addText::placeholder {
-    font-size: 11px;
-  }
-  .add,
-  button {
-    font-size: 13px;
   }
   .colorinfo {
     margin-bottom: 0px;
