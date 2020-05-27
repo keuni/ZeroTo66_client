@@ -69,17 +69,22 @@ button {
 .completedHabit {
   text-decoration: line-through;
 }
-.openDelete {
+.openSetting {
   border: none;
   /* float: right; */
   font-size: 20px;
 }
-.delete {
+.delete,
+.modify {
+  margin-top: -30px;
   border: none;
   font-family: 'Mukta', 'Noto Sans KR';
   margin-right: -10px;
   float: right;
   font-size: 16px;
+}
+.modify {
+  margin-right: 30px;
 }
 
 .unitSelect {
@@ -109,13 +114,18 @@ button {
     margin-left: 60px;
     margin-bottom: 30px;
   }
+  .delete,
+  .modify {
+    margin-top: -40px;
+    font-size: 20px;
+  }
   .colorinfo {
     font-size: 18px;
     width: 590px;
     margin-left: 20px;
   }
-  .delete {
-    font-size: 20px;
+  .modify {
+    margin-right: 50px;
   }
   /*calendar*/
   .DayPicker-Body {
@@ -186,8 +196,10 @@ button {
   .Calendar {
     margin-left: 40px;
   }
-  .delete {
-    font-size: 17px;
+  .delete,
+  .modify {
+    margin-top: -25px;
+    font-size: 15px;
   }
   /*calendar*/
   .DayPicker-Body {
@@ -265,8 +277,12 @@ button {
     margin-bottom: 0px;
     font-size: 10px;
   }
-  .delete {
+  .delete,
+  .modify {
     font-size: 13px;
+  }
+  .modify {
+    margin-right: 22px;
   }
   /*calendar*/
   .DayPicker-wrapper {

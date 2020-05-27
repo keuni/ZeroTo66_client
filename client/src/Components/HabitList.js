@@ -4,6 +4,18 @@ import HabitInfo from './HabitInfo';
 import AddHabit from './AddHabit';
 import url from './config/config';
 import SuccessModal from './Modal/SuccessModal';
+import EditHabit from './Modal/EditHabitModal';
+
+const units = {
+  CHECK: 'check',
+  COUNT: 'count',
+  MINUTE: 'minute',
+  prop: {
+    1: { value: 'check' },
+    2: { value: 'count' },
+    3: { value: 'minute' },
+  },
+};
 
 class HabitList extends React.Component {
   constructor(props) {
@@ -13,13 +25,22 @@ class HabitList extends React.Component {
       habitlist: [],
       completed: 0,
       successModal: 'hide',
-      deleting: false,
+      setting: false,
+      editing: false,
+      editIndex: null,
+      editDetail: null,
+      index: null,
     };
     this.postRecord = this.postRecord.bind(this);
     this.showSuccessModal = this.showSuccessModal.bind(this);
+    this.postEditHabit = this.postEditHabit.bind(this);
+    this.handleInputValue = this.handleInputValue.bind(this);
+    this.handleGoal = this.handleGoal.bind(this);
+    this.handleUnit = this.handleUnit.bind(this);
+    this.changefrequency = this.changefrequency.bind(this);
   }
 
-  addHabit(newHabit, frequency) {
+  addHabit(newHabit, frequency, unit, goal) {
     fetch(url.server + 'habit', {
       method: 'POST',
       withCredentials: true,
@@ -27,6 +48,8 @@ class HabitList extends React.Component {
       body: JSON.stringify({
         habitName: newHabit,
         frequency,
+        unit,
+        goal,
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -41,15 +64,53 @@ class HabitList extends React.Component {
         if (data === undefined) {
           return;
         }
-        let newHabit = {
-          habitId: data.id,
-          habitName: data.habitName,
+        let today = new Date().getDay() - 1;
+        if (data.frequency[today] === '1') {
+          let newHabit = {
+            habitId: data.id,
+            habitName: data.habitName,
+            frequency: data.frequency.split(''),
+            unit: data.unit.toString(),
+            goal: data.goal,
+            completed: false,
+          };
+          this.setState({
+            habitlist: [...this.state.habitlist, newHabit],
+          });
+        }
+      });
+  }
+
+  postEditHabit(id, habitName, frequency, unit, goal) {
+    fetch(url.server + 'habit', {
+      method: 'PUT',
+      withCredentials: true,
+      credentials: 'include',
+      body: JSON.stringify({
+        habitId: id,
+        habitName,
+        frequency,
+        unit,
+        goal,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((result) => {
+      if (result.status === 201) {
+        let habitlist = JSON.parse(JSON.stringify(this.state.habitlist));
+        let modifiedHabit = {
+          habitId: id,
+          habitName,
+          frequency: frequency.split(''),
+          unit,
+          goal,
           completed: false,
         };
-        this.setState({
-          habitlist: [...this.state.habitlist, newHabit],
-        });
-      });
+        habitlist[this.state.index] = modifiedHabit;
+        this.setState({ habitlist });
+      }
+    });
   }
 
   deleteHabit(index, id) {
@@ -75,6 +136,19 @@ class HabitList extends React.Component {
     });
   }
 
+  editHabit(index) {
+    if (index >= 0) {
+      let editDetail = this.state.habitlist[index];
+      this.setState({
+        editDetail,
+        index,
+      });
+    }
+    this.setState({
+      editing: !this.state.editing,
+    });
+  }
+
   componentDidMount() {
     fetch(url.server + 'record/today', {
       method: 'GET',
@@ -97,6 +171,9 @@ class HabitList extends React.Component {
           return {
             habitId: x.habitId,
             habitName: x.habit.habitName,
+            frequency: x.habit.frequency.split(''),
+            unit: units[x.habit.unit.toUpperCase()],
+            goal: x.habit.goal,
             completed: x.completed,
           };
         });
@@ -171,14 +248,75 @@ class HabitList extends React.Component {
       successModal: 'hide',
     });
   }
-  openDelete() {
+  openSetting() {
+    if (this.state.setting === true) {
+      this.setState({
+        editing: false,
+      });
+    }
     this.setState({
-      deleting: !this.state.deleting,
+      setting: !this.state.setting,
     });
   }
 
+  handleInputValue = (e) => {
+    let editDetail = Object.assign({}, this.state.editDetail);
+    editDetail.habitName = e.target.value;
+    this.setState({ editDetail });
+    if (e.target.value.length > 0) {
+      document.querySelector('.checkagain').classList.add('hidecheckagain');
+    }
+  };
+
+  handleUnit = (e) => {
+    let editDetail = Object.assign({}, this.state.editDetail);
+    editDetail.unit = e.target.value;
+    this.setState({ editDetail });
+  };
+  handleGoal = (e) => {
+    let editDetail = Object.assign({}, this.state.editDetail);
+    editDetail.goal = e.target.value;
+    this.setState({ editDetail });
+  };
+  changefrequency(e) {
+    let editDetail = Object.assign({}, this.state.editDetail);
+    let frequency = JSON.parse(JSON.stringify(this.state.editDetail.frequency));
+    frequency[Number(e.target.value)] =
+      frequency[Number(e.target.value)] === '1' ? '0' : '1';
+    editDetail.frequency = frequency;
+    this.setState({ editDetail });
+  }
+
+  editingpost() {
+    if (this.state.editDetail.habitName.length > 0) {
+      let frequency = this.state.editDetail.frequency.join('');
+      let unit = this.state.editDetail.unit;
+      let goal =
+        this.state.editDetail.unit === units.CHECK
+          ? 1
+          : this.state.editDetail.goal;
+      this.postEditHabit(
+        this.state.editDetail.habitId,
+        this.state.editDetail.habitName,
+        frequency,
+        unit,
+        goal
+      );
+      return true;
+    } else {
+      document.querySelector('.checkagain').classList.toggle('hidecheckagain');
+      return false;
+    }
+  }
+
   render() {
-    const { habitlist, completed, successModal } = this.state;
+    const {
+      habitlist,
+      completed,
+      successModal,
+      editing,
+      editDetail,
+    } = this.state;
     const all = habitlist.length;
     return (
       <div className='HabitList'>
@@ -187,12 +325,26 @@ class HabitList extends React.Component {
         ) : (
           ''
         )}
+        {editing ? (
+          <EditHabit
+            editHabit={this.editHabit.bind(this)}
+            editDetail={editDetail}
+            postEditHabit={this.postEditHabit}
+            handleInputValue={this.handleInputValue}
+            handleUnit={this.handleUnit}
+            handleGoal={this.handleGoal}
+            changefrequency={this.changefrequency}
+            editingpost={this.editingpost.bind(this)}
+          />
+        ) : (
+          ''
+        )}
         <div className='todayList'>
           <span className='text1'>오늘의 습관 </span>
           <span className='text2'>
             {completed}/{all}
           </span>
-          <button className='openDelete' onClick={this.openDelete.bind(this)}>
+          <button className='openSetting' onClick={this.openSetting.bind(this)}>
             ⚙️
           </button>
         </div>
@@ -209,11 +361,12 @@ class HabitList extends React.Component {
                   recordComplete={this.recordComplete.bind(this)}
                   showHabitDetail={this.props.showHabitDetail}
                   deleteHabit={this.deleteHabit.bind(this)}
-                  deleting={this.state.deleting}
+                  setting={this.state.setting}
                   getHabitCalendarInfo={this.props.getHabitCalendarInfo}
                   getMainCalendarInfo={this.props.getMainCalendarInfo}
                   detailMonth={this.props.detailMonth}
                   detailyear={this.props.detailyear}
+                  editHabit={this.editHabit.bind(this)}
                 />
               ))
             : ''}
