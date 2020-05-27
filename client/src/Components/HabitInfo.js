@@ -60,13 +60,15 @@ class HabitInfo extends React.Component {
                 수정
               </button>
             </div>
-          ) : (
+          ) : this.props.unit === 'check' ? (
             <input
               type='checkbox'
               className='checkbox'
               onClick={this.checkboxClick.bind(this)}
               defaultChecked={this.props.check}
             ></input>
+          ) : (
+            ''
           )}
         </div>
       </div>

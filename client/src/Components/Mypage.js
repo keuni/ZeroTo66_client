@@ -55,6 +55,7 @@ class Mypage extends React.Component {
     this.setCurHabitTimer = this.setCurHabitTimer.bind(this);
     this.startTimer = this.startTimer.bind(this);
     this.stopTimer = this.stopTimer.bind(this);
+    this.setHabitProgress = this.setHabitProgress.bind(this);
   }
 
   logout() {
@@ -297,9 +298,13 @@ class Mypage extends React.Component {
       }
 
       let newProgress = curHabitInfo.goal * 60 - (minutes * 60 + seconds);
-      this.postRecord(detailHabitId, newProgress);
-      this.handleCurHabitProgress(newProgress);
+      this.setHabitProgress(detailHabitId, newProgress);
     }, 1000);
+  }
+
+  setHabitProgress(habitId, newProgress) {
+    this.postRecord(habitId, newProgress);
+    this.handleCurHabitProgress(newProgress);
   }
 
   startTimer() {
@@ -381,6 +386,7 @@ class Mypage extends React.Component {
                 curHabitTimer={curHabitTimer}
                 startTimer={this.startTimer}
                 stopTimer={this.stopTimer}
+                setHabitProgress={this.setHabitProgress}
               />
             )}
           </div>

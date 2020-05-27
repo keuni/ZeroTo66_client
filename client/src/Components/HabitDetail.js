@@ -19,6 +19,7 @@ class HabitDetail extends React.Component {
       curHabitTimer,
       startTimer,
       stopTimer,
+      setHabitProgress,
     } = this.props;
 
     let standard =
@@ -73,23 +74,29 @@ class HabitDetail extends React.Component {
                 </div>
               </div>
               <button
-                onClick={() => this.setHabitProgress(curHabitInfo.progress + 1)}
+                onClick={() =>
+                  setHabitProgress(detailHabitId, curHabitInfo.progress + 1)
+                }
               >
                 1
               </button>
               <button
-                onClick={() => this.setHabitProgress(curHabitInfo.progress + 3)}
+                onClick={() =>
+                  setHabitProgress(detailHabitId, curHabitInfo.progress + 3)
+                }
               >
                 3
               </button>
               <button
-                onClick={() => this.setHabitProgress(curHabitInfo.progress + 5)}
+                onClick={() =>
+                  setHabitProgress(detailHabitId, curHabitInfo.progress + 5)
+                }
               >
                 5
               </button>
               <button
                 onClick={() =>
-                  this.setHabitProgress(curHabitInfo.progress + 10)
+                  setHabitProgress(detailHabitId, curHabitInfo.progress + 10)
                 }
               >
                 10
