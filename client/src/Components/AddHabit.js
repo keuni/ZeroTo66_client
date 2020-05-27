@@ -1,5 +1,17 @@
 import React from 'react';
 import './AddHabit.css';
+
+const units = {
+  CHECK: 'check',
+  COUNT: 'count',
+  MINUTE: 'minute',
+  properties: {
+    1: { value: 'check' },
+    2: { value: 'count' },
+    3: { value: 'minute' },
+  },
+};
+
 class AddHabit extends React.Component {
   constructor(props) {
     super(props);
@@ -16,6 +28,7 @@ class AddHabit extends React.Component {
         su: true,
       },
       adding: false,
+      unit: units.CHECK,
     };
     this.openAddHabit = this.openAddHabit.bind(this);
     this.postHabit = this.postHabit.bind(this);
@@ -26,6 +39,12 @@ class AddHabit extends React.Component {
     if (e.target.value.length > 0) {
       document.querySelector('.checkagain').classList.add('hidecheckagain');
     }
+  };
+
+  handleUnit = (e) => {
+    console.log('d');
+    console.log(e.target.value);
+    this.setState({ unit: e.target.value });
   };
 
   openAddHabit() {
@@ -70,6 +89,7 @@ class AddHabit extends React.Component {
     return (
       <div className='addHabit'>
         {this.state.adding ? (
+
           <form
             className='adding'
             onSubmit={(e) => {
@@ -88,6 +108,42 @@ class AddHabit extends React.Component {
                 습관이 입력되지 않았습니다!
               </div>
             </div>
+
+         <div className='unitSelect'>
+              <label>단위를 선택하세요 : </label>
+              <select onChange={this.handleUnit.bind(this)}>
+                <option value={units.CHECK}>Check</option>
+                <option value={units.COUNT}>Count</option>
+                <option value={units.MINUTE}>Minute</option>
+              </select>
+
+              {this.state.unit !== units.CHECK ? (
+                <div>
+                  {this.state.unit === units.COUNT ? (
+                    <div>
+                      <input
+                        className='addText'
+                        type='text'
+                        placeholder='5'
+                      ></input>
+                      <span> 번</span>
+                    </div>
+                  ) : (
+                    <div>
+                      <input
+                        className='addText'
+                        type='text'
+                        placeholder='30'
+                      ></input>
+                      <span> 분</span>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div></div>
+              )}
+            </div>
+
             <div> Frequency </div>
             <div className='Frequency'>
               <input
@@ -148,7 +204,7 @@ class AddHabit extends React.Component {
               <label htmlFor='su'> 일 </label>
             </div>
             <input type='submit' className='add' value='추가' />
-            <button className='add cancel' onClick={this.openAddHabit}>
+            <button className='add' onClick={this.openAddHabit}>
               취소
             </button>
           </form>

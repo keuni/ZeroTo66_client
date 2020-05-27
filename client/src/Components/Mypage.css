@@ -82,6 +82,16 @@ button {
   font-size: 16px;
 }
 
+.unitSelect {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.unitSelect label {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
 @media screen and (min-width: 1500px) {
   .mypageContent {
     width: 1300px;
