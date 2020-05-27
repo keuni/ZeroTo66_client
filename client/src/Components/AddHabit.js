@@ -42,20 +42,20 @@ class AddHabit extends React.Component {
             </button>
             <div> Frequency </div>
             <div className='Frequency'>
-              <label for='Monday'> 월 </label>
               <input type='checkbox' id='Monday' value='Monday' />
-              <label for='Tuesday'> 화 </label>
+              <label for='Monday'> 월 </label>
               <input type='checkbox' id='Tuesday' vlaue='Tuesday' />
-              <label for='Wednesday'> 수 </label>
+              <label for='Tuesday'> 화 </label>
               <input type='checkbox' id='Wednesday' vlaue='Wednesday' />
-              <label for='Thursday'> 목 </label>
+              <label for='Wednesday'> 수 </label>
               <input type='checkbox' id='Thursday' vlaue='Thursday' />
-              <label for='Friday'> 금 </label>
+              <label for='Thursday'> 목 </label>
               <input type='checkbox' id='Friday' vlaue='Friday' />
-              <label for='Saturday'> 토 </label>
+              <label for='Friday'> 금 </label>
               <input type='checkbox' id='Saturday' vlaue='Saturday' />
-              <label for='Sunday'> 일 </label>
+              <label for='Saturday'> 토 </label>
               <input type='checkbox' id='Sunday' vlaue='Sunday' />
+              <label for='sunday'> 일 </label>
             </div>
             <button className='add cancel' onClick={this.openAddHabit}>
               취소

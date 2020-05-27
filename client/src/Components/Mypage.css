@@ -6,12 +6,14 @@
   justify-content: center;
 }
 
-.Frequency {
-  width: 30px;
+.Frequency input[type='checkbox'] {
+  width: 10px;
 }
 
-input:focus {
-  outline: none;
+.Frequency input[type='checkbox'] + label {
+  display: inline-block;
+  width: 20px;
+  line-height: 10px;
 }
 
 .mypageContent {
