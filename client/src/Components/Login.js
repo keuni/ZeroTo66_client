@@ -48,7 +48,6 @@ class Login extends React.Component {
         >
           <div className='zeroTo66'>ZeroTo66</div>
           <div className='maintext'>Login</div>
-
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -64,6 +63,7 @@ class Login extends React.Component {
                   'Content-Type': 'application/json',
                 },
               }).then((result) => {
+                console.log('result', result.status);
                 if (result.status === 200) {
                   this.props.handleLogin();
                   this.props.history.push('/mypage');
