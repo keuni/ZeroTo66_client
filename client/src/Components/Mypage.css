@@ -107,11 +107,10 @@ button {
   border: none;
   font-size: 15px;
   cursor: pointer;
-}
-.cancel {
   margin-top: 7px;
-  width: 200px;
+  width: 80px;
 }
+
 ::placeholder {
   font-size: 15px;
 }
@@ -136,6 +135,16 @@ button {
   margin-right: -10px;
   float: right;
   font-size: 16px;
+}
+
+.unitSelect {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.unitSelect label {
+  margin-top: 10px;
+  margin-right: 10px;
 }
 
 @media screen and (min-width: 1500px) {

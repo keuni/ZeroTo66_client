@@ -1,5 +1,16 @@
 import React from 'react';
 
+const units = {
+  CHECK: 'check',
+  COUNT: 'count',
+  MINUTE: 'minute',
+  properties: {
+    1: { value: 'check' },
+    2: { value: 'count' },
+    3: { value: 'minute' },
+  },
+};
+
 class AddHabit extends React.Component {
   constructor(props) {
     super(props);
@@ -7,12 +18,19 @@ class AddHabit extends React.Component {
     this.state = {
       newHabit: '',
       adding: false,
+      unit: units.CHECK,
     };
     this.openAddHabit = this.openAddHabit.bind(this);
   }
 
   handleInputValue = (e) => {
     this.setState({ newHabit: e.target.value });
+  };
+
+  handleUnit = (e) => {
+    console.log('d');
+    console.log(e.target.value);
+    this.setState({ unit: e.target.value });
   };
 
   openAddHabit() {
@@ -37,9 +55,42 @@ class AddHabit extends React.Component {
               placeholder='새로운 습관을 만들어보세요'
               onChange={this.handleInputValue.bind(this)}
             ></input>
-            <button className='add' onClick={this.postHabit.bind(this)}>
-              추가
-            </button>
+
+            <div className='unitSelect'>
+              <label>단위를 선택하세요 : </label>
+              <select onChange={this.handleUnit.bind(this)}>
+                <option value={units.CHECK}>Check</option>
+                <option value={units.COUNT}>Count</option>
+                <option value={units.MINUTE}>Minute</option>
+              </select>
+
+              {this.state.unit !== units.CHECK ? (
+                <div>
+                  {this.state.unit === units.COUNT ? (
+                    <div>
+                      <input
+                        className='addText'
+                        type='text'
+                        placeholder='5'
+                      ></input>
+                      <span> 번</span>
+                    </div>
+                  ) : (
+                    <div>
+                      <input
+                        className='addText'
+                        type='text'
+                        placeholder='30'
+                      ></input>
+                      <span> 분</span>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div></div>
+              )}
+            </div>
+
             <div> Frequency </div>
             <div className='Frequency'>
               <input type='checkbox' id='Monday' value='Monday' checked />
@@ -57,7 +108,10 @@ class AddHabit extends React.Component {
               <input type='checkbox' id='Sunday' vlaue='Sunday' checked />
               <label for='Sunday'> 일 </label>
             </div>
-            <button className='add cancel' onClick={this.openAddHabit}>
+            <button className='add' onClick={this.postHabit.bind(this)}>
+              추가
+            </button>
+            <button className='add' onClick={this.openAddHabit}>
               취소
             </button>
           </div>
