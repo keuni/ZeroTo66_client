@@ -1,5 +1,7 @@
 .addHabit {
   font-family: 'Noto Sans KR';
+  display: flex;
+  justify-content: center;
 }
 
 .btnAdd {
@@ -51,15 +53,16 @@
   height: 30px;
   margin: 2px 5px;
 }
-.cancel {
-  margin-top: 7px;
-  width: 90px;
-}
+
 ::placeholder {
   font-size: 15px;
 }
 
 .adding {
+  border: gray solid 0.5px;
+  border-radius: 10px;
+  width: 320px;
+  padding: 10px 5px;
   margin-top: -7px;
 }
 
