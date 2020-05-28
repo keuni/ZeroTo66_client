@@ -21,6 +21,9 @@
     width: 400px;
     height: 100px;
   }
+  .modifyDone_overlay {
+    height: 450px;
+  }
 }
 
 @media screen and (max-width: 1000px) {

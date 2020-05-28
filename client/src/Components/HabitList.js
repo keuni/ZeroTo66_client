@@ -38,7 +38,10 @@ class HabitList extends React.Component {
     this.handleUnit = this.handleUnit.bind(this);
     this.changefrequency = this.changefrequency.bind(this);
     this.getTodayHabit = this.getTodayHabit.bind(this);
-    this.changeCompleted = this.changeCompleted.bind(this);
+    this.changeCompletedAndProgress = this.changeCompletedAndProgress.bind(
+      this
+    );
+    this.recordComplete = this.recordComplete.bind(this);
   }
 
   addHabit(newHabit, frequency, unit, goal) {
@@ -84,10 +87,16 @@ class HabitList extends React.Component {
       });
   }
 
-  changeCompleted(habitListIndex) {
+  changeCompletedAndProgress(habitListIndex, progress) {
     let newState = JSON.parse(JSON.stringify(this.state.habitlist));
-    this.setState({ completed: this.state.completed + 1 });
-    newState[habitListIndex].completed = true;
+    if (progress) {
+      newState[habitListIndex].progress = progress;
+    } else {
+      if (this.state.habitlist[habitListIndex].completed === false) {
+        this.setState({ completed: this.state.completed + 1 });
+      }
+      newState[habitListIndex].completed = true;
+    }
     this.setState({ habitlist: newState });
   }
 
@@ -222,17 +231,14 @@ class HabitList extends React.Component {
 
   componentDidMount() {
     this.getTodayHabit();
-    this.props.ccc(this.changeCompleted);
+    this.props.handleResult(this.changeCompletedAndProgress);
   }
 
-  recordComplete(index) {
-    let changed = this.state.habitlist[index];
-    changed['completed'] = !changed['completed'];
+  recordComplete(index, check) {
     let newState = JSON.parse(JSON.stringify(this.state.habitlist));
-    newState.splice(index, 1, changed);
+    newState[index].completed = check;
     this.setState({ habitlist: newState });
-    let result = this.state.habitlist[index].completed;
-    if (result === true) {
+    if (check === true) {
       this.setState({
         completed: this.state.completed + 1,
       });
@@ -242,8 +248,13 @@ class HabitList extends React.Component {
         completed: this.state.completed - 1,
       });
     }
-    this.props.postRecord(changed.habitId, result);
-    this.props.colorTodayComplete(result, this.state.habitlist[index].habitId);
+    this.props.colorTodayComplete(check, this.state.habitlist[index].habitId);
+    this.props.postRecord(
+      this.state.habitlist[index].habitId,
+      check,
+      index,
+      'check'
+    );
   }
 
   showSuccessModal() {
@@ -377,7 +388,7 @@ class HabitList extends React.Component {
                   unit={data.unit}
                   goal={data.goal}
                   progress={data.progress}
-                  recordComplete={this.recordComplete.bind(this)}
+                  recordComplete={this.recordComplete}
                   showHabitDetail={this.props.showHabitDetail}
                   deleteHabit={this.deleteHabit.bind(this)}
                   setting={this.state.setting}
