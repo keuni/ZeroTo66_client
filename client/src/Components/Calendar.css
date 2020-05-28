@@ -199,8 +199,6 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
-/* */
-
 .DayPicker-Day--selected {
   position: relative;
   background-color: rgb(232, 176, 160) !important;
