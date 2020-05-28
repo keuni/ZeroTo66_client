@@ -9,15 +9,39 @@
   height: 80px;
   margin-top: 200px;
 }
+
 .modifyDone_overlay {
   border-radius: 20px;
   background-color: rgba(76, 75, 75, 0.799);
-  height: 410px;
+  height: 400px;
 }
 
 @media screen and (min-width: 1500px) {
   .modal_content {
     width: 400px;
     height: 100px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .modal_content {
+    width: 200px;
+    height: 80px;
+    margin-top: 140px;
+  }
+  .modifyDone_overlay {
+    height: 300px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .modal_content {
+    width: 200px;
+    height: 60px;
+    margin-top: 140px;
+    padding-top: 22px;
+  }
+  .modifyDone_overlay {
+    height: 270px;
   }
 }
