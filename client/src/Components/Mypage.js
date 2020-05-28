@@ -129,6 +129,12 @@ class Mypage extends React.Component {
             streak: data.streak,
             longestStreak: data.longestStreak,
           });
+        } else {
+          this.setState({
+            total: '',
+            streak: '',
+            longestStreak: '',
+          });
         }
       });
   }
