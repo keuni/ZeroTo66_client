@@ -82,34 +82,35 @@ class AddHabitModal extends React.Component {
                       <option value={units.COUNT}>Count</option>
                       <option value={units.MINUTE}>Minute</option>
                     </select>
-
-                    {this.props.state.unit !== units.CHECK ? (
-                      <div>
-                        {this.props.state.unit === units.COUNT ? (
-                          <div>
-                            <input
-                              className='unitText'
-                              type='text'
-                              placeholder='5'
-                              onChange={this.props.handleGoal}
-                            ></input>
-                            <span> 번</span>
-                          </div>
-                        ) : (
-                          <div>
-                            <input
-                              className='unitText'
-                              type='text'
-                              placeholder='30'
-                              onChange={this.props.handleGoal}
-                            ></input>
-                            <span> 분</span>
-                          </div>
-                        )}
-                      </div>
-                    ) : (
-                      <div></div>
-                    )}
+                    <div
+                      className={
+                        this.props.state.unit === units.CHECK
+                          ? 'unitdisplayNone'
+                          : ''
+                      }
+                    >
+                      {this.props.state.unit === units.COUNT ? (
+                        <div className='specificUnit'>
+                          <input
+                            className='unitText'
+                            type='text'
+                            placeholder='5'
+                            onChange={this.props.handleGoal}
+                          ></input>
+                          <span> 번</span>
+                        </div>
+                      ) : (
+                        <div className='specificUnit'>
+                          <input
+                            className='unitText'
+                            type='text'
+                            placeholder='30'
+                            onChange={this.props.handleGoal}
+                          ></input>
+                          <span> 분</span>
+                        </div>
+                      )}
+                    </div>
                   </div>
 
                   <div> 반복 </div>

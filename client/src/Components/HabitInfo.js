@@ -31,14 +31,7 @@ class HabitInfo extends React.Component {
     this.props.editHabit(this.props.id);
   }
 
-  showHabitCount() {
-    this.setState({
-      showCount: !this.state.showCount,
-    });
-  }
-
   render() {
-    //&& this.props.unit === 'check'
     return (
       <div>
         <div className='existingHabit'>

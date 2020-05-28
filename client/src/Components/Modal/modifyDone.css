@@ -14,33 +14,6 @@
   background-color: rgba(76, 75, 75, 0.799);
   height: 410px;
 }
-.unitSelect {
-  margin: 20px 0;
-}
-.unitText {
-  border-radius: 10px;
-  padding: 0px 5px;
-  width: 60px;
-}
-label {
-  top: 16px;
-  left: -25px;
-}
-.daycheck {
-  width: 10px;
-}
-.editFrequency {
-  padding-left: 20px;
-}
-.editFrequency input[type='checkbox'] {
-  width: 23px;
-  left: 3px;
-}
-
-form.adding {
-  border: none;
-  margin: 10px 0;
-}
 
 @media screen and (min-width: 1500px) {
   .modal_content {

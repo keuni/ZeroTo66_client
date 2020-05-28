@@ -51,6 +51,7 @@ class AddHabit extends React.Component {
       adding: !this.state.adding,
       frequency: ['1', '1', '1', '1', '1', '1', '1'],
       newHabit: '',
+      unit: units.CHECK,
     });
   }
 

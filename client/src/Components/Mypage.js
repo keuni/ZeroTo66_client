@@ -257,7 +257,6 @@ class Mypage extends React.Component {
         return res.json();
       }
     });
-    console.log('259', result);
     this.colorTodayComplete(undefined, id, result, goal);
   }
 

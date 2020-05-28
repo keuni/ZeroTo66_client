@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&Gamja+Flower&display=swap');
 
 .mypagebody {
   /*수평 중앙정렬*/
   display: flex;
   justify-content: center;
+  font-family: 'Gaegu', cursive;
 }
 
 input:focus {
@@ -16,7 +17,7 @@ input:focus {
   margin-top: 2vh;
 }
 .HabitList {
-  font-family: 'Gamja Flower', cursive;
+  /* font-family: 'Gamja Flower', cursive; */
   position: relative;
   width: 450px;
   margin: 0 50px;
@@ -25,9 +26,11 @@ input:focus {
   z-index: 0;
 }
 .todayList {
-  font-size: 40px;
+  /* font-size: 40px; */
+  font-size: 35px;
+  /* font-weight: lighter; */
   margin-bottom: 30px;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 .text1 {
   display: inline-block;
@@ -39,6 +42,7 @@ input:focus {
 }
 .existingHabit {
   font-size: 25px;
+  font-weight: lighter;
   text-align: left;
   margin-left: 50px;
   width: 320px;
@@ -49,6 +53,7 @@ input:focus {
   -moz-appearance: none;
   appearance: none;
   border: 1px solid black;
+  border-radius: 5px;
   color: black;
   width: 23px;
   height: 23px;
@@ -121,7 +126,7 @@ button {
   }
   .colorinfo {
     font-size: 18px;
-    width: 590px;
+    width: 500px;
     margin-left: 20px;
   }
   .modify {
@@ -129,19 +134,18 @@ button {
   }
   /*calendar*/
   .DayPicker-Body {
-    width: 600px !important;
-    font-size: 30px !important;
+    width: 500px !important;
+    font-size: 25px !important;
   }
   .DayPicker-Weekdays {
-    width: 600px !important;
-    font-size: 50px !important;
+    width: 500px !important;
   }
   .DayPicker-Weekday {
     font-size: 20px !important;
   }
   .DayPicker-Week {
-    height: 70px !important;
-    font: 70px !important;
+    height: 60px !important;
+    font: 60px !important;
   }
   .DayPicker-Caption {
     font-size: 30px !important;
@@ -192,9 +196,6 @@ button {
   }
   .colorinfo {
     font-size: 13px;
-  }
-  .Calendar {
-    margin-left: 40px;
   }
   .delete,
   .modify {

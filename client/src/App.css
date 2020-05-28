@@ -1,18 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@200;500;800&family=Balsamiq+Sans:ital,wght@1,700&family=Dancing+Script:wght@700&family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family&family&Mukta:wght@200;500;800&family=Balsamiq+Sans:ital,wght@1,700&family=Dancing+Script:wght@700&family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Pacifico&display=swap');
 
 .App {
   font-family: 'Mukta', 'Noto Sans KR', sans-serif;
   text-align: center;
 }
 
-input:focus {
-  outline: none !important;
-}
-
+input:focus,
+select:focus,
 button:focus {
   outline: none !important;
 }
-
 .zeroTo66 {
   font-family: 'Pacifico', cursive;
   margin-top: 15vh;

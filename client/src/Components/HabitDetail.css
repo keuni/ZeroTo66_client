@@ -5,13 +5,28 @@
 .OnehabitName {
   font-size: 20px;
   height: 30px;
-  font-weight: bolder;
+  font-weight: 500;
 }
 
 .detailInfo {
   font-size: 16px;
   margin-left: 30px;
   text-align: left;
+  font-family: 'Mukta', 'Noto Sans KR';
+}
+.progressbody {
+  font-family: 'Mukta', 'Noto Sans KR';
+}
+.countBtns {
+  font-family: 'Mukta', 'Noto Sans KR';
+  margin-top: -85px;
+  margin-left: 140px;
+}
+.countBtn {
+  border-radius: 5px;
+  border: 1px solid black;
+  width: 40px;
+  margin-right: 5px;
 }
 
 @media screen and (min-width: 1500px) {
@@ -26,10 +41,36 @@
     margin-left: 20px;
     font-size: 20px;
   }
+  .progress-circle {
+    font-size: 20px;
+    margin: 20px;
+    margin-left: 60px;
+    position: relative; /* so that children can be absolutely positioned */
+    padding: 0;
+    width: 50px;
+    height: 50px;
+    background-color: #f2e9e1;
+    border-radius: 50%;
+    line-height: 5em;
+  }
+  .countBtns {
+    font-family: 'Mukta', 'Noto Sans KR';
+    margin-top: -85px;
+    margin-left: 140px;
+  }
+  .countBtn {
+    border-radius: 5px;
+    border: 1px solid black;
+    width: 40px;
+    margin-right: 5px;
+  }
 }
 @media screen and (max-width: 1000px) {
   .habitDetail {
     width: 400px;
+  }
+  .Calendar {
+    width: 424.7px;
   }
   .OnehabitName {
     margin-left: 0px;
@@ -40,21 +81,45 @@
     margin-left: 60px;
     font-size: 14px;
   }
+  .progressbody {
+    margin-left: 20px;
+  }
+  .progress-circle {
+    font-size: 20px;
+    margin: 20px;
+    margin-left: 60px;
+  }
+  .countBtns {
+    font-size: 13px;
+    margin-left: 130px;
+  }
+  .countBtn {
+    width: 30px;
+  }
 }
 
 @media screen and (max-width: 600px) {
   .habitDetail {
     width: 350px;
   }
+  .Calendar {
+    width: 300px;
+  }
   .OnehabitName {
     text-align: center;
     margin-left: 45px;
     font-size: 17px;
-    width: 200px;
+    width: 180px;
   }
   .detailInfo {
     margin-left: 40px;
     width: 280px;
     font-size: 12px;
+  }
+  .progressbody {
+    margin-left: -10px;
+  }
+  .countBtn {
+    padding-top: 0px;
   }
 }
