@@ -57,6 +57,9 @@ class Mypage extends React.Component {
     this.startTimer = this.startTimer.bind(this);
     this.stopTimer = this.stopTimer.bind(this);
     this.setHabitProgress = this.setHabitProgress.bind(this);
+    this.ChangecurHabitInfoTimerDetailHabitName = this.ChangecurHabitInfoTimerDetailHabitName.bind(
+      this
+    );
   }
 
   logout() {
@@ -166,20 +169,24 @@ class Mypage extends React.Component {
       },
     })
       .then((res) => {
-        return res.json();
+        if (res.status === 200) {
+          return res.json();
+        }
       })
       .then((data) => {
-        let done_all = [];
-        data.forEach((x, index) => {
-          if (x === true) {
-            done_all.push(new Date(year, month, index + 1));
-          }
-        });
-        this.setState((prevState) => {
-          let Habitmodifiers = Object.assign({}, prevState.Habitmodifiers);
-          Habitmodifiers.birthday = done_all;
-          return { Habitmodifiers };
-        });
+        if (data) {
+          let done_all = [];
+          data.forEach((x, index) => {
+            if (x === true) {
+              done_all.push(new Date(year, month, index + 1));
+            }
+          });
+          this.setState((prevState) => {
+            let Habitmodifiers = Object.assign({}, prevState.Habitmodifiers);
+            Habitmodifiers.birthday = done_all;
+            return { Habitmodifiers };
+          });
+        }
       });
   }
   getMainCalendarInfo(yr, mth) {
@@ -272,9 +279,29 @@ class Mypage extends React.Component {
     });
   }
 
+  ChangecurHabitInfoTimerDetailHabitName(unit, goal, progress, gap, name) {
+    if (name) {
+      this.setState({
+        detailHabitName: name,
+      });
+    }
+    if (gap) {
+      let curHabitTimer = Object.assign({}, this.state.curHabitTimer);
+      curHabitTimer.minutes += gap;
+      this.setState({
+        curHabitTimer,
+      });
+    } else {
+      let curHabitInfo = { unit, goal, progress };
+      this.setState({
+        curHabitInfo,
+      });
+    }
+  }
+
   setCurHabitTimer() {
     this.timer = setInterval(() => {
-      const { curHabitInfo, detailHabitId, curHabitTimer } = this.state;
+      const { curHabitInfo, DetailHabitId, curHabitTimer } = this.state;
       const { seconds, minutes } = curHabitTimer;
       if (seconds > 0) {
         this.setState({
@@ -306,7 +333,7 @@ class Mypage extends React.Component {
       }
 
       let newProgress = curHabitInfo.goal * 60 - (minutes * 60 + seconds);
-      this.setHabitProgress(detailHabitId, newProgress);
+      this.setHabitProgress(DetailHabitId, newProgress);
     }, 1000);
   }
 
@@ -370,6 +397,9 @@ class Mypage extends React.Component {
               detailMonth={detailMonth}
               detailyear={detailyear}
               postRecord={this.postRecord}
+              ChangecurHabitInfoTimerDetailHabitName={
+                this.ChangecurHabitInfoTimerDetailHabitName
+              }
             />
             {habitDetail === false ? (
               <Calendar

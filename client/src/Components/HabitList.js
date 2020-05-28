@@ -37,6 +37,7 @@ class HabitList extends React.Component {
     this.handleGoal = this.handleGoal.bind(this);
     this.handleUnit = this.handleUnit.bind(this);
     this.changefrequency = this.changefrequency.bind(this);
+    this.getTodayHabit = this.getTodayHabit.bind(this);
   }
 
   addHabit(newHabit, frequency, unit, goal) {
@@ -100,16 +101,34 @@ class HabitList extends React.Component {
     }).then((result) => {
       if (result.status === 201) {
         let habitlist = JSON.parse(JSON.stringify(this.state.habitlist));
-        let modifiedHabit = {
-          habitId: id,
-          habitName,
-          frequency: frequency.split(''),
-          unit,
-          goal,
-          completed: false,
-        };
-        habitlist[this.state.index] = modifiedHabit;
-        this.setState({ habitlist });
+        if (habitName !== [this.state.index].habitName) {
+          this.props.ChangecurHabitInfoTimerDetailHabitName(
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            habitName
+          );
+        }
+        if (unit !== habitlist[this.state.index].unit) {
+          this.props.ChangecurHabitInfoTimerDetailHabitName(unit, goal, 0);
+        } else if (goal !== habitlist[this.state.index].goal) {
+          this.props.ChangecurHabitInfoTimerDetailHabitName(
+            unit,
+            goal,
+            habitlist[this.state.index].progress
+          );
+          if (unit === 'minute') {
+            let gap = goal - habitlist[this.state.index].goal;
+            this.props.ChangecurHabitInfoTimerDetailHabitName(
+              undefined,
+              undefined,
+              undefined,
+              gap
+            );
+          }
+        }
+        this.getTodayHabit();
       }
     });
   }
@@ -151,7 +170,7 @@ class HabitList extends React.Component {
     });
   }
 
-  componentDidMount() {
+  getTodayHabit() {
     fetch(url.server + 'record/today', {
       method: 'GET',
       withCredentials: true,
@@ -191,6 +210,10 @@ class HabitList extends React.Component {
           completed: count,
         });
       });
+  }
+
+  componentDidMount() {
+    this.getTodayHabit();
   }
 
   recordComplete(index) {
