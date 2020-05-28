@@ -38,6 +38,7 @@ class HabitList extends React.Component {
     this.handleUnit = this.handleUnit.bind(this);
     this.changefrequency = this.changefrequency.bind(this);
     this.getTodayHabit = this.getTodayHabit.bind(this);
+    this.changeCompleted = this.changeCompleted.bind(this);
   }
 
   addHabit(newHabit, frequency, unit, goal) {
@@ -81,6 +82,13 @@ class HabitList extends React.Component {
           this.props.getMainCalendarInfo();
         }
       });
+  }
+
+  changeCompleted(habitListIndex) {
+    let newState = JSON.parse(JSON.stringify(this.state.habitlist));
+    this.setState({ completed: this.state.completed + 1 });
+    newState[habitListIndex].completed = true;
+    this.setState({ habitlist: newState });
   }
 
   postEditHabit(id, habitName, frequency, unit, goal) {
@@ -214,6 +222,7 @@ class HabitList extends React.Component {
 
   componentDidMount() {
     this.getTodayHabit();
+    this.props.ccc(this.changeCompleted);
   }
 
   recordComplete(index) {

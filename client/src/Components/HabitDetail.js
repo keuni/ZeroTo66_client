@@ -79,7 +79,8 @@ class HabitDetail extends React.Component {
                     setHabitProgress(
                       detailHabitId,
                       curHabitInfo.progress + 1,
-                      curHabitInfo.goal
+                      curHabitInfo.goal,
+                      curHabitInfo.unit
                     )
                   }
                 >
@@ -91,7 +92,8 @@ class HabitDetail extends React.Component {
                     setHabitProgress(
                       detailHabitId,
                       curHabitInfo.progress + 3,
-                      curHabitInfo.goal
+                      curHabitInfo.goal,
+                      curHabitInfo.unit
                     )
                   }
                 >
@@ -103,7 +105,8 @@ class HabitDetail extends React.Component {
                     setHabitProgress(
                       detailHabitId,
                       curHabitInfo.progress + 5,
-                      curHabitInfo.goal
+                      curHabitInfo.goal,
+                      curHabitInfo.unit
                     )
                   }
                 >
@@ -115,7 +118,8 @@ class HabitDetail extends React.Component {
                     setHabitProgress(
                       detailHabitId,
                       curHabitInfo.progress + 10,
-                      curHabitInfo.goal
+                      curHabitInfo.goal,
+                      curHabitInfo.unit
                     )
                   }
                 >
