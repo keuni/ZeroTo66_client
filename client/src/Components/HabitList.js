@@ -77,6 +77,7 @@ class HabitList extends React.Component {
           this.setState({
             habitlist: [...this.state.habitlist, newHabit],
           });
+          this.props.getMainCalendarInfo();
         }
       });
   }
@@ -132,6 +133,7 @@ class HabitList extends React.Component {
         }
         newState.splice(index, 1);
         this.setState({ habitlist: newState });
+        this.props.getMainCalendarInfo();
       }
     });
   }

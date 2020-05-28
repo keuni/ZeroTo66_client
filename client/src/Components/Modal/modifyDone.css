@@ -41,3 +41,10 @@ form.adding {
   border: none;
   margin: 10px 0;
 }
+
+@media screen and (min-width: 1500px) {
+  .modal_content {
+    width: 400px;
+    height: 100px;
+  }
+}

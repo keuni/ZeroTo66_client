@@ -2,7 +2,6 @@ import React from 'react';
 import './HabitDetail.css';
 import HabitCalendar from './HabitCalendar';
 import './css-circular-prog-bar.css';
-import url from './config/config';
 
 class HabitDetail extends React.Component {
   render() {
@@ -75,28 +74,44 @@ class HabitDetail extends React.Component {
               </div>
               <button
                 onClick={() =>
-                  setHabitProgress(detailHabitId, curHabitInfo.progress + 1)
+                  setHabitProgress(
+                    detailHabitId,
+                    curHabitInfo.progress + 1,
+                    curHabitInfo.goal
+                  )
                 }
               >
                 1
               </button>
               <button
                 onClick={() =>
-                  setHabitProgress(detailHabitId, curHabitInfo.progress + 3)
+                  setHabitProgress(
+                    detailHabitId,
+                    curHabitInfo.progress + 3,
+                    curHabitInfo.goal
+                  )
                 }
               >
                 3
               </button>
               <button
                 onClick={() =>
-                  setHabitProgress(detailHabitId, curHabitInfo.progress + 5)
+                  setHabitProgress(
+                    detailHabitId,
+                    curHabitInfo.progress + 5,
+                    curHabitInfo.goal
+                  )
                 }
               >
                 5
               </button>
               <button
                 onClick={() =>
-                  setHabitProgress(detailHabitId, curHabitInfo.progress + 10)
+                  setHabitProgress(
+                    detailHabitId,
+                    curHabitInfo.progress + 10,
+                    curHabitInfo.goal
+                  )
                 }
               >
                 10
