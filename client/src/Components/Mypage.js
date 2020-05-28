@@ -44,6 +44,7 @@ class Mypage extends React.Component {
         seconds: 0,
       },
     };
+    this.delegateChangeCompleted = null;
     this.showHabitDetail = this.showHabitDetail.bind(this);
     this.getStreakInfo = this.getStreakInfo.bind(this);
     this.getHabitCalendarInfo = this.getHabitCalendarInfo.bind(this);
@@ -60,6 +61,12 @@ class Mypage extends React.Component {
     this.ChangecurHabitInfoTimerDetailHabitName = this.ChangecurHabitInfoTimerDetailHabitName.bind(
       this
     );
+    this.ccc = this.ccc.bind(this);
+  }
+
+  ccc(func) {
+    this.delegateChangeCompleted = func;
+    this.delegateChangeCompleted = this.delegateChangeCompleted.bind(this);
   }
 
   logout() {
@@ -253,7 +260,7 @@ class Mypage extends React.Component {
     }
   }
 
-  postRecord(id, result, goal) {
+  postRecord(id, result) {
     fetch(url.server + 'record', {
       method: 'POST',
       withCredentials: true,
@@ -270,7 +277,6 @@ class Mypage extends React.Component {
         return res.json();
       }
     });
-    this.colorTodayComplete(undefined, id, result, goal);
   }
 
   handleCurHabitProgress(progress) {
@@ -301,7 +307,7 @@ class Mypage extends React.Component {
 
   setCurHabitTimer() {
     this.timer = setInterval(() => {
-      const { curHabitInfo, DetailHabitId, curHabitTimer } = this.state;
+      const { curHabitInfo, detailHabitId, curHabitTimer } = this.state;
       const { seconds, minutes } = curHabitTimer;
       if (seconds > 0) {
         this.setState({
@@ -320,7 +326,11 @@ class Mypage extends React.Component {
               onTimer: false,
             },
           });
+
+          console.log('min, sec', minutes, seconds);
           clearInterval(this.timer);
+          this.delegateChangeCompleted(this.state.habitDetail);
+          this.colorTodayComplete(true, detailHabitId);
         } else {
           this.setState({
             curHabitTimer: {
@@ -333,12 +343,21 @@ class Mypage extends React.Component {
       }
 
       let newProgress = curHabitInfo.goal * 60 - (minutes * 60 + seconds);
-      this.setHabitProgress(DetailHabitId, newProgress);
+      this.setHabitProgress(
+        detailHabitId,
+        newProgress,
+        null,
+        curHabitInfo.unit
+      );
     }, 1000);
   }
 
-  setHabitProgress(habitId, newProgress, goal) {
+  setHabitProgress(habitId, newProgress, goal, unit) {
     this.postRecord(habitId, newProgress, goal);
+    if (unit === 'count' && newProgress >= goal) {
+      this.delegateChangeCompleted(this.state.habitDetail);
+      this.colorTodayComplete(undefined, habitId, newProgress, goal);
+    }
     this.handleCurHabitProgress(newProgress);
   }
 
@@ -400,6 +419,7 @@ class Mypage extends React.Component {
               ChangecurHabitInfoTimerDetailHabitName={
                 this.ChangecurHabitInfoTimerDetailHabitName
               }
+              ccc={this.ccc}
             />
             {habitDetail === false ? (
               <Calendar
