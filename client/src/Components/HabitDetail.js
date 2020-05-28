@@ -145,9 +145,13 @@ class HabitDetail extends React.Component {
                 </div>
               </div>
               {!curHabitTimer.onTimer ? (
-                <button onClick={startTimer}>시작</button>
+                <button className='timerBtn' onClick={startTimer}>
+                  시작
+                </button>
               ) : (
-                <button onClick={stopTimer}>그만</button>
+                <button className='timerBtn' onClick={stopTimer}>
+                  그만
+                </button>
               )}
             </div>
           )}

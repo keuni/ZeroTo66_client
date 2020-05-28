@@ -28,6 +28,9 @@
   width: 40px;
   margin-right: 5px;
 }
+.timerBtn {
+  margin-top: -285px;
+}
 
 @media screen and (min-width: 1500px) {
   .Calendar {

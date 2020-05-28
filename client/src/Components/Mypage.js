@@ -61,10 +61,10 @@ class Mypage extends React.Component {
     this.ChangecurHabitInfoTimerDetailHabitName = this.ChangecurHabitInfoTimerDetailHabitName.bind(
       this
     );
-    this.ccc = this.ccc.bind(this);
+    this.handleResult = this.handleResult.bind(this);
   }
 
-  ccc(func) {
+  handleResult(func) {
     this.delegateChangeCompleted = func;
     this.delegateChangeCompleted = this.delegateChangeCompleted.bind(this);
   }
@@ -260,21 +260,24 @@ class Mypage extends React.Component {
     }
   }
 
-  postRecord(id, result) {
+  postRecord(habitId, result, index, unit) {
     fetch(url.server + 'record', {
       method: 'POST',
       withCredentials: true,
       credentials: 'include',
       body: JSON.stringify({
-        habitId: id,
+        habitId,
         progress: result,
       }),
       headers: {
         'Content-Type': 'application/json',
       },
     }).then((res) => {
-      if (res.status === 200) {
-        return res.json();
+      if (res.status === 201) {
+        console.log('postrecord');
+        if (unit !== 'check') {
+          this.delegateChangeCompleted(index, result);
+        }
       }
     });
   }
@@ -306,6 +309,7 @@ class Mypage extends React.Component {
   }
 
   setCurHabitTimer() {
+    console.log('setCurHabitTimer');
     this.timer = setInterval(() => {
       const { curHabitInfo, detailHabitId, curHabitTimer } = this.state;
       const { seconds, minutes } = curHabitTimer;
@@ -327,7 +331,6 @@ class Mypage extends React.Component {
             },
           });
 
-          console.log('min, sec', minutes, seconds);
           clearInterval(this.timer);
           this.delegateChangeCompleted(this.state.habitDetail);
           this.colorTodayComplete(true, detailHabitId);
@@ -419,7 +422,7 @@ class Mypage extends React.Component {
               ChangecurHabitInfoTimerDetailHabitName={
                 this.ChangecurHabitInfoTimerDetailHabitName
               }
-              ccc={this.ccc}
+              handleResult={this.handleResult}
             />
             {habitDetail === false ? (
               <Calendar

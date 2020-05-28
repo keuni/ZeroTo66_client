@@ -1,9 +1,8 @@
 import React from 'react';
 
 class HabitInfo extends React.Component {
-  checkboxClick() {
-    this.props.recordComplete(this.props.id);
-    this.props.getMainCalendarInfo();
+  checkboxClick(e) {
+    this.props.recordComplete(this.props.id, e.target.checked);
   }
 
   eachHabitClick() {
