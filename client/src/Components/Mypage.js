@@ -138,7 +138,7 @@ class Mypage extends React.Component {
     if (yr) {
       fetchUrl =
         url.server +
-        'habit/detail?habitId=' +
+        'record/detail?habitId=' +
         id +
         '&year=' +
         yr +
@@ -147,7 +147,7 @@ class Mypage extends React.Component {
       year = yr;
       month = mth - 1;
     } else {
-      fetchUrl = url.server + 'habit/detail?habitId=' + id;
+      fetchUrl = url.server + 'record/detail?habitId=' + id;
       year = new Date().getFullYear();
       month = new Date().getMonth();
     }
