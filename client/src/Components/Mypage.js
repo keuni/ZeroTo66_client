@@ -311,7 +311,6 @@ class Mypage extends React.Component {
   }
 
   setCurHabitTimer() {
-    console.log('setCurHabitTimer');
     this.timer = setInterval(() => {
       const { curHabitInfo, detailHabitId, curHabitTimer } = this.state;
       const { seconds, minutes } = curHabitTimer;
