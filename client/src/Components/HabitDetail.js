@@ -2,7 +2,6 @@ import React from 'react';
 import './HabitDetail.css';
 import HabitCalendar from './HabitCalendar';
 import './css-circular-prog-bar.css';
-import url from './config/config';
 
 class HabitDetail extends React.Component {
   render() {
@@ -59,48 +58,70 @@ class HabitDetail extends React.Component {
           {curHabitInfo.unit === 'check' ? (
             ''
           ) : curHabitInfo.unit === 'count' ? (
-            <div>
+            <div className='progressbody'>
               <div
-                class={
+                className={
                   percent > 50
                     ? 'progress-circle over50 p' + percent
                     : 'progress-circle p' + percent
                 }
               >
                 <span>{percent}%</span>
-                <div class='left-half-clipper'>
-                  <div class='first50-bar'></div>
-                  <div class='value-bar'></div>
+                <div className='left-half-clipper'>
+                  <div className='first50-bar'></div>
+                  <div className='value-bar'></div>
                 </div>
               </div>
-              <button
-                onClick={() =>
-                  setHabitProgress(detailHabitId, curHabitInfo.progress + 1)
-                }
-              >
-                1
-              </button>
-              <button
-                onClick={() =>
-                  setHabitProgress(detailHabitId, curHabitInfo.progress + 3)
-                }
-              >
-                3
-              </button>
-              <button
-                onClick={() =>
-                  setHabitProgress(detailHabitId, curHabitInfo.progress + 5)
-                }
-              >
-                5
-              </button>
-              <button
-                onClick={() =>
-                  setHabitProgress(detailHabitId, curHabitInfo.progress + 10)
-                }
-              >
-                10
-              </button>
+              <div className='countBtns'>
+                <button
+                  className='countBtn'
+                  onClick={() =>
+                    setHabitProgress(
+                      detailHabitId,
+                      curHabitInfo.progress + 1,
+                      curHabitInfo.goal
+                    )
+                  }
+                >
+                  1
+                </button>
+                <button
+                  className='countBtn'
+                  onClick={() =>
+                    setHabitProgress(
+                      detailHabitId,
+                      curHabitInfo.progress + 3,
+                      curHabitInfo.goal
+                    )
+                  }
+                >
+                  3
+                </button>
+                <button
+                  className='countBtn'
+                  onClick={() =>
+                    setHabitProgress(
+                      detailHabitId,
+                      curHabitInfo.progress + 5,
+                      curHabitInfo.goal
+                    )
+                  }
+                >
+                  5
+                </button>
+                <button
+                  className='countBtn'
+                  onClick={() =>
+                    setHabitProgress(
+                      detailHabitId,
+                      curHabitInfo.progress + 10,
+                      curHabitInfo.goal
+                    )
+                  }
+                >
+                  10
+                </button>
+              </div>
             </div>
           ) : (
             <div>

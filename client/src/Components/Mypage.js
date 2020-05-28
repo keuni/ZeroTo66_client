@@ -23,6 +23,7 @@ class Mypage extends React.Component {
         birthday: [],
         sunday: { daysOfWeek: [0] },
         foo: new Date(), //today
+        done_partially: [],
       },
       mainCalendar: {
         modifiers: {
@@ -225,9 +226,9 @@ class Mypage extends React.Component {
     this.getMainCalendarInfo(year, month);
   }
 
-  colorTodayComplete(complete, clickedId) {
+  colorTodayComplete(complete, clickedId, result, goal) {
     if (clickedId === this.state.detailHabitId) {
-      if (complete) {
+      if (complete || result >= goal) {
         let Habitmodifiers = Object.assign({}, this.state.Habitmodifiers);
         Habitmodifiers.birthday.push(new Date());
         this.setState({ Habitmodifiers });
@@ -239,7 +240,7 @@ class Mypage extends React.Component {
     }
   }
 
-  postRecord(id, result) {
+  postRecord(id, result, goal) {
     fetch(url.server + 'record', {
       method: 'POST',
       withCredentials: true,
@@ -256,6 +257,7 @@ class Mypage extends React.Component {
         return res.json();
       }
     });
+    this.colorTodayComplete(undefined, id, result, goal);
   }
 
   handleCurHabitProgress(progress) {
@@ -302,8 +304,8 @@ class Mypage extends React.Component {
     }, 1000);
   }
 
-  setHabitProgress(habitId, newProgress) {
-    this.postRecord(habitId, newProgress);
+  setHabitProgress(habitId, newProgress, goal) {
+    this.postRecord(habitId, newProgress, goal);
     this.handleCurHabitProgress(newProgress);
   }
 
@@ -380,9 +382,6 @@ class Mypage extends React.Component {
                 getHabitCalendarInfo={this.getHabitCalendarInfo}
                 getdetailMonth={this.getdetailMonth}
                 curHabitInfo={curHabitInfo}
-                handleCurHabitProgress={this.handleCurHabitProgress}
-                postRecord={this.postRecord}
-                setCurHabitTimer={this.setCurHabitTimer}
                 curHabitTimer={curHabitTimer}
                 startTimer={this.startTimer}
                 stopTimer={this.stopTimer}

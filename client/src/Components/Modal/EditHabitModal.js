@@ -1,5 +1,5 @@
 import React from 'react';
-import './EditHabit.css';
+import './EditAddHabit.css';
 import ModifyDone from './modifyDone';
 
 const units = {
@@ -90,35 +90,33 @@ class EditHabit extends React.Component {
                       <option value={units.MINUTE}>Minute</option>
                     </select>
 
-                    {unit !== units.CHECK ? (
-                      <div>
-                        {unit === units.COUNT ? (
-                          <div>
-                            <input
-                              className='unitText'
-                              type='text'
-                              placeholder='5'
-                              onChange={this.props.handleGoal}
-                              value={goal}
-                            ></input>
-                            <span> 번</span>
-                          </div>
-                        ) : (
-                          <div>
-                            <input
-                              className='unitText'
-                              type='text'
-                              placeholder='30'
-                              onChange={this.props.handleGoal}
-                              value={goal}
-                            ></input>
-                            <span> 분</span>
-                          </div>
-                        )}
-                      </div>
-                    ) : (
-                      <div></div>
-                    )}
+                    <div
+                      className={unit === units.CHECK ? 'unitdisplayNone' : ''}
+                    >
+                      {unit === units.COUNT ? (
+                        <div className='specificUnit'>
+                          <input
+                            className='unitText'
+                            type='text'
+                            placeholder='5'
+                            onChange={this.props.handleGoal}
+                            value={goal}
+                          ></input>
+                          <span> 번</span>
+                        </div>
+                      ) : (
+                        <div className='specificUnit'>
+                          <input
+                            className='unitText'
+                            type='text'
+                            placeholder='30'
+                            onChange={this.props.handleGoal}
+                            value={goal}
+                          ></input>
+                          <span> 분</span>
+                        </div>
+                      )}
+                    </div>
                   </div>
 
                   <div> 반복 </div>
