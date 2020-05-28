@@ -18,7 +18,8 @@ input:focus {
 .HabitList {
   position: relative;
   width: 450px;
-  margin: 0 50px;
+  margin-right: 20px;
+  margin-left: 50px;
   float: left;
   align-items: center;
   z-index: 0;
@@ -34,9 +35,10 @@ input:focus {
 .text2 {
   display: inline-block;
   width: 80px;
+  font-size: 30px;
 }
 .existingHabit {
-  font-size: 25px;
+  font-size: 22px;
   font-weight: lighter;
   text-align: left;
   margin-left: 50px;
@@ -52,8 +54,10 @@ input:focus {
   color: black;
   width: 23px;
   height: 23px;
+  position: absolute;
   float: right;
   margin-top: 5px;
+  right: 80px;
 }
 .checkbox:checked {
   background-color: black;
@@ -62,8 +66,10 @@ button {
   font: inherit;
   background: none;
 }
-
 .colorinfo {
+  font-family: 'Mukta', sans-serif;
+  margin-top: 10px;
+  font-size: 13px;
   margin-bottom: -10px;
 }
 .completedHabit {
@@ -74,14 +80,21 @@ button {
   /* float: right; */
   font-size: 20px;
 }
+.eachHabit {
+  z-index: -1;
+  width: 300px;
+}
 .delete,
 .modify {
+  position: relative;
+  background-color: rgb(255, 255, 255);
   margin-top: -30px;
   border: none;
   font-family: 'Mukta', 'Noto Sans KR';
   margin-right: -10px;
   float: right;
   font-size: 16px;
+  z-index: 0;
 }
 .modify {
   margin-right: 30px;
@@ -111,8 +124,15 @@ button {
   .existingHabit {
     width: 420px;
     font-size: 30px;
-    margin-left: 60px;
+    margin-left: 100px;
     margin-bottom: 30px;
+  }
+  .checkbox {
+    right: 100px;
+  }
+  .text1 {
+    font-size: 40px;
+    width: 200px;
   }
   .delete,
   .modify {
@@ -120,7 +140,7 @@ button {
     font-size: 20px;
   }
   .colorinfo {
-    font-size: 18px;
+    font-size: 15px;
     width: 500px;
     margin-left: 20px;
   }
@@ -162,12 +182,12 @@ button {
 }
 @media screen and (max-width: 1000px) {
   .mypageContent {
-    width: 650px;
+    width: 680px;
   }
   .HabitList {
-    width: 300px;
+    width: 260px;
     margin-left: 0px;
-    margin-right: 10px;
+    margin-right: 20px;
   }
   .todayList {
     font-size: 30px;
@@ -176,15 +196,17 @@ button {
     width: 140px;
   }
   .text2 {
+    font-size: 20px;
     width: 50px;
   }
   .existingHabit {
     margin-left: 10px;
     margin-bottom: 25px;
     width: 230px;
-    font-size: 20px;
+    font-size: 18px;
   }
   .checkbox {
+    right: 20px;
     margin-top: 4px;
     width: 18px;
     height: 18px;
@@ -256,15 +278,17 @@ button {
     width: 120px;
   }
   .text2 {
-    width: 40px;
+    font-size: 18px;
+    width: 50px;
   }
   .existingHabit {
-    margin-left: 70px;
+    margin-left: 50px;
     width: 200px;
     margin-bottom: 10px;
     font-size: 18px;
   }
   .checkbox {
+    right: 50px;
     margin-top: 5px;
     width: 16px;
     height: 16px;
