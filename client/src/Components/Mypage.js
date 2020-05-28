@@ -178,6 +178,8 @@ class Mypage extends React.Component {
       .then((res) => {
         if (res.status === 200) {
           return res.json();
+        } else if (res.status === 204) {
+          return [];
         }
       })
       .then((data) => {
@@ -274,7 +276,7 @@ class Mypage extends React.Component {
       },
     }).then((res) => {
       if (res.status === 201) {
-        console.log('postrecord');
+        this.getMainCalendarInfo();
         if (unit !== 'check') {
           this.delegateChangeCompleted(index, result);
         }
@@ -356,7 +358,7 @@ class Mypage extends React.Component {
   }
 
   setHabitProgress(habitId, newProgress, goal, unit) {
-    this.postRecord(habitId, newProgress, goal);
+    this.postRecord(habitId, newProgress, this.state.habitDetail, unit);
     if (unit === 'count' && newProgress >= goal) {
       this.delegateChangeCompleted(this.state.habitDetail);
       this.colorTodayComplete(undefined, habitId, newProgress, goal);

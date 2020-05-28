@@ -88,12 +88,13 @@ class HabitList extends React.Component {
   }
 
   changeCompletedAndProgress(habitListIndex, progress) {
-    console.log('changeCompletedAndProgress');
     let newState = JSON.parse(JSON.stringify(this.state.habitlist));
     if (progress) {
       newState[habitListIndex].progress = progress;
     } else {
-      this.setState({ completed: this.state.completed + 1 });
+      if (this.state.habitlist[habitListIndex].completed === false) {
+        this.setState({ completed: this.state.completed + 1 });
+      }
       newState[habitListIndex].completed = true;
     }
     this.setState({ habitlist: newState });
